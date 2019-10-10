@@ -1,3 +1,17 @@
 img{
-    width: 200px;
+    width: 100px;
+    margin: 0px !important;
+    
+}
+
+.mat-toolbar{
+padding: 50px;
+background:  #00b3e3;
+}
+
+span{
+    font-size: 18px;
+    margin-top: 10px;
+    margin-left: 16px;
+    color:#ffff;
 }
