@@ -11,9 +11,7 @@
                     </a><br/>
               
             </th>
-            <th class="ps-sm-mod4"><input type="submit" class="ps-btn ps-btn-primary" value="Regras" /></th>
-            <th class="ps-sm-mod4"><input type="submit" class="ps-btn ps-btn-primary" value="Composição" /></th>
-        </tr>
+            <th class="ps-sm-mod8"><input type="submit" class="ps-btn ps-btn-primary" value="Regras & Composição" /></th>        </tr>
            
     
         
@@ -75,23 +73,30 @@
                     <p class="titulo">Cadastro de Segmento</p>
                 </div>
                 <div class="ps-modal-content">
-                    <label class="ps-frm-lbl ps-frm-lbl-internal">Nome Segmento RV</label>
-                    <input type="text" name="test" class="ps-frm-entry" placeholder="Preencha aqui" />
+                    <label>Nome Segmento RV</label>
+                 <input [(ngModel)]="objDTO.nomeSegmentoRV" type="text"  class="ps-frm-entry" placeholder="Preencha aqui" />
                 <br>
-            <input type="radio" name="tst1" value="seguro" class="ps-frm-radio" id="ps-frm-rad-tst1" />
+            <input [(ngModel)]="objDTO.isSeguro" type="radio" name="tst1" value=true class="ps-frm-radio" id="ps-frm-rad-tst1" />
             <label class="ps-frm-radio" for="ps-frm-rad-tst1">
                Seguro
             </label>
             <br>
-            <input type="radio" name="tst1" value="naoSeguro" class="ps-frm-radio" id="ps-frm-rad-tst2" checked />
+            <input [(ngModel)]="objDTO.isSeguro" type="radio" name="tst1" value=false class="ps-frm-radio" id="ps-frm-rad-tst2" checked />
             
             <label class="ps-frm-radio" for="ps-frm-rad-tst2">
                 Não Seguro
             </label>
+            <textarea [(ngModel)]="objDTO.observacao" name="test" class="ps-frm-entry" placeholder="Observação (máximo 100 caracteres)" maxlength="100"></textarea>
                 </div>
                 <div class="ps-modal-foot">
-                        <button class="ps-btn" style="margin: 4px;">Gravar</button>
-                        <button class="ps-btn" style="color: crimson; border-color: crimson">Cancelar</button>
+                    <div class="row">
+                        <div class="ps-sm-mod6">
+                           <button (click)="gravar()" class="ps-btn" >Gravar</button>
+                        </div>
+                        <div class="ps-sm-mod6">
+                            <button class="ps-btn" style="color: crimson; border-color: crimson">Cancelar</button>
+                        </div>
+                    </div>                                   
                 </div>
             </div>
             

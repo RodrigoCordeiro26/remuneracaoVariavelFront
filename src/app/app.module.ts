@@ -8,7 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { AlgumaCoisaComponent } from './alguma-coisa/alguma-coisa.component';
 import { ModalComponent } from './modal/modal.component';
 import { CadastroSegmentoRVComponent } from './cadastro-segmento-rv/cadastro-segmento-rv.component';
-import { TesteComponent } from './teste/teste.component';
+import { FormsModule }   from '@angular/forms'
 
 
 @NgModule({
@@ -18,12 +18,12 @@ import { TesteComponent } from './teste/teste.component';
     HomeComponent,
     AlgumaCoisaComponent,
     ModalComponent,
-    CadastroSegmentoRVComponent,
-    TesteComponent
+    CadastroSegmentoRVComponent 
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
