@@ -1,0 +1,100 @@
+<div class="ps-container">
+    <div class="ps-row" style="text-align: center; margin-top:0px; ">
+        <p class="titulo">Regras de Segmento</p>
+    </div><br>
+    <div class="ps-row" style="margin-bottom: 4px;" >
+        <tr class="ps-mod8 ps-sm-mod12">
+            <th class="ps-mod8 ps-sm-mod2">
+                    <a  title="Adicionar novo Segmento" style="width:60px;"href="javascript:;" class="ps-btn ps-open-modal" data-modal="#ModalPadrao" data-modalbackdropstatic="false" data-modalkeyboarddisable="true" data-modalonshow="console.log('abrir modal')" data-modalonhide="console.log('fechar modal')">
+                            <span class="ps-mod8 ps-ico ps-sm-mod1 ps-alignCenter ps-ico-plus">
+                           </span>
+                    </a><br/>
+              
+            </th>
+            <th class="ps-sm-mod4"><input type="submit" class="ps-btn ps-btn-primary" value="Regras" /></th>
+            <th class="ps-sm-mod4"><input type="submit" class="ps-btn ps-btn-primary" value="Composição" /></th>
+        </tr>
+           
+    
+        
+    </div>
+    
+    <div class="ps-row">
+        <div class="ps-mod8 ps-sm-mod12">
+            <table class="ps-table ps-datagrid" data-pagesize="5"  data-filtering="true">
+                <thead>
+                    <tr>
+                        <th class="ps-sm-mod2">Código</th>
+                        <th class="ps-sm-mod3">Segmento</th>
+                        <th class="ps-hide ps-sm-show ps-sm-mod3">Tipo</th>
+                        <th class="ps-hide ps-sm-show ps-sm-mod2">Data</th>
+                        <th class="ps-sm-mod2">Observação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>15-36027222</td>
+                        <td>Auto</td>
+                        <td>1</td>
+                        <td>18/05/2014</td>
+                        <td>Bla</td>
+                    </tr>
+                    <tr>
+                            <td>65-36027222</td>
+                            <td>Auto</td>
+                            <td>1</td>
+                            <td>18/05/2014</td>
+                            <td>Bla</td>
+                        </tr> <tr>
+                                <td>65-36027222</td>
+                                <td>Auto</td>
+                                <td>1</td>
+                                <td>18/05/2014</td>
+                                <td>Bla</td>
+                            </tr> <tr>
+                                    <td>65-36027222</td>
+                                    <td>Auto</td>
+                                    <td>1</td>
+                                    <td>18/05/2014</td>
+                                    <td>Bla</td>
+                                </tr> <tr>
+                                        <td>65-36027222</td>
+                                        <td>Auto</td>
+                                        <td>1</td>
+                                        <td>18/05/2014</td>
+                                        <td>Bla</td>
+                                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="ps-modal" id="ModalPadrao">
+            <a href="javascript:;" class="ps-modal-close ps-modal-close-default"><span class="ps-ico ps-ico-sm ps-sm-ico-lg ps-ico-close"></span></a>
+            <div class="ps-modal-container">
+                <div class="ps-modal-title">
+                    <p class="titulo">Cadastro de Segmento</p>
+                </div>
+                <div class="ps-modal-content">
+                    <label class="ps-frm-lbl ps-frm-lbl-internal">Nome Segmento RV</label>
+                    <input type="text" name="test" class="ps-frm-entry" placeholder="Preencha aqui" />
+                <br>
+            <input type="radio" name="tst1" value="seguro" class="ps-frm-radio" id="ps-frm-rad-tst1" />
+            <label class="ps-frm-radio" for="ps-frm-rad-tst1">
+               Seguro
+            </label>
+            <br>
+            <input type="radio" name="tst1" value="naoSeguro" class="ps-frm-radio" id="ps-frm-rad-tst2" checked />
+            
+            <label class="ps-frm-radio" for="ps-frm-rad-tst2">
+                Não Seguro
+            </label>
+                </div>
+                <div class="ps-modal-foot">
+                        <button class="ps-btn" style="margin: 4px;">Gravar</button>
+                        <button class="ps-btn" style="color: crimson; border-color: crimson">Cancelar</button>
+                </div>
+            </div>
+            
+
+    </div>
+</div>

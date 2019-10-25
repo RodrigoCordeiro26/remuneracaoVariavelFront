@@ -2,17 +2,17 @@
     <div class="ps-container">
         <div class="ps-mod4 ps-sm-mod9">
             <ul class="ps-menu ps-menu-mobile ps-menu-allCaps ps-menu-horizontal">
-                <a href="#">
+                <a [routerLink]="['']">
                     <span class="ps-ico ps-ico-home ps-ico-md" ></span>
                 </a>
                 <li><a href="#" class="ps-menu-hasLevel">Menu</a>
                     <ul>
-                        <li class="item-menu"><a href="#">Item 1</a></li>
+                        <li class="item-menu"><a [routerLink]="['cadastro-segmento']" >Cadastro Segmento</a></li>
                         <li class="item-menu"><a href="#">Item 2</a></li>
                         <li class="item-menu"><a href="#">Item 3</a></li>
                     </ul>
                 </li>
-                <li><a>Opção I</a></li>
+                <li><a [routerLink]="['modal']">ModalComponent</a></li>
                 <li><a>Opção II</a></li>
                 <li><a>Opção III</a></li>
                 
