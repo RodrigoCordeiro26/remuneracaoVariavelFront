@@ -1,0 +1,134 @@
+<div class="card-header">
+    <div class="container-rv" style="width: 200;"> 
+        <div class="form-group" >
+          <label><b>Operador</b></label>
+          <select class="fas" (change)="getMostravalor()">
+            <option  value="">selecione</option>
+            <option class='fas' value=">">&#xf531;</option>
+            <option class='fas' value="<">&#xf536;</option>
+            <option class='fas' value="=">&#xf52c;</option>
+            <option class='fas' value="<=">&#xf537;</option>
+            <option class='fas' value="=>">&#xf532;</option>
+          </select>
+        </div>
+      </div>
+      <div class="container-rv" style="width: 200;" > 
+          <div class="form-group" >
+            <label><b>Operador</b></label>
+            <select class="fas" (change)="getMostravalor()">
+              <option  value="">selecione</option>
+              <option class='fas' value=">">&#xf531;</option>
+              <option class='fas' value="<">&#xf536;</option>
+              <option class='fas' value="=">&#xf52c;</option>
+              <option class='fas' value="<=">&#xf537;</option>
+              <option class='fas' value="=>">&#xf532;</option>
+            </select>
+          </div>
+        </div>
+        <div class="container-rv" style="width: 200;"> 
+            <div class="form-group">
+              <label><b>Operador</b></label>
+              <select class="fas" (change)="getMostravalor()">
+                <option  value="">selecione</option>
+                <option class='fas' value=">">&#xf531;</option>
+                <option class='fas' value="<">&#xf536;</option>
+                <option class='fas' value="=">&#xf52c;</option>
+                <option class='fas' value="<=">&#xf537;</option>
+                <option class='fas' value="=>">&#xf532;</option>
+              </select>
+            </div>
+          </div>
+          <div class="container-rv" style="width: 200;"> 
+              <div class="form-group" >
+                <label><b>Operador</b></label>
+                <select class="fas" (change)="getMostravalor()">
+                  <option  value="">selecione</option>
+                  <option class='fas' value=">">&#xf531;</option>
+                  <option class='fas' value="<">&#xf536;</option>
+                  <option class='fas' value="=">&#xf52c;</option>
+                  <option class='fas' value="<=">&#xf537;</option>
+                  <option class='fas' value="=>">&#xf532;</option>
+                </select>
+              </div>
+            </div>
+</div>
+<div class="card-header">
+<div class="container-rv" style="width: 150px;">
+  <label><b>Indicador</b></label>
+    <div  cdkDropList 
+           #minha="cdkDropList" 
+           [cdkDropListConnectedTo]="[confirmados,indicadorregra]"
+           class="list-rv"
+           [cdkDropListData]="myList"  
+           (cdkDropListDropped)="drop($event)" 
+            >
+      <div class="box-rv" *ngFor="let p of myList" cdkDrag>{{p.name}}</div>
+    </div>
+</div>
+
+<div class="container-rv" style="width: 150px;" >
+  <label><b>Indicador Escolhido</b></label> 
+        <div  cdkDropList 
+             #confirmados="cdkDropList" 
+             [cdkDropListConnectedTo]="[minha]"
+             [cdkDropListData]="confirmeList"  
+             class="list-rv"
+             (cdkDropListDropped)="drop($event)">
+             <div class="box-rv" *ngFor="let p of confirmeList" cdkDrag>{{p.name}}</div>
+        </div>
+      
+</div>
+<div class="container-rv" > 
+    <div class="form-group" *ngIf="flgRegras">
+      <label><b>Operador</b></label>
+      <select class="fas" (change)="getMostravalor()">
+        <option  value="">selecione</option>
+        <option class='fas' value=">">&#xf531;</option>
+        <option class='fas' value="<">&#xf536;</option>
+        <option class='fas' value="=">&#xf52c;</option>
+        <option class='fas' value="<=">&#xf537;</option>
+        <option class='fas' value="=>">&#xf532;</option>
+      </select>
+    </div>
+  </div>
+
+<div class="container-rv"  > 
+        <div class="form-group" style="padding: 33px 0px 0px 0px;" *ngIf="flgValor">
+          <input type="text" class="form-control" placeholder="valor" name="valor" currencyMask  >
+        </div>
+  </div>  
+
+  <div class="container-rv" style="width: 150px;">
+      
+      <label ><b>Indicador regra</b></label> 
+            <div cdkDropList  
+                 #indicadorregra="cdkDropList" 
+                 [cdkDropListConnectedTo]="[minha]"
+                 [cdkDropListData]="regra"  
+                 class="list-rv"
+                 (cdkDropListDropped)="drop($event)" >
+                    <div  class="box-rv" *ngFor="let p of regra" cdkDrag>{{p.name}}</div>
+            </div>     
+      
+  </div>        
+  
+    <div class="container-rv">
+        <div class="form-group"  *ngIf="flgValor" >
+          <label><b>taxa</b></label>
+            <div class="radio">
+               <label><input type="radio" name="optradio" value="2">porcentagem</label>
+             </div>
+            <div class="radio">
+               <label><input type="radio" name="optradio" value="1">valor</label>
+            </div>
+        </div>    
+    </div>
+  
+  <div class="container-rv">
+      <div class="form-group" style="padding: 25px 0px 0px 0px;"  *ngIf="flgValor">
+        <input type="text" class="form-control" placeholder="porcentagem" name="porcentagem" currencyMask   >
+      </div>
+</div>
+</div>
+
+

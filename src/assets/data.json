@@ -1,0 +1,11 @@
+[
+    {
+        "name": "Emitido",
+        "cod" : 1
+    },
+    {
+        "name":"Cobrado",
+        "cod" : 2
+    }
+
+]

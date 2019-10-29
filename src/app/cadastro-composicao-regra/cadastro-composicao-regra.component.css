@@ -1,0 +1,89 @@
+
+.container-rv-p{
+  width: 180px;
+  margin: 0 10px 10px 0;
+  
+}
+.container-rv {
+    margin: 0 10px 10px 0;
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .container-rv select{
+    display: block;
+    /* width: 100%; */
+    height: calc(1.5em + .75rem + 2px);
+    padding: 5px 5px 5px 10px;
+    /*font-size: 29px;*/
+    /* font-weight: 600; */
+    /* line-height: 1.5; */
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    /* border-radius: .25rem; */
+    width: 100px;
+    text-align: center;
+  }
+  .container-rv option{
+    font-size:24px;text-align: center;
+
+  }
+
+  .container-rv .dropDag{
+  width: 180px;
+  margin: 0 10px 10px 0;
+  display: inline-block;
+  vertical-align: top;
+  }
+  
+  .list-rv {
+    border: solid 1px #ccc;
+    min-height: 60px;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    display: block;
+  }
+  
+  .box-rv {
+    padding: 10px 5px;
+    border-bottom: solid 1px #ccc;
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    cursor: move;
+    background: white;
+    font-size: 14px;
+  }
+  
+  .cdk-drag-preview {
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+                0 8px 10px 1px rgba(0, 0, 0, 0.14),
+                0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  }
+  
+  .cdk-drag-placeholder {
+    opacity: 0;
+  }
+  
+  .cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  
+  .box-rv:last-child {
+    border: none;
+  }
+  
+  .list-rv.cdk-drop-list-dragging .box-rv:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+
+  
