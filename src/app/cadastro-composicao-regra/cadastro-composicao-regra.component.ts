@@ -2,9 +2,10 @@ import { Component} from '@angular/core';
 import {CdkDragDrop,moveItemInArray,transferArrayItem} from '@angular/cdk/drag-drop';
 import { HttpClient } from '@angular/common/http';
 
+
 export interface Indicador{
   nome: String;
-  cod: Int16Array;
+  cod: number;
 }
 
 @Component({
@@ -23,6 +24,20 @@ export class CadastroComposicaoRegraComponent {
   flgValor : boolean = false;
   flgPorcentagem : boolean = false;
   tipoDado : number;
+  produtoList: [];
+  empresaList: [];
+  ramoList: [];
+  modalidadeList:[];
+  grupoList:[];
+  subgrupoList:[];
+  dadosComposicao: never[];
+  empresa : [];
+  produto : string;
+  ramo : string;
+  modalidade: string;
+  grupo : string;
+  subgrupo: string;
+  
 
   
 
@@ -43,11 +58,49 @@ getCampoValorPorcentagem(valor:number){
   getMostravalor(){
      this.flgValor = true;
   }
+
+  
+
+  public paginaAtual = 1;
   
   getMyList(){
     this.httpClient.get<Indicador[]>('assets/data.json').subscribe(list  =>{
       this.myList = list;
+    }),
+    this.httpClient.get<[]>('assets/produto.json').subscribe(list =>{
+      this.produtoList = list;
+    }),
+    this.httpClient.get<[]>('assets/empresa.json').subscribe(list =>{
+      this.empresaList = list;
+    }),
+    this.httpClient.get<[]>('assets/ramo.json').subscribe(list =>{
+      this.ramoList = list;
+    }),
+    this.httpClient.get<[]>('assets/modalidade.json').subscribe(list =>{
+      this.modalidadeList = list;
+    }),
+    this.httpClient.get<[]>('assets/grupo.json').subscribe(list =>{
+      this.grupoList = list;
+    }),
+    this.httpClient.get<[]>('assets/subgrupo.json').subscribe(list =>{
+      this.subgrupoList = list;
     })
+    this.httpClient.get<[]>('assets/dadosComposicao.json').subscribe(list =>{
+      this.dadosComposicao   = list;
+    })
+
+  }
+
+  getMostra(){
+    let  teste ={
+       "empresa" : this.empresa,
+       "produto" : this.produto,
+       "ramo" : this.ramo,
+       "modalidade" : this.modalidade,
+       "grupo" : this.grupo,
+       "subgrupo" : this.subgrupo
+    }
+    this.dadosComposicao.push(teste);
   }
  
 

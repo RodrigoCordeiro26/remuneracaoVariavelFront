@@ -16,6 +16,7 @@ import {CommonModule} from '@angular/common';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from "ng2-currency-mask/src/currency-mask.config";
 import {NgxPaginationModule} from "ngx-pagination"; 
+import { FormsModule } from '@angular/forms';
   
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
@@ -51,7 +52,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     HttpClientModule,
     CommonModule,
     CurrencyMaskModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FormsModule
   ],
   providers: [
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }

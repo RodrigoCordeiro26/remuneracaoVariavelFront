@@ -1,295 +1,217 @@
 <div id="accordion">
-    <div class="card">
-        <div class="card-header">
-            <a class="card-link" data-toggle="collapse" href="#collapseOne">
-              Cadastro de Composição e Regras
-            </a>
-          </div> 
-<div class="card-body">
+  <div class="card">
+    <div class="card-header">
+      <a class="card-link" data-toggle="collapse" href="#collapseOne">
+        Cadastro de Composição e Regras
+      </a>
+    </div>
+    <div class="card-body">
 
-    <div class="container-rv-input"  > 
-       <label>Nome do Segmento</label>
-        <div class="form-group" >
-          <input type="text" class="form-control"  name="segtmento"   >
-        </div>
-  </div> 
-  <div class="form-group" id="form-parte-um">
-    <div class="container-rv-p" > 
-        <div class="form-group" >
-          <label><b>Empresa</b></label>
-          <select class="form-control">
-            <option  value="">selecione</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="911">911</option>
-  
-          </select>
+      <div class="container-rv-input">
+        <label>Nome do Segmento</label>
+        <div class="form-group">
+          <input type="text" class="form-control" name="segtmento">
         </div>
       </div>
-      <div class="container-rv-p" > 
-          <div class="form-group" >
+      <div class="form-group" id="form-parte-um">
+        <div class="container-rv-p">
+          <div class="form-group">
+            <label><b>Empresa</b></label>
+            <select class="form-control" [(ngModel)]="empresa" >
+              <option value="">selecione</option>
+              <option *ngFor="let emp of empresaList" [value]="emp">{{emp.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="container-rv-p">
+          <div class="form-group">
             <label><b>Produto</b></label>
-            <select class="form-control">
-              <option  value="">selecione</option>
-              <option value="1">Auto Porto</option>
-              <option value="2">Auto Porto RE</option>
-              <option value="11">Fiança</option>
-              <option value="9">Segmento</option>
+            <select class="form-control" [(ngModel)]="produto" >
+              <option value="">selecione</option>
+              <option *ngFor="let prod of produtoList">{{prod.name}}</option>
+
 
 
             </select>
           </div>
         </div>
-        <div class="container-rv-p" > 
-            <div class="form-group">
-              <label><b>Ramo</b></label>
-              <select class="form-control">
-                <option  value="">selecione</option>
-                <option  value="1">segtmento</option>
-    
-              </select>
+        <div class="container-rv-p">
+          <div class="form-group">
+            <label><b>Ramo</b></label>
+            <select class="form-control" [(ngModel)]="ramo" >
+              <option value="">selecione</option>
+              <option *ngFor="let ramo of ramoList">{{ramo.name}}</option>
+
+            </select>
+          </div>
+        </div>
+        <div class="container-rv-p">
+          <div class="form-group">
+            <label><b>Tipo Operação</b></label>
+            <div class="radio">
+              <label><input type="radio" name="optradio" value="1">Adicionar</label>
+            </div>
+            <div class="radio">
+              <label><input type="radio" name="optradio" value="2">Remover</label>
             </div>
           </div>
-          <div class="container-rv-p">
-              <div class="form-group"  >
-                <label><b>Tipo Operação</b></label>
-                  <div class="radio">
-                     <label><input type="radio" name="optradio" value="1">Adicionar</label>
-                   </div>
-                  <div class="radio">
-                     <label><input type="radio" name="optradio" value="2">Remover</label>
-                  </div>
-              </div>    
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <div class="container-rv-p">
+          <div class="form-group">
+            <label><b>Modalidade</b></label>
+            <select class="form-control" [(ngModel)]="modalidade" >
+              <option value="">selecione</option>
+              <option *ngFor="let mod of modalidadeList">{{mod.name}}</option>
+
+            </select>
           </div>
- </div>   
- 
-  
-  <div class="form-group">       
-          <div class="container-rv-p" > 
-              <div class="form-group" >
-                <label><b>Modalidade</b></label>
-                <select class="form-control">
-                  <option  value="">selecione</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="911">911</option>
-        
-                </select>
-              </div>
+        </div>
+        <div class="container-rv-p">
+          <div class="form-group">
+            <label><b>Grupo</b></label>
+            <select class="form-control" [(ngModel)]="grupo" >
+              <option value="">selecione</option>
+              <option *ngFor="let grupo of grupoList">{{grupo.name}}</option>
+
+
+            </select>
+          </div>
+        </div>
+        <div class="container-rv-p">
+          <div class="form-group">
+            <label><b>Subgrupo</b></label>
+            <select class="form-control" [(ngModel)]="subgrupo" >
+              <option value="">selecione</option>
+              <option *ngFor="let sub of subgrupoList">{{sub.name}}</option>
+
+            </select>
+          </div>
+        </div>
+        <div class="container-rv-p">
+          <div class="form-group" id="adicionar">
+            <label class="fas fa-plus-circle" (click)="getMostra()"  style="font-size:24px;"></label>
+            <div class="checkbox">
+              <a type="text" name="optradio" value="2">Incluir</a>
             </div>
-            <div class="container-rv-p" > 
-                <div class="form-group" >
-                  <label><b>Grupo</b></label>
-                  <select class="form-control">
-                    <option  value="">selecione</option>
-                    <option value="1">Auto Porto</option>
-                    <option value="2">Auto Porto RE</option>
-                    <option value="11">Fiança</option>
-                    <option value="9">Segmento</option>
-      
-      
-                  </select>
-                </div>
-              </div>
-              <div class="container-rv-p" > 
-                  <div class="form-group">
-                    <label><b>Subgrupo</b></label>
-                    <select class="form-control">
-                      <option  value="">selecione</option>
-                      <option  value="1">segtmento</option>
-          
-                    </select>
-                  </div>
-                </div>
-          <div class="container-rv-p">
-              <div class="form-group" id="adicionar" >
-                <label class="fas fa-plus-circle" style="font-size:24px;" ></label>
-                  <div class="checkbox">
-                     <a type="text"  name="optradio" value="2">Incluir</a>
-                  </div>
-              </div>    
           </div>
-          <div class="container-rv-p">
-              <div class="form-group" id="remover" >
-                <label class="fas fa-trash-alt" style="font-size:24px;" ></label>
-                  <div class="checkbox">
-                     <a type="text"  name="optradio" value="2">Excluir</a>
-                  </div>
-              </div>    
+        </div>
+        <div class="container-rv-p">
+          <div class="form-group" id="remover">
+            <label class="fas fa-trash-alt" style="font-size:24px;"></label>
+            <div class="checkbox">
+              <a type="text" name="optradio" value="2">Excluir</a>
+            </div>
           </div>
-      </div>     
+        </div>
+      </div>
 
       <table class="table table-striped">
-          <thead>
-            <tr >
-              <th>Empresa</th>
-              <th>Produto</th>
-              <th>Ramo</th>
-              <th>Modalidade</th>
-              <th>Grupo</th>
-              <th>Subgrupo</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Porto Plus</td>
-              <td>Auto Porto</td>
-              <td>Segmento</td>
-              <td>Porto</td>
-              <td>teste</td>
-              <td>teste</td>
-            </tr>
-            <tr>
-                <td>Porto Plus</td>
-                <td>Auto Porto</td>
-                <td>Segmento</td>
-                <td>Porto</td>
-                <td>teste</td>
-                <td>teste</td>
-            </tr>
-            <tr>
-                <td>Porto Plus</td>
-                <td>Auto Porto</td>
-                <td>Segmento</td>
-                <td>Porto</td>
-                <td>teste</td>
-                <td>teste</td>
-            </tr>
-            <tr>
-                <td>Porto Plus</td>
-                <td>Auto Porto</td>
-                <td>Segmento</td>
-                <td>Porto</td>
-                <td>teste</td>
-                <td>teste</td>
-            </tr>
-            <tr>
-                <td>Porto Plus</td>
-                <td>Auto Porto</td>
-                <td>Segmento</td>
-                <td>Porto</td>
-                <td>teste</td>
-                <td>teste</td>
-            </tr>
-            <tr>
-                <td>Porto Plus</td>
-                <td>Auto Porto</td>
-                <td>Segmento</td>
-                <td>Porto</td>
-                <td>teste</td>
-                <td>teste</td>
-            </tr>
-            <tr>
-                <td>Porto Plus</td>
-                <td>Auto Porto</td>
-                <td>Segmento</td>
-                <td>Porto</td>
-                <td>teste</td>
-                <td>teste</td>
-            </tr>
-            <tr>
-                <td>Porto Plus</td>
-                <td>Auto Porto</td>
-                <td>Segmento</td>
-                <td>Porto</td>
-                <td>teste</td>
-                <td>teste</td>
-            </tr>
-          </tbody>
-        </table>
- 
-</div>
- 
-        <div class="card-header">
-          <a class="card-link" data-toggle="collapse" href="#collapseOne">
-            Regras
-          </a>
-        </div>
+        <thead>
+          <tr>
+            <th>Empresa</th>
+            <th>Produto</th>
+            <th>Ramo</th>
+            <th>Modalidade</th>
+            <th>Grupo</th>
+            <th>Subgrupo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let dados of dadosComposicao | paginate: { itemsPerPage: 2, currentPage: paginaAtual }; let i = index">
+            <td>{{dados.empresa}}</td>
+            <td>{{dados.produto}}</td>
+            <td>{{dados.ramo}}</td>
+            <td>{{dados.modalidade}}</td>
+            <td>{{dados.grupo}}</td>
+            <td>{{dados.subgrupo}}</td>
+          </tr>
+        </tbody>
+        <pagination-controls  (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo"></pagination-controls>
+      </table>
 
-<div class="card-body">
-<div class="container-rv">
-  <label><b>Indicador</b></label>
-    <div  cdkDropList 
-           #minha="cdkDropList" 
-           [cdkDropListConnectedTo]="[confirmados,indicadorregra]"
-           class="list-rv"
-           [cdkDropListData]="myList"  
-           (cdkDropListDropped)="drop($event)" 
-            >
-      <div class="box-rv" *ngFor="let p of myList" cdkDrag>{{p.name}}</div>
     </div>
-</div>
 
-<div class="container-rv" style="width: 150px;" >
-  <label><b>Indicador Escolhido</b></label> 
-        <div  cdkDropList 
-             #confirmados="cdkDropList" 
-             [cdkDropListConnectedTo]="[minha]"
-             [cdkDropListData]="confirmeList"  
-             class="list-rv"
-             (cdkDropListDropped)="drop($event)">
-             <div class="box-rv" *ngFor="let p of confirmeList" cdkDrag>{{p.name}}</div>
+    <div class="card-header">
+      <a class="card-link" data-toggle="collapse" href="#collapseOne">
+        Regras
+      </a>
+    </div>
+
+    <div class="card-body">
+      <div class="container-rv">
+        <label><b>Indicador</b></label>
+        <div cdkDropList #minha="cdkDropList" [cdkDropListConnectedTo]="[confirmados,indicadorregra]" class="list-rv"
+          [cdkDropListData]="myList" (cdkDropListDropped)="drop($event)">
+          <div class="box-rv" *ngFor="let p of myList" cdkDrag>{{p.name}}</div>
         </div>
-      
-</div>
-<div class="container-rv" > 
-    <div class="form-group" *ngIf="flgRegras">
-      <label><b>Operador</b></label>
-      <select class="fas" (change)="getMostravalor()">
-        <option  value="">selecione</option>
-        <option class='fas' value=">">&#xf531;</option>
-        <option class='fas' value="<">&#xf536;</option>
-        <option class='fas' value="=">&#xf52c;</option>
-        <option class='fas' value="<=">&#xf537;</option>
-        <option class='fas' value="=>">&#xf532;</option>
-      </select>
+      </div>
+
+      <div class="container-rv" style="width: 150px;">
+        <label><b>Indicador Escolhido</b></label>
+        <div cdkDropList #confirmados="cdkDropList" [cdkDropListConnectedTo]="[minha]" [cdkDropListData]="confirmeList"
+          class="list-rv" (cdkDropListDropped)="drop($event)">
+          <div class="box-rv" *ngFor="let p of confirmeList" cdkDrag>{{p.name}}</div>
+        </div>
+
+      </div>
+      <div class="container-rv">
+        <div class="form-group" *ngIf="flgRegras">
+          <label><b>Operador</b></label>
+          <select class="fas" (change)="getMostravalor()">
+            <option value="">selecione</option>
+            <option class='fas' value=">">&#xf531;</option>
+            <option class='fas' value="<">&#xf536;</option>
+            <option class='fas' value="=">&#xf52c;</option>
+            <option class='fas' value="<=">&#xf537;</option>
+            <option class='fas' value="=>">&#xf532;</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="container-rv">
+        <div class="form-group" style="padding: 33px 0px 0px 0px;" *ngIf="flgValor">
+          <input type="text" class="form-control" placeholder="R$0.00" name="valor" currencyMask>
+        </div>
+      </div>
+
+      <div class="container-rv" style="width: 150px;">
+
+        <label><b>Indicador regra</b></label>
+        <div cdkDropList #indicadorregra="cdkDropList" [cdkDropListConnectedTo]="[minha]" [cdkDropListData]="regra"
+          class="list-rv" (cdkDropListDropped)="drop($event)">
+          <div class="box-rv" *ngFor="let p of regra" cdkDrag>{{p.name}}</div>
+        </div>
+
+      </div>
+
+      <div class="container-rv">
+        <div class="form-group" *ngIf="flgValor">
+          <label><b>taxa</b></label>
+          <div class="radio">
+            <label><input type="radio" name="optradio" (change)="getCampoValorPorcentagem(1)"
+                value="1">porcentagem</label>
+          </div>
+          <div class="radio">
+            <label><input type="radio" name="optradio" (change)="getCampoValorPorcentagem(2)" value="2">valor</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-rv">
+        <div class="form-group" style="padding: 33px 0px 0px 0px;" *ngIf="tipoDado == 1">
+          <input type="text" class="form-control" placeholder="%0.000" currencyMask
+            [options]="{ precision:3, decimal: '.',prefix: '%'}" maxlength="8">
+        </div>
+      </div>
+      <div class="container-rv">
+        <div class="form-group" style="padding: 33px 0px 0px 0px;" *ngIf="tipoDado == 2">
+          <input type="text" class="form-control" placeholder="R$0.00" name="valor" currencyMask>
+        </div>
+      </div>
     </div>
   </div>
-
-<div class="container-rv"  > 
-        <div class="form-group" style="padding: 33px 0px 0px 0px;" *ngIf="flgValor">
-          <input type="text" class="form-control" placeholder="R$0.00" name="valor" currencyMask  >
-        </div>
-  </div>  
-
-  <div class="container-rv" style="width: 150px;">
-      
-      <label ><b>Indicador regra</b></label> 
-            <div cdkDropList  
-                 #indicadorregra="cdkDropList" 
-                 [cdkDropListConnectedTo]="[minha]"
-                 [cdkDropListData]="regra"  
-                 class="list-rv"
-                 (cdkDropListDropped)="drop($event)" >
-                    <div  class="box-rv" *ngFor="let p of regra" cdkDrag>{{p.name}}</div>
-            </div>     
-      
-  </div>        
-  
-    <div class="container-rv">
-        <div class="form-group"  *ngIf="flgValor" >
-          <label><b>taxa</b></label>
-            <div class="radio">
-               <label><input type="radio" name="optradio" (change)="getCampoValorPorcentagem(1)" value="1">porcentagem</label>
-             </div>
-            <div class="radio">
-               <label><input type="radio" name="optradio" (change)="getCampoValorPorcentagem(2)" value="2">valor</label>
-            </div>
-        </div>    
-    </div>
-  
-  <div class="container-rv">
-      <div class="form-group" style="padding: 33px 0px 0px 0px;"  *ngIf="tipoDado == 1">
-        <input type="text" class="form-control" placeholder="%0.000"  currencyMask  [options]="{ precision:3, decimal: '.',prefix: '%'}"  maxlength="8" >
-      </div>
 </div>
-<div class="container-rv"  > 
-        <div class="form-group" style="padding: 33px 0px 0px 0px;" *ngIf="tipoDado == 2">
-          <input type="text" class="form-control" placeholder="R$0.00" name="valor" currencyMask  >
-        </div>
-  </div> 
-</div>
-</div>
-</div>
-
-

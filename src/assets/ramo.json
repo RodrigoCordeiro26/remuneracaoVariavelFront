@@ -1,0 +1,14 @@
+[
+{
+     "name":"residencial",
+    "cod" : 1
+},
+{
+    "name":"auto individual",
+    "cod" : 2
+},
+{
+    "name":"responsabilidade civil",
+    "cod" : 2
+}
+]

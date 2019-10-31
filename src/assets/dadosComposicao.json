@@ -1,0 +1,34 @@
+[
+{
+ "empresa":"Porto Plus",
+ "produto":"Alto Porto",
+ "ramo" : "residencial",
+ "modalidade" : "automovel",
+ "grupo":"empresarial",
+ "subgrupo":"pessoa"
+},
+{
+ "empresa":"Porto Plus1",
+ "produto":"Alto Porto1",
+ "ramo" : "residencial1",
+ "modalidade" : "automovel1",
+ "grupo":"empresarial1",
+ "subgrupo":"pessoa1"
+},
+{
+ "empresa":"Porto Plus2",
+ "produto":"Alto Porto2",
+ "ramo" : "residencial2",
+ "modalidade" : "automovel2",
+ "grupo":"empresarial2",
+ "subgrupo":"pessoa2"
+},
+{
+ "empresa":"Porto Plus3",
+ "produto":"Alto Porto3",
+ "ramo" : "residencial3",
+ "modalidade" : "automovel3",
+ "grupo":"empresarial3",
+ "subgrupo":"pessoa3"
+}
+]
