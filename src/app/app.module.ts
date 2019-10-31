@@ -9,6 +9,9 @@ import { AlgumaCoisaComponent } from './alguma-coisa/alguma-coisa.component';
 import { ModalComponent } from './modal/modal.component';
 import { CadastroSegmentoRVComponent } from './cadastro-segmento-rv/cadastro-segmento-rv.component';
 import { FormsModule }   from '@angular/forms'
+import { CadastroSegmentoService } from 'src/services/domain/cadastroSegmento.service';
+import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -23,9 +26,14 @@ import { FormsModule }   from '@angular/forms'
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    CommonModule
+
   ],
-  providers: [],
+  providers: [
+    CadastroSegmentoService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

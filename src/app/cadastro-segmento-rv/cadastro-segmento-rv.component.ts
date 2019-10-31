@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CadastroSegmentoDTO } from 'src/models/cadastroSegmento.dto';
-import { FormsModule }   from '@angular/forms';
+import { CadastroSegmentoRVDTO } from "src/models/CadastroSegmentoRV.dto";
+import { CadastroSegmentoService } from 'src/services/domain/cadastroSegmento.service'
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 @Component({
   selector: 'rv-cadastro-segmento-rv',
   templateUrl: './cadastro-segmento-rv.component.html',
@@ -8,20 +9,38 @@ import { FormsModule }   from '@angular/forms';
 })
 export class CadastroSegmentoRVComponent implements OnInit {
 
-  objDTO : CadastroSegmentoDTO ={
-    nomeSegmentoRV:"",
+  objDTO: CadastroSegmentoRVDTO = {
+    id: null,
+    nmSegmentoRV: "",
     isSeguro: false,
-    observacao: ""
+    observacao: "",
+    normal: false,
+    assessoria: false
   }
+  
+  public items : CadastroSegmentoRVDTO [];
 
-  constructor() { }
+  constructor(public service: CadastroSegmentoService) {
+
+  }
 
   ngOnInit() {
+    this.service.getAll().subscribe(res=>{
+      this.items = res;
+      console.log(this.items)
+    })
   }
- 
-gravar(){
-  console.log(this.objDTO)
-}
- 
+
+  gravar() {
+    this.service.insert(this.objDTO).subscribe(response => {
+      console.log(response);
+    });
+  }
+  getList() {
+    this.service.getAll().subscribe(response=>{
+      this.items = response;
+      console.log(this.items)
+    })
+  }
 
 }

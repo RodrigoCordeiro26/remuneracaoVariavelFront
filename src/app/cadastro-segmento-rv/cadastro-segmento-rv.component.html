@@ -2,104 +2,120 @@
     <div class="ps-row" style="text-align: center; margin-top:0px; ">
         <p class="titulo">Regras de Segmento</p>
     </div><br>
-    <div class="ps-row" style="margin-bottom: 4px;" >
+    <div class="ps-row" style="margin-bottom: 4px;">
         <tr class="ps-mod8 ps-sm-mod12">
             <th class="ps-mod8 ps-sm-mod2">
-                    <a  title="Adicionar novo Segmento" style="width:60px;"href="javascript:;" class="ps-btn ps-open-modal" data-modal="#ModalPadrao" data-modalbackdropstatic="false" data-modalkeyboarddisable="true" data-modalonshow="console.log('abrir modal')" data-modalonhide="console.log('fechar modal')">
-                            <span class="ps-mod8 ps-ico ps-sm-mod1 ps-alignCenter ps-ico-plus">
-                           </span>
-                    </a><br/>
-              
+                <a title="Adicionar novo Segmento" style="width:60px;" href="javascript:;" class="ps-btn ps-open-modal"
+                    data-modal="#ModalPadrao" data-modalbackdropstatic="false" data-modalkeyboarddisable="true"
+                    data-modalonshow="console.log('abrir modal')" data-modalonhide="console.log('fechar modal')">
+                    <span class="ps-mod8 ps-ico ps-sm-mod1 ps-alignCenter ps-ico-plus">
+                    </span>
+                </a><br />
+
             </th>
-            <th class="ps-sm-mod8"><input type="submit" class="ps-btn ps-btn-primary" value="Regras & Composição" /></th>        </tr>
-           
-    
-        
+            <th class="ps-sm-mod8"><input type="submit" class="ps-btn ps-btn-primary" value="Regras & Composição" />
+            </th>
+        </tr>
+
+
+
     </div>
-    
+
     <div class="ps-row">
         <div class="ps-mod8 ps-sm-mod12">
-            <table class="ps-table ps-datagrid" data-pagesize="5"  data-filtering="true">
+            <table class="ps-table ps-datagrid" data-pagesize="5" data-filtering="true" >
                 <thead>
                     <tr>
                         <th class="ps-sm-mod2">Código</th>
                         <th class="ps-sm-mod3">Segmento</th>
-                        <th class="ps-hide ps-sm-show ps-sm-mod3">Tipo</th>
-                        <th class="ps-hide ps-sm-show ps-sm-mod2">Data</th>
+                        <th class="ps-hide ps-sm-show ps-sm-mod3">Assessoria</th>
+                        <th class="ps-hide ps-sm-show ps-sm-mod2">Normal</th>
+                        <th class="ps-hide ps-sm-show ps-sm-mod2">Seguro</th>
                         <th class="ps-sm-mod2">Observação</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>15-36027222</td>
-                        <td>Auto</td>
-                        <td>1</td>
-                        <td>18/05/2014</td>
-                        <td>Bla</td>
-                    </tr>
-                    <tr>
-                            <td>65-36027222</td>
-                            <td>Auto</td>
-                            <td>1</td>
-                            <td>18/05/2014</td>
-                            <td>Bla</td>
-                        </tr> <tr>
-                                <td>65-36027222</td>
-                                <td>Auto</td>
-                                <td>1</td>
-                                <td>18/05/2014</td>
-                                <td>Bla</td>
-                            </tr> <tr>
-                                    <td>65-36027222</td>
-                                    <td>Auto</td>
-                                    <td>1</td>
-                                    <td>18/05/2014</td>
-                                    <td>Bla</td>
-                                </tr> <tr>
-                                        <td>65-36027222</td>
-                                        <td>Auto</td>
-                                        <td>1</td>
-                                        <td>18/05/2014</td>
-                                        <td>Bla</td>
-                                    </tr>
+                        <tr *ngFor="let item of items">
+                            <td>{{item.id}}</td>
+                            <td>{{item.nmSegmentoRV}}</td>
+                            <!-- INICIO Bloco do campo Normal-->
+                            <td *ngIf="item.assessoria">
+                                Sim
+                            </td>
+                            <td *ngIf="!item.assessoria">
+                                Não
+                            </td>
+                            <!-- FIM Bloco do campo Normal-->
+
+                            <!-- INICIO Bloco do campo Normal-->
+                            <td *ngIf="item.normal">
+                                Sim
+                            </td>
+                            <td *ngIf="!item.normal">
+                                Não
+                            </td>
+                            <!-- FIM Bloco do campo Normal-->
+                            <!-- INICIO Bloco do campo Normal-->
+                            <td *ngIf="item.isSeguro">
+                                Sim
+                            </td>
+                            <td *ngIf="!item.isSeguro">
+                                Não
+                            </td>
+                            <!-- FIM Bloco do campo Normal-->
+                            <td>{{item.observacao}}</td>
+                        </tr>
+
                 </tbody>
             </table>
         </div>
     </div>
     <div class="ps-modal" id="ModalPadrao">
-            <a href="javascript:;" class="ps-modal-close ps-modal-close-default"><span class="ps-ico ps-ico-sm ps-sm-ico-lg ps-ico-close"></span></a>
-            <div class="ps-modal-container">
-                <div class="ps-modal-title">
-                    <p class="titulo">Cadastro de Segmento</p>
-                </div>
-                <div class="ps-modal-content">
-                    <label>Nome Segmento RV</label>
-                 <input [(ngModel)]="objDTO.nomeSegmentoRV" type="text"  class="ps-frm-entry" placeholder="Preencha aqui" />
+        <a href="javascript:;" class="ps-modal-close ps-modal-close-default"><span
+                class="ps-ico ps-ico-sm ps-sm-ico-lg ps-ico-close"></span></a>
+        <div class="ps-modal-container">
+            <div class="ps-modal-title">
+                <p class="titulo">Cadastro de Segmento</p>
+            </div>
+            <div class="ps-modal-content">
+                <label>Nome Segmento RV</label>
+                <input [(ngModel)]="objDTO.nmSegmentoRV" type="text" class="ps-frm-entry" placeholder="Preencha aqui" />
                 <br>
-            <input [(ngModel)]="objDTO.isSeguro" type="radio" name="tst1" value=true class="ps-frm-radio" id="ps-frm-rad-tst1" />
-            <label class="ps-frm-radio" for="ps-frm-rad-tst1">
-               Seguro
-            </label>
-            <br>
-            <input [(ngModel)]="objDTO.isSeguro" type="radio" name="tst1" value=false class="ps-frm-radio" id="ps-frm-rad-tst2" checked />
-            
-            <label class="ps-frm-radio" for="ps-frm-rad-tst2">
-                Não Seguro
-            </label>
-            <textarea [(ngModel)]="objDTO.observacao" name="test" class="ps-frm-entry" placeholder="Observação (máximo 100 caracteres)" maxlength="100"></textarea>
-                </div>
-                <div class="ps-modal-foot">
-                    <div class="row">
-                        <div class="ps-sm-mod6">
-                           <button (click)="gravar()" class="ps-btn" >Gravar</button>
-                        </div>
-                        <div class="ps-sm-mod6">
-                            <button class="ps-btn" style="color: crimson; border-color: crimson">Cancelar</button>
-                        </div>
-                    </div>                                   
+                <input [(ngModel)]="objDTO.assessoria" type="checkbox" name="tst" class="ps-frm-checkbox"
+                    id="ps-frm-chk-tst1" />
+                <label class="ps-frm-checkbox" for="ps-frm-chk-tst1">
+                    Assessoria
+                </label>
+                <input [(ngModel)]="objDTO.normal" type="checkbox" name="tst" class="ps-frm-checkbox"
+                    id="ps-frm-chk-tst2" checked />
+                <label class="ps-frm-checkbox" for="ps-frm-chk-tst2">
+                    Normal
+                </label><br>
+                <input [(ngModel)]="objDTO.isSeguro" type="radio" name="tst1" value=true class="ps-frm-radio"
+                    id="ps-frm-rad-tst1" />
+                <label class="ps-frm-radio" for="ps-frm-rad-tst1">
+                    Seguro
+                </label>
+                <br>
+                <input [(ngModel)]="objDTO.isSeguro" type="radio" name="tst1" value=false class="ps-frm-radio"
+                    id="ps-frm-rad-tst2" checked />
+
+                <label class="ps-frm-radio" for="ps-frm-rad-tst2">
+                    Não Seguro
+                </label>
+                <textarea [(ngModel)]="objDTO.observacao" name="test" class="ps-frm-entry"
+                    placeholder="Observação (máximo 100 caracteres)" maxlength="100" style="width: 300px;"></textarea>
+            </div>
+            <div class="ps-modal-foot">
+                <div class="row">
+                    <div class="ps-sm-mod6">
+                        <button (click)="gravar()" class="ps-btn">Gravar</button>
+                    </div>
+                    <div class="ps-sm-mod6">
+                        <button class="ps-btn" style="color: crimson; border-color: crimson">Cancelar</button>
+                    </div>
                 </div>
             </div>
-            
-
+        </div>
     </div>
 </div>
