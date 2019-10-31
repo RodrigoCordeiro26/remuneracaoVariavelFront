@@ -1,59 +1,213 @@
-<div class="card-header">
-    <div class="container-rv" style="width: 200;"> 
+<div id="accordion">
+    <div class="card">
+        <div class="card-header">
+            <a class="card-link" data-toggle="collapse" href="#collapseOne">
+              Cadastro de Composição e Regras
+            </a>
+          </div> 
+<div class="card-body">
+
+    <div class="container-rv-input"  > 
+       <label>Nome do Segmento</label>
         <div class="form-group" >
-          <label><b>Operador</b></label>
-          <select class="fas" (change)="getMostravalor()">
+          <input type="text" class="form-control"  name="segtmento"   >
+        </div>
+  </div> 
+  <div class="form-group" id="form-parte-um">
+    <div class="container-rv-p" > 
+        <div class="form-group" >
+          <label><b>Empresa</b></label>
+          <select class="form-control">
             <option  value="">selecione</option>
-            <option class='fas' value=">">&#xf531;</option>
-            <option class='fas' value="<">&#xf536;</option>
-            <option class='fas' value="=">&#xf52c;</option>
-            <option class='fas' value="<=">&#xf537;</option>
-            <option class='fas' value="=>">&#xf532;</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="911">911</option>
+  
           </select>
         </div>
       </div>
-      <div class="container-rv" style="width: 200;" > 
+      <div class="container-rv-p" > 
           <div class="form-group" >
-            <label><b>Operador</b></label>
-            <select class="fas" (change)="getMostravalor()">
+            <label><b>Produto</b></label>
+            <select class="form-control">
               <option  value="">selecione</option>
-              <option class='fas' value=">">&#xf531;</option>
-              <option class='fas' value="<">&#xf536;</option>
-              <option class='fas' value="=">&#xf52c;</option>
-              <option class='fas' value="<=">&#xf537;</option>
-              <option class='fas' value="=>">&#xf532;</option>
+              <option value="1">Auto Porto</option>
+              <option value="2">Auto Porto RE</option>
+              <option value="11">Fiança</option>
+              <option value="9">Segmento</option>
+
+
             </select>
           </div>
         </div>
-        <div class="container-rv" style="width: 200;"> 
+        <div class="container-rv-p" > 
             <div class="form-group">
-              <label><b>Operador</b></label>
-              <select class="fas" (change)="getMostravalor()">
+              <label><b>Ramo</b></label>
+              <select class="form-control">
                 <option  value="">selecione</option>
-                <option class='fas' value=">">&#xf531;</option>
-                <option class='fas' value="<">&#xf536;</option>
-                <option class='fas' value="=">&#xf52c;</option>
-                <option class='fas' value="<=">&#xf537;</option>
-                <option class='fas' value="=>">&#xf532;</option>
+                <option  value="1">segtmento</option>
+    
               </select>
             </div>
           </div>
-          <div class="container-rv" style="width: 200;"> 
+          <div class="container-rv-p">
+              <div class="form-group"  >
+                <label><b>Tipo Operação</b></label>
+                  <div class="radio">
+                     <label><input type="radio" name="optradio" value="1">Adicionar</label>
+                   </div>
+                  <div class="radio">
+                     <label><input type="radio" name="optradio" value="2">Remover</label>
+                  </div>
+              </div>    
+          </div>
+ </div>   
+ 
+  
+  <div class="form-group">       
+          <div class="container-rv-p" > 
               <div class="form-group" >
-                <label><b>Operador</b></label>
-                <select class="fas" (change)="getMostravalor()">
+                <label><b>Modalidade</b></label>
+                <select class="form-control">
                   <option  value="">selecione</option>
-                  <option class='fas' value=">">&#xf531;</option>
-                  <option class='fas' value="<">&#xf536;</option>
-                  <option class='fas' value="=">&#xf52c;</option>
-                  <option class='fas' value="<=">&#xf537;</option>
-                  <option class='fas' value="=>">&#xf532;</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="911">911</option>
+        
                 </select>
               </div>
             </div>
+            <div class="container-rv-p" > 
+                <div class="form-group" >
+                  <label><b>Grupo</b></label>
+                  <select class="form-control">
+                    <option  value="">selecione</option>
+                    <option value="1">Auto Porto</option>
+                    <option value="2">Auto Porto RE</option>
+                    <option value="11">Fiança</option>
+                    <option value="9">Segmento</option>
+      
+      
+                  </select>
+                </div>
+              </div>
+              <div class="container-rv-p" > 
+                  <div class="form-group">
+                    <label><b>Subgrupo</b></label>
+                    <select class="form-control">
+                      <option  value="">selecione</option>
+                      <option  value="1">segtmento</option>
+          
+                    </select>
+                  </div>
+                </div>
+          <div class="container-rv-p">
+              <div class="form-group" id="adicionar" >
+                <label class="fas fa-plus-circle" style="font-size:24px;" ></label>
+                  <div class="checkbox">
+                     <a type="text"  name="optradio" value="2">Incluir</a>
+                  </div>
+              </div>    
+          </div>
+          <div class="container-rv-p">
+              <div class="form-group" id="remover" >
+                <label class="fas fa-trash-alt" style="font-size:24px;" ></label>
+                  <div class="checkbox">
+                     <a type="text"  name="optradio" value="2">Excluir</a>
+                  </div>
+              </div>    
+          </div>
+      </div>     
+
+      <table class="table table-striped">
+          <thead>
+            <tr >
+              <th>Empresa</th>
+              <th>Produto</th>
+              <th>Ramo</th>
+              <th>Modalidade</th>
+              <th>Grupo</th>
+              <th>Subgrupo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Porto Plus</td>
+              <td>Auto Porto</td>
+              <td>Segmento</td>
+              <td>Porto</td>
+              <td>teste</td>
+              <td>teste</td>
+            </tr>
+            <tr>
+                <td>Porto Plus</td>
+                <td>Auto Porto</td>
+                <td>Segmento</td>
+                <td>Porto</td>
+                <td>teste</td>
+                <td>teste</td>
+            </tr>
+            <tr>
+                <td>Porto Plus</td>
+                <td>Auto Porto</td>
+                <td>Segmento</td>
+                <td>Porto</td>
+                <td>teste</td>
+                <td>teste</td>
+            </tr>
+            <tr>
+                <td>Porto Plus</td>
+                <td>Auto Porto</td>
+                <td>Segmento</td>
+                <td>Porto</td>
+                <td>teste</td>
+                <td>teste</td>
+            </tr>
+            <tr>
+                <td>Porto Plus</td>
+                <td>Auto Porto</td>
+                <td>Segmento</td>
+                <td>Porto</td>
+                <td>teste</td>
+                <td>teste</td>
+            </tr>
+            <tr>
+                <td>Porto Plus</td>
+                <td>Auto Porto</td>
+                <td>Segmento</td>
+                <td>Porto</td>
+                <td>teste</td>
+                <td>teste</td>
+            </tr>
+            <tr>
+                <td>Porto Plus</td>
+                <td>Auto Porto</td>
+                <td>Segmento</td>
+                <td>Porto</td>
+                <td>teste</td>
+                <td>teste</td>
+            </tr>
+            <tr>
+                <td>Porto Plus</td>
+                <td>Auto Porto</td>
+                <td>Segmento</td>
+                <td>Porto</td>
+                <td>teste</td>
+                <td>teste</td>
+            </tr>
+          </tbody>
+        </table>
+ 
 </div>
-<div class="card-header">
-<div class="container-rv" style="width: 150px;">
+ 
+        <div class="card-header">
+          <a class="card-link" data-toggle="collapse" href="#collapseOne">
+            Regras
+          </a>
+        </div>
+
+<div class="card-body">
+<div class="container-rv">
   <label><b>Indicador</b></label>
     <div  cdkDropList 
            #minha="cdkDropList" 
@@ -94,7 +248,7 @@
 
 <div class="container-rv"  > 
         <div class="form-group" style="padding: 33px 0px 0px 0px;" *ngIf="flgValor">
-          <input type="text" class="form-control" placeholder="valor" name="valor" currencyMask  >
+          <input type="text" class="form-control" placeholder="R$0.00" name="valor" currencyMask  >
         </div>
   </div>  
 
@@ -116,18 +270,25 @@
         <div class="form-group"  *ngIf="flgValor" >
           <label><b>taxa</b></label>
             <div class="radio">
-               <label><input type="radio" name="optradio" value="2">porcentagem</label>
+               <label><input type="radio" name="optradio" (change)="getCampoValorPorcentagem(1)" value="1">porcentagem</label>
              </div>
             <div class="radio">
-               <label><input type="radio" name="optradio" value="1">valor</label>
+               <label><input type="radio" name="optradio" (change)="getCampoValorPorcentagem(2)" value="2">valor</label>
             </div>
         </div>    
     </div>
   
   <div class="container-rv">
-      <div class="form-group" style="padding: 25px 0px 0px 0px;"  *ngIf="flgValor">
-        <input type="text" class="form-control" placeholder="porcentagem" name="porcentagem" currencyMask   >
+      <div class="form-group" style="padding: 33px 0px 0px 0px;"  *ngIf="tipoDado == 1">
+        <input type="text" class="form-control" placeholder="%0.000"  currencyMask  [options]="{ precision:3, decimal: '.',prefix: '%'}"  maxlength="8" >
       </div>
+</div>
+<div class="container-rv"  > 
+        <div class="form-group" style="padding: 33px 0px 0px 0px;" *ngIf="tipoDado == 2">
+          <input type="text" class="form-control" placeholder="R$0.00" name="valor" currencyMask  >
+        </div>
+  </div> 
+</div>
 </div>
 </div>
 

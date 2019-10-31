@@ -15,7 +15,9 @@ import {HttpClientModule} from '@angular/common/http';
 import {CommonModule} from '@angular/common';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from "ng2-currency-mask/src/currency-mask.config";
- 
+import {NgxPaginationModule} from "ngx-pagination"; 
+  
+
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     align: "right",
     allowNegative: true,
@@ -39,6 +41,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     CadastroComposicaoRegraComponent
     
     
+    
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     DragDropModule,
     HttpClientModule,
     CommonModule,
-    CurrencyMaskModule
+    CurrencyMaskModule,
+    NgxPaginationModule
   ],
   providers: [
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }

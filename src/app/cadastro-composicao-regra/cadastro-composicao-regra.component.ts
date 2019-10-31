@@ -22,6 +22,7 @@ export class CadastroComposicaoRegraComponent {
   flgRegras : boolean = false;
   flgValor : boolean = false;
   flgPorcentagem : boolean = false;
+  tipoDado : number;
 
   
 
@@ -31,6 +32,13 @@ export class CadastroComposicaoRegraComponent {
      this.getMyList()
   }
 
+getCampoValorPorcentagem(valor:number){
+   if(valor == 1){
+      this.tipoDado = 1;
+   }else{
+      this.tipoDado = 2
+   }
+} 
 
   getMostravalor(){
      this.flgValor = true;
@@ -58,9 +66,7 @@ export class CadastroComposicaoRegraComponent {
       this.getMyList()     
       if(event.container.id === "cdk-drop-list-1"){
         this.flgRegras = true;
-      } else if(event.container.id === "cdk-drop-list-0"){
-        this.flgRegras = false;
-      }         
+      }        
 
     }
   }
