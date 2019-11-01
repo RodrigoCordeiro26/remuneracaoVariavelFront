@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
 import {CdkDragDrop,moveItemInArray,transferArrayItem} from '@angular/cdk/drag-drop';
-import { HttpClient } from '@angular/common/http';
+import {empresaDTO} from 'src/models/Empresa.dto';
+import { CadastroComposicaoRegraService } from "src/services/domain/CadastroComposicaoRegra.service";
 
 
 export interface Indicador{
@@ -31,7 +32,7 @@ export class CadastroComposicaoRegraComponent {
   grupoList:[];
   subgrupoList:[];
   dadosComposicao: never[];
-  empresa : [];
+  empresa : empresaDTO[];
   produto : string;
   ramo : string;
   modalidade: string;
@@ -43,7 +44,7 @@ export class CadastroComposicaoRegraComponent {
 
  
 
-  constructor(private httpClient: HttpClient){
+  constructor(private service: CadastroComposicaoRegraService){
      this.getMyList()
   }
 
@@ -62,46 +63,52 @@ getCampoValorPorcentagem(valor:number){
   
 
   public paginaAtual = 1;
-  
+
   getMyList(){
-    this.httpClient.get<Indicador[]>('assets/data.json').subscribe(list  =>{
-      this.myList = list;
-    }),
-    this.httpClient.get<[]>('assets/produto.json').subscribe(list =>{
-      this.produtoList = list;
-    }),
-    this.httpClient.get<[]>('assets/empresa.json').subscribe(list =>{
-      this.empresaList = list;
-    }),
-    this.httpClient.get<[]>('assets/ramo.json').subscribe(list =>{
-      this.ramoList = list;
-    }),
-    this.httpClient.get<[]>('assets/modalidade.json').subscribe(list =>{
-      this.modalidadeList = list;
-    }),
-    this.httpClient.get<[]>('assets/grupo.json').subscribe(list =>{
-      this.grupoList = list;
-    }),
-    this.httpClient.get<[]>('assets/subgrupo.json').subscribe(list =>{
-      this.subgrupoList = list;
+    this.service.getAll().subscribe(list => {
+      this.empresa = list;
     })
-    this.httpClient.get<[]>('assets/dadosComposicao.json').subscribe(list =>{
-      this.dadosComposicao   = list;
-    })
-
   }
+  
+  // getMyList(){
+  //   this.httpClient.get<Indicador[]>('assets/data.json').subscribe(list  =>{
+  //     this.myList = list;
+  //   }),
+  //   this.httpClient.get<[]>('assets/produto.json').subscribe(list =>{
+  //     this.produtoList = list;
+  //   }),
+  //   this.httpClient.get<[]>('assets/empresa.json').subscribe(list =>{
+  //     this.empresaList = list;
+  //   }),
+  //   this.httpClient.get<[]>('assets/ramo.json').subscribe(list =>{
+  //     this.ramoList = list;
+  //   }),
+  //   this.httpClient.get<[]>('assets/modalidade.json').subscribe(list =>{
+  //     this.modalidadeList = list;
+  //   }),
+  //   this.httpClient.get<[]>('assets/grupo.json').subscribe(list =>{
+  //     this.grupoList = list;
+  //   }),
+  //   this.httpClient.get<[]>('assets/subgrupo.json').subscribe(list =>{
+  //     this.subgrupoList = list;
+  //   })
+  //   this.httpClient.get<[]>('assets/dadosComposicao.json').subscribe(list =>{
+  //     this.dadosComposicao   = list;
+  //   })
 
-  getMostra(){
-    let  teste ={
-       "empresa" : this.empresa,
-       "produto" : this.produto,
-       "ramo" : this.ramo,
-       "modalidade" : this.modalidade,
-       "grupo" : this.grupo,
-       "subgrupo" : this.subgrupo
-    }
-    this.dadosComposicao.push(teste);
-  }
+  // }
+
+  // getMostra(){
+  //   let  teste ={
+  //      "empresa" : this.empresa,
+  //      "produto" : this.produto,
+  //      "ramo" : this.ramo,
+  //      "modalidade" : this.modalidade,
+  //      "grupo" : this.grupo,
+  //      "subgrupo" : this.subgrupo
+  //   }
+  //   this.dadosComposicao.push(teste);
+  // }
  
 
   drop(event: CdkDragDrop<string[]>) {
