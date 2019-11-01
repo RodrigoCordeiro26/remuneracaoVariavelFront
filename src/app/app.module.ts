@@ -8,10 +8,13 @@ import { HomeComponent } from './home/home.component';
 import { AlgumaCoisaComponent } from './alguma-coisa/alguma-coisa.component';
 import { ModalComponent } from './modal/modal.component';
 import { CadastroSegmentoRVComponent } from './cadastro-segmento-rv/cadastro-segmento-rv.component';
+
+import { CadastroSegmentoService } from 'src/services/domain/cadastroSegmento.service';
+import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
+
 import { CadastroComposicaoRegraComponent } from './cadastro-composicao-regra/cadastro-composicao-regra.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-import {HttpClientModule} from '@angular/common/http';
 import {CommonModule} from '@angular/common';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from "ng2-currency-mask/src/currency-mask.config";
@@ -30,7 +33,6 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
 };
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,9 +42,6 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ModalComponent,
     CadastroSegmentoRVComponent,
     CadastroComposicaoRegraComponent
-    
-    
-    
   ],
   imports: [
     BrowserModule,
@@ -56,10 +55,11 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     FormsModule
   ],
   providers: [
-    { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }
+    { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }, 
+    CadastroSegmentoService
   
   ],
-    
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
