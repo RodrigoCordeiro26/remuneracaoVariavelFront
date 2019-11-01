@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Emitido",
+        "cod" : 1
+    },
+    {
+        "name":"Cobrado",
+        "cod" : 2
+    },
+    {
+        "name":"Valor Liberado",
+        "cod":3
+    },
+    {
+        "name": "Cartões Ativado",
+        "cod": 4
+    },
+    {
+        "name":"Cotas Contabilizada",
+        "cod":5
+    }
+
+]

@@ -24,4 +24,8 @@ export class CadastroSegmentoService{
     getAll(): Observable<CadastroSegmentoRVDTO[]>{
         return this.http.get<CadastroSegmentoRVDTO[]>(`${API_CONFIG.baseUrl}/segmentos-rv`);
     }
+
+    getListByFilter(selected: String, value: String ):Observable<CadastroSegmentoRVDTO[]>{
+        return this.http.get<CadastroSegmentoRVDTO[]>(`${API_CONFIG.baseUrl}/segmentos-rv/filtro?selected=${selected}&value=${value}"`)
+    }
 }
