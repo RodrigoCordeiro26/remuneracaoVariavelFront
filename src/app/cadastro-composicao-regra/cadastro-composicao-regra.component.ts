@@ -1,13 +1,11 @@
 import { Component} from '@angular/core';
 import {CdkDragDrop,moveItemInArray,transferArrayItem} from '@angular/cdk/drag-drop';
-import {empresaDTO} from 'src/models/Empresa.dto';
+import {Indicadores} from 'src/models/Indicadores.dto';
 import { CadastroComposicaoRegraService } from "src/services/domain/CadastroComposicaoRegra.service";
+import {CadastroComposicaoRegraDTO} from 'src/models/CadastroComposicaoRegra.dto';
 
 
-export interface Indicador{
-  nome: String;
-  cod: number;
-}
+
 
 @Component({
   selector: 'rv-cadastro-composicao-regra',
@@ -18,9 +16,9 @@ export interface Indicador{
 
 export class CadastroComposicaoRegraComponent {
   
-  myList: Indicador[];
-  confirmeList: Indicador[] = [];
-  regra : Indicador[] = [];
+  myList: Indicadores[];
+  confirmeList: Indicadores[] = [];
+  regra : Indicadores[] = [];
   flgRegras : boolean = false;
   flgValor : boolean = false;
   flgPorcentagem : boolean = false;
@@ -31,13 +29,16 @@ export class CadastroComposicaoRegraComponent {
   modalidadeList:[];
   grupoList:[];
   subgrupoList:[];
-  dadosComposicao: never[];
-  empresa : empresaDTO[];
-  produto : string;
-  ramo : string;
-  modalidade: string;
-  grupo : string;
-  subgrupo: string;
+  empresa : number;
+  produto : number;
+  ramo : number;
+  modalidade: number;
+  grupo : number;
+  subgrupo: number;
+  composicaoList : CadastroComposicaoRegraDTO[];
+
+  dadosComposicao : CadastroComposicaoRegraDTO;
+  
   
 
   
@@ -60,55 +61,59 @@ getCampoValorPorcentagem(valor:number){
      this.flgValor = true;
   }
 
-  
+  getCadastraComposicaoRegra(){
+    this.dadosComposicao = {
+      codEmpresa : this.empresa,
+      codProduto: this.produto,
+      codModalidade: this.modalidade,
+      codRamo: this.ramo,
+      codGrupo : this.grupo,
+      codSubgrupo: this.subgrupo
+    }
+    
+     this.service.insert(this.dadosComposicao).subscribe(
+       success =>console.log('sucesso'),
+       error => console.log('error'),
+       () => console.log('completo')
+     );
+     
+       
+     
+  }
 
   public paginaAtual = 1;
 
   getMyList(){
-    this.service.getAll().subscribe(list => {
-      this.empresa = list;
+    this.service.getEmpresa().subscribe(list => {
+      this.empresaList = list;
+      
+    }),
+    this.service.getProduto().subscribe(produto =>{
+      this.produtoList = produto;
     })
+    this.service.getRamo().subscribe(ramo =>{
+      this.ramoList = ramo;
+    })
+    this.service.getModalidade().subscribe(modalidade =>{
+      this.modalidadeList = modalidade;
+    })
+    this.service.getGrupo().subscribe(grupo =>{
+      this.grupoList = grupo;
+    })
+    this.service.getSubgrupo().subscribe(subgrupo =>{
+      this.subgrupoList = subgrupo;
+    })
+    this.service.getIndicadores().subscribe(indicador =>{
+      this.myList = indicador;
+    })
+    this.service.getComposicao().subscribe(composicoes =>{
+      this.composicaoList = composicoes;
+    })
+     
+ 
   }
   
-  // getMyList(){
-  //   this.httpClient.get<Indicador[]>('assets/data.json').subscribe(list  =>{
-  //     this.myList = list;
-  //   }),
-  //   this.httpClient.get<[]>('assets/produto.json').subscribe(list =>{
-  //     this.produtoList = list;
-  //   }),
-  //   this.httpClient.get<[]>('assets/empresa.json').subscribe(list =>{
-  //     this.empresaList = list;
-  //   }),
-  //   this.httpClient.get<[]>('assets/ramo.json').subscribe(list =>{
-  //     this.ramoList = list;
-  //   }),
-  //   this.httpClient.get<[]>('assets/modalidade.json').subscribe(list =>{
-  //     this.modalidadeList = list;
-  //   }),
-  //   this.httpClient.get<[]>('assets/grupo.json').subscribe(list =>{
-  //     this.grupoList = list;
-  //   }),
-  //   this.httpClient.get<[]>('assets/subgrupo.json').subscribe(list =>{
-  //     this.subgrupoList = list;
-  //   })
-  //   this.httpClient.get<[]>('assets/dadosComposicao.json').subscribe(list =>{
-  //     this.dadosComposicao   = list;
-  //   })
-
-  // }
-
-  // getMostra(){
-  //   let  teste ={
-  //      "empresa" : this.empresa,
-  //      "produto" : this.produto,
-  //      "ramo" : this.ramo,
-  //      "modalidade" : this.modalidade,
-  //      "grupo" : this.grupo,
-  //      "subgrupo" : this.subgrupo
-  //   }
-  //   this.dadosComposicao.push(teste);
-  // }
+ 
  
 
   drop(event: CdkDragDrop<string[]>) {

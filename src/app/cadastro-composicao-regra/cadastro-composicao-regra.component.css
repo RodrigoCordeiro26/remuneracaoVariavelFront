@@ -4,12 +4,20 @@
   padding: 10px 0px 30px 0px;
 }
 .container-rv-p{
-  width: 180px;
+  width: 250px;
   margin: 0 20px 20px 0;
   vertical-align: top;
   display: inline-block;
   
 }
+.form-group tr{
+  font-size: 12px;
+}
+
+.form-group option{
+  font-size: 12px;
+}
+
 #adicionar{
  display: flex;
  padding: 36px 20px 14px 69px;

@@ -18,8 +18,8 @@
           <div class="form-group">
             <label><b>Empresa</b></label>
             <select class="form-control" [(ngModel)]="empresa" >
-              <option value="">selecione</option>
-              <option *ngFor="let emp of empresaList" [value]="emp">{{emp.name}}</option>
+              <option [value]="0">selecione</option>
+              <option *ngFor="let emp of empresaList" value={{emp.codEmpresa}}>{{emp.codEmpresa}}-{{emp.nomEmpresa}}</option>
             </select>
           </div>
         </div>
@@ -28,7 +28,7 @@
             <label><b>Produto</b></label>
             <select class="form-control" [(ngModel)]="produto" >
               <option value="">selecione</option>
-              <option *ngFor="let prod of produtoList">{{prod.name}}</option>
+              <option *ngFor="let prod of produtoList" value={{prod.codProduto}}>{{prod.codProduto}}-{{prod.produto}}</option>
 
 
 
@@ -40,7 +40,7 @@
             <label><b>Ramo</b></label>
             <select class="form-control" [(ngModel)]="ramo" >
               <option value="">selecione</option>
-              <option *ngFor="let ramo of ramoList">{{ramo.name}}</option>
+              <option *ngFor="let ramo of ramoList" value={{ramo.codRamo}}>{{ramo.codRamo}}-{{ramo.nomRamo}}</option>
 
             </select>
           </div>
@@ -65,7 +65,7 @@
             <label><b>Modalidade</b></label>
             <select class="form-control" [(ngModel)]="modalidade" >
               <option value="">selecione</option>
-              <option *ngFor="let mod of modalidadeList">{{mod.name}}</option>
+              <option *ngFor="let mod of modalidadeList" value={{mod.codModalidade}}>{{mod.codModalidade}}-{{mod.nomModalidade}}</option>
 
             </select>
           </div>
@@ -75,7 +75,7 @@
             <label><b>Grupo</b></label>
             <select class="form-control" [(ngModel)]="grupo" >
               <option value="">selecione</option>
-              <option *ngFor="let grupo of grupoList">{{grupo.name}}</option>
+              <option *ngFor="let grupo of grupoList" value={{grupo.numGrupo}}>{{grupo.numGrupo}}-{{grupo.nomGrupo}}</option>
 
 
             </select>
@@ -86,28 +86,19 @@
             <label><b>Subgrupo</b></label>
             <select class="form-control" [(ngModel)]="subgrupo" >
               <option value="">selecione</option>
-              <option *ngFor="let sub of subgrupoList">{{sub.name}}</option>
+              <option *ngFor="let sub of subgrupoList" value={{sub.numSubGrupo}}>{{sub.numSubGrupo}}-{{sub.nomSubGrupo}}</option>
 
             </select>
           </div>
         </div>
         <div class="container-rv-p">
           <div class="form-group" id="adicionar">
-            <label class="fas fa-plus-circle" (click)="getMostra()"  style="font-size:24px;"></label>
+            <label class="fas fa-plus-circle" (click)="getCadastraComposicaoRegra()"  style="font-size:24px;"></label>
             <div class="checkbox">
               <a type="text" name="optradio" value="2">Incluir</a>
             </div>
           </div>
         </div>
-        <div class="container-rv-p">
-          <div class="form-group" id="remover">
-            <label class="fas fa-trash-alt" style="font-size:24px;"></label>
-            <div class="checkbox">
-              <a type="text" name="optradio" value="2">Excluir</a>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <table class="table table-striped">
         <thead>
@@ -118,16 +109,22 @@
             <th>Modalidade</th>
             <th>Grupo</th>
             <th>Subgrupo</th>
+            <th>Operação</th>
+            <th>Excluir</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let dados of dadosComposicao | paginate: { itemsPerPage: 2, currentPage: paginaAtual }; let i = index">
-            <td>{{dados.empresa}}</td>
-            <td>{{dados.produto}}</td>
-            <td>{{dados.ramo}}</td>
-            <td>{{dados.modalidade}}</td>
-            <td>{{dados.grupo}}</td>
-            <td>{{dados.subgrupo}}</td>
+          <tr *ngFor="let dados of composicaoList | paginate: { itemsPerPage: 2, currentPage: paginaAtual }; let i = index">
+            <td>{{dados.empresa.nomEmpresa}}</td>
+            <td>{{dados.produto.produto}}</td>
+            <td>{{dados.ramo.nomRamo}}</td>
+            <td>{{dados.modalidade.nomModalidade}}</td>
+            <td>{{dados.grupo.nomGrupo}}</td>
+            <td>{{dados.subgrupo.nomSubGrupo}}</td>
+            <td *ngIf="dados.tipoOperacao == 1" class="fas fa-minus" style="font-size:24px;" ></td>
+            <td *ngIf="dados.tipoOperacao == 0" class="fas fa-plus" style="font-size:24px;"></td>
+            <td class="fa fa-trash-o" style="font-size:24px;"></td>
+
           </tr>
         </tbody>
         <pagination-controls  (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo"></pagination-controls>
