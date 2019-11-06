@@ -5,5 +5,5 @@ export interface CadastroComposicaoRegraDTO{
     codModalidade:number;
     codGrupo:number;
     codSubgrupo: number
-    tipoOperacao:number;
+    tipoOperacao:boolean;
 }

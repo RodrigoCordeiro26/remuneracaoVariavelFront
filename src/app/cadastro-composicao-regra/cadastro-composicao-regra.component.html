@@ -1,5 +1,4 @@
-<div id="accordion">
-  <div class="card">
+<div class="card">
     <div class="card-header">
       <a class="card-link" data-toggle="collapse" href="#collapseOne">
         Cadastro de Composição e Regras
@@ -17,8 +16,8 @@
         <div class="container-rv-p">
           <div class="form-group">
             <label><b>Empresa</b></label>
-            <select class="form-control" [(ngModel)]="empresa" >
-              <option [value]="0">selecione</option>
+            <select class="form-control" [(ngModel)]="empresa" (change)="getBuscarProduto()">
+              <option >selecione</option>
               <option *ngFor="let emp of empresaList" value={{emp.codEmpresa}}>{{emp.codEmpresa}}-{{emp.nomEmpresa}}</option>
             </select>
           </div>
@@ -26,8 +25,8 @@
         <div class="container-rv-p">
           <div class="form-group">
             <label><b>Produto</b></label>
-            <select class="form-control" [(ngModel)]="produto" >
-              <option value="">selecione</option>
+            <select class="form-control" [(ngModel)]="produto" (change)="getBuscarRamo()">
+              <option >selecione</option>
               <option *ngFor="let prod of produtoList" value={{prod.codProduto}}>{{prod.codProduto}}-{{prod.produto}}</option>
 
 
@@ -38,23 +37,25 @@
         <div class="container-rv-p">
           <div class="form-group">
             <label><b>Ramo</b></label>
-            <select class="form-control" [(ngModel)]="ramo" >
-              <option value="">selecione</option>
+            <select class="form-control" [(ngModel)]="ramo" (change)="getBuscarModalidade()">
+              <option >selecione</option>
               <option *ngFor="let ramo of ramoList" value={{ramo.codRamo}}>{{ramo.codRamo}}-{{ramo.nomRamo}}</option>
 
             </select>
           </div>
         </div>
         <div class="container-rv-p">
-          <div class="form-group">
-            <label><b>Tipo Operação</b></label>
-            <div class="radio">
-              <label><input type="radio" name="optradio" value="1">Adicionar</label>
-            </div>
-            <div class="radio">
-              <label><input type="radio" name="optradio" value="2">Remover</label>
-            </div>
-          </div>
+          <div class="form-group" id="radioButtom">
+              <div class="custom-control custom-radio ">
+                  <input type="radio" class="custom-control-input" id="customRadio" name="radio" [(ngModel)]="tipoOperacao"  value=true>
+                  <label class="custom-control-label" for="customRadio">Adicionar</label>
+                </div>
+                <div class="custom-control custom-radio ">
+                  <input type="radio" class="custom-control-input" id="customRadio2" name="radio" [(ngModel)]="tipoOperacao" value=false>
+                  <label class="custom-control-label" for="customRadio2">Remover</label>
+                </div>
+           
+          </div> 
         </div>
       </div>
 
@@ -64,7 +65,7 @@
           <div class="form-group">
             <label><b>Modalidade</b></label>
             <select class="form-control" [(ngModel)]="modalidade" >
-              <option value="">selecione</option>
+              <option >selecione</option>
               <option *ngFor="let mod of modalidadeList" value={{mod.codModalidade}}>{{mod.codModalidade}}-{{mod.nomModalidade}}</option>
 
             </select>
@@ -74,7 +75,7 @@
           <div class="form-group">
             <label><b>Grupo</b></label>
             <select class="form-control" [(ngModel)]="grupo" >
-              <option value="">selecione</option>
+              <option >selecione</option>
               <option *ngFor="let grupo of grupoList" value={{grupo.numGrupo}}>{{grupo.numGrupo}}-{{grupo.nomGrupo}}</option>
 
 
@@ -85,21 +86,20 @@
           <div class="form-group">
             <label><b>Subgrupo</b></label>
             <select class="form-control" [(ngModel)]="subgrupo" >
-              <option value="">selecione</option>
-              <option *ngFor="let sub of subgrupoList" value={{sub.numSubGrupo}}>{{sub.numSubGrupo}}-{{sub.nomSubGrupo}}</option>
+              <option value=''>selecione</option>
+              <option *ngFor="let sub of subgrupoList" value='{{sub.numSubGrupo}}'>{{sub.numSubGrupo}}-{{sub.nomSubGrupo}}</option>
 
             </select>
           </div>
         </div>
         <div class="container-rv-p">
           <div class="form-group" id="adicionar">
-            <label class="fas fa-plus-circle" (click)="getCadastraComposicaoRegra()"  style="font-size:24px;"></label>
-            <div class="checkbox">
-              <a type="text" name="optradio" value="2">Incluir</a>
+              <button type="button" class="btn btn-outline-primary" (click)="getCadastraComposicaoRegra()">Adicionar</button>
             </div>
           </div>
         </div>
-
+      
+      
       <table class="table table-striped">
         <thead>
           <tr>
@@ -114,22 +114,31 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let dados of composicaoList | paginate: { itemsPerPage: 2, currentPage: paginaAtual }; let i = index">
-            <td>{{dados.empresa.nomEmpresa}}</td>
-            <td>{{dados.produto.produto}}</td>
-            <td>{{dados.ramo.nomRamo}}</td>
-            <td>{{dados.modalidade.nomModalidade}}</td>
-            <td>{{dados.grupo.nomGrupo}}</td>
-            <td>{{dados.subgrupo.nomSubGrupo}}</td>
-            <td *ngIf="dados.tipoOperacao == 1" class="fas fa-minus" style="font-size:24px;" ></td>
-            <td *ngIf="dados.tipoOperacao == 0" class="fas fa-plus" style="font-size:24px;"></td>
-            <td class="fa fa-trash-o" style="font-size:24px;"></td>
+          <tr *ngFor="let dados of composicaoList | paginate: { itemsPerPage: 5, currentPage: paginaAtual }; let i = index">
+            <td>{{dados.empresa.codEmpresa}}-{{dados.empresa.nomEmpresa}}</td>
+            <td>{{dados.produto.codProduto}}-{{dados.produto.produto}}</td>
+            <td>{{dados.ramo.codRamo}}-{{dados.ramo.nomRamo}}</td>
+            <td>{{dados.modalidade.codModalidade}}-{{dados.modalidade.nomModalidade}}</td>
+            <td>{{dados.grupo.numGrupo}}-{{dados.grupo.nomGrupo}}</td>
+            <td>{{dados.subgrupo.numSubGrupo}}-{{dados.subgrupo.nomSubGrupo}}</td>
+            <td *ngIf="dados.tipoOperacao == false"  >
+                <i  class="fas fa-minus" ></i> 
+                         
+            </td>
+            <td *ngIf="dados.tipoOperacao == true" >
+                <i class="fas fa-plus" ></i>
+                
+            </td>
+            <td>
+                <i class="fa fa-trash-o" style="font-size:24px;" (click)="deletarComposicaoRegra(dados.id)"></i>
+              
+            </td>
 
           </tr>
         </tbody>
-        <pagination-controls  (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo"></pagination-controls>
+        
       </table>
-
+      <pagination-controls maxSize="5" (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo"></pagination-controls>
     </div>
 
     <div class="card-header">
@@ -189,11 +198,10 @@
         <div class="form-group" *ngIf="flgValor">
           <label><b>taxa</b></label>
           <div class="radio">
-            <label><input type="radio" name="optradio" (change)="getCampoValorPorcentagem(1)"
-                value="1">porcentagem</label>
+            <label><input type="radio" name="optradio"  [(ngModel)]="tipoDado"    value="1">porcentagem</label>
           </div>
           <div class="radio">
-            <label><input type="radio" name="optradio" (change)="getCampoValorPorcentagem(2)" value="2">valor</label>
+            <label><input type="radio" name="optradio"  [(ngModel)]="tipoDado"  value="2">valor</label>
           </div>
         </div>
       </div>
@@ -210,5 +218,11 @@
         </div>
       </div>
     </div>
-  </div>
 </div>
+<ng-template #deleteModel>
+  <div class="modal-body text-center">
+    <p>Realmente deseja exluir a composicao?</p>
+    <button type="button" class="btn btn-default" (click)="confirmaDelete()" >Sim</button>
+    <button type="button" class="btn btn-primary"  (click)=" negarDelete()">Não</button>
+  </div>
+</ng-template>

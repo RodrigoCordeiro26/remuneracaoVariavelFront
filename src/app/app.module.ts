@@ -21,7 +21,9 @@ import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from "ng2-currency-mask/src/
 import {NgxPaginationModule} from "ngx-pagination"; 
 import { FormsModule } from '@angular/forms';
 import { CadastroComposicaoRegraService } from 'src/services/domain/CadastroComposicaoRegra.service';
-  
+import { ModalModule } from 'ngx-bootstrap';
+import { AlertModule } from 'ngx-bootstrap';
+import {AlertModelComponent} from 'src/app/alert-model/alert-model.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     align: "right",
@@ -42,7 +44,9 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     AlgumaCoisaComponent,
     ModalComponent,
     CadastroSegmentoRVComponent,
-    CadastroComposicaoRegraComponent
+    CadastroComposicaoRegraComponent,
+    AlertModelComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -53,7 +57,11 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     CommonModule,
     CurrencyMaskModule,
     NgxPaginationModule,
-    FormsModule
+    FormsModule,
+    ModalModule.forRoot(),
+    AlertModule.forRoot()
+  
+    
   ],
   providers: [
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }, 
@@ -61,6 +69,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     CadastroComposicaoRegraService,
   
   ],
+  exports:[AlertModelComponent],
+  entryComponents:[AlertModelComponent, CadastroComposicaoRegraComponent],
 
   bootstrap: [AppComponent]
 })

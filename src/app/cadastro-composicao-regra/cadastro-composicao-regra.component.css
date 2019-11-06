@@ -10,8 +10,16 @@
   display: inline-block;
   
 }
-.form-group tr{
-  font-size: 12px;
+.card-body tr{
+  font-size: 13px;
+}
+
+.card-body i{
+  font-size: 24px;
+}
+
+#radioButtom{
+  padding: 30px;
 }
 
 .form-group option{
@@ -20,7 +28,7 @@
 
 #adicionar{
  display: flex;
- padding: 36px 20px 14px 69px;
+ padding: 24px 13px 6px 28px;
 }
 
 #form-parte-um{
@@ -71,7 +79,7 @@
     min-height: 60px;
     background: white;
     border-radius: 4px;
-    overflow: hidden;
+    /* overflow: hidden; */
     display: block;
   }
   

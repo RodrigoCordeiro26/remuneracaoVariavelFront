@@ -1,28 +1,32 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient,HttpHeaders } from "@angular/common/http";
 import { API_CONFIG } from 'src/config/api.config';
 import { Observable } from 'rxjs/internal/Observable';
 import {Indicadores} from 'src/models/Indicadores.dto';
-import {CadastroComposicaoRegraDTO} from 'src/models/CadastroComposicaoRegra.dto'
-import { logWarnings } from 'protractor/built/driverProviders';
+import {CadastroComposicaoRegraDTO} from 'src/models/CadastroComposicaoRegra.dto';
+
 
 @Injectable()
 export class CadastroComposicaoRegraService {
     constructor(public http: HttpClient) {
     }
+
+    
+     
+    
     getEmpresa(): Observable<[]> {
         return this.http.get<[]>(`${API_CONFIG.baseUrl}/cadastroComposicaoRegra/empresa`);
     }
 
-    getProduto():Observable<[]>{
-        return this.http.get<[]>(`${API_CONFIG.baseUrl}/cadastroComposicaoRegra/produto`);
+    getProduto(codEmpresa:number){
+        return this.http.get<[]>(`${API_CONFIG.baseUrl}/cadastroComposicaoRegra/produto/${codEmpresa}`);
     }
     
-    getRamo(): Observable<[]>{
-        return this.http.get<[]>(`${API_CONFIG.baseUrl}/cadastroComposicaoRegra/ramo`)
+    getRamo(codProduto:number){
+        return this.http.get<[]>(`${API_CONFIG.baseUrl}/cadastroComposicaoRegra/ramo/${codProduto}`)
     }
-    getModalidade(): Observable<[]>{
-        return this.http.get<[]>(`${API_CONFIG.baseUrl}/cadastroComposicaoRegra/modalidade`)
+    getModalidade(codRamo:number){
+        return this.http.get<[]>(`${API_CONFIG.baseUrl}/cadastroComposicaoRegra/modalidade/${codRamo}`)
     }
     getGrupo(): Observable<[]>{
         return this.http.get<[]>(`${API_CONFIG.baseUrl}/cadastroComposicaoRegra/grupo`)
@@ -43,6 +47,13 @@ export class CadastroComposicaoRegraService {
             `${API_CONFIG.baseUrl}/cadastroComposicaoRegra/salvarDadosComposicao`, obj 
             
              ) 
+    }
+
+    delete(id : number){
+        return this.http.delete(
+            `${API_CONFIG.baseUrl}/cadastroComposicaoRegra/deletarDadosComposicao/${id}`
+        
+        )
     }
 
 }
