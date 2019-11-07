@@ -20,7 +20,10 @@ import {CommonModule} from '@angular/common';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from "ng2-currency-mask/src/currency-mask.config";
 import {NgxPaginationModule} from "ngx-pagination"; 
-  
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+
+
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     align: "right",
@@ -41,7 +44,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     AlgumaCoisaComponent,
     ModalComponent,
     CadastroSegmentoRVComponent,
-    CadastroComposicaoRegraComponent
+    CadastroComposicaoRegraComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +56,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     CurrencyMaskModule,
     NgxPaginationModule,
     FormsModule,
+    AutocompleteLibModule,
+    Ng2SearchPipeModule
   ],
   providers: [
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }, 

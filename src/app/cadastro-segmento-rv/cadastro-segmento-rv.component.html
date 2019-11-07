@@ -1,201 +1,159 @@
 <div class="ps-container">
     <div class="ps-row" style="text-align: center; margin-top:0px; ">
-        <p class="titulo">Regras de Segmento</p>
-    </div><br>
-    <div class="ps-row" style="margin-bottom: 4px;">
-        <tr class="ps-mod8 ps-sm-mod12">
-            <th class="ps-mod8 ps-sm-mod2">
-                <a title="Adicionar novo Segmento" style="width:60px;" href="javascript:;" class="ps-btn ps-open-modal"
+        <p class="titulo">Cadastro de Segmento</p>
+    </div><br><br>
+    <div class="ps-row" >
+        <tr class="ps-mod8 ps-sm-mod12" >
+            <div class="ps-mod8 ps-sm-mod2" style="margin-top: 20px;">
+                <a title="Adicionar novo Segmento" style="width:60px" href="javascript:;" class="ps-btn ps-open-modal"
                     data-modal="#ModalPadrao" data-modalbackdropstatic="false" data-modalkeyboarddisable="true"
                     data-modalonshow="console.log('abrir modal')" data-modalonhide="console.log('fechar modal')">
                     <span class="ps-mod8 ps-ico ps-sm-mod1 ps-alignCenter ps-ico-plus">
                     </span>
-                </a><br />
+                </a>
 
-            </th>
-            <th class="ps-sm-mod8"><input type="submit" class="ps-btn ps-btn-primary" value="Regras & Composição" />
-            </th>
-        </tr>
-    </div>
-</div>
-<!--TABLE HERE-->
-<div class="ps-container">
-    <div class="ps-row">
-        <div class="ps-mod8 ps-sm-mod12">
-            <table class="ps-table ps-datagrid" data-pagesize="5" data-filtering="true">
-                <thead>
-                    <tr>
-                        <th class="ps-sm-mod2" data-type="text" data-itemtemplate="PropostaTemplate">Proposta</th>
-                        <th class="ps-sm-mod3" data-type="text" data-itemtemplate="NomeTemplate">Nome</th>
-                        <th class="ps-hide ps-sm-show ps-sm-mod3" data-type="select" data-items="produtos"
-                            data-valuefield="id" data-textfield="Name" data-sorter="number">Produto</th>
-                        <th class="ps-hide ps-sm-show ps-sm-mod2" data-type="text" data-sorting="false">SUSEP</th>
-                        <th class="ps-hide ps-sm-show ps-sm-mod2" data-type="text" data-sorter="date">Recebida em</th>
-                        <th class="ps-sm-mod2" data-itemtemplate="StatusTemplate" data-type="select"
-                            data-items="reqStatus" data-valuefield="id" data-textfield="Name" data-sorter="number">
-                            Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>65-36027222</td>
-                        <td>NORMA NOGUEIRA PEREIRA</td>
-                        <td>1</td>
-                        <td>S5005J</td>
-                        <td>18/05/2014</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>20-20962040</td>
-                        <td>MARCIA CURY</td>
-                        <td>2</td>
-                        <td>S5005J</td>
-                        <td>18/04/2015</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>12-22988317</td>
-                        <td>AIRTON CIRO STRIANI</td>
-                        <td>2</td>
-                        <td>S5005J</td>
-                        <td>18/05/2015</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>65-36075699</td>
-                        <td>FRANCISCA GUILHERME ZANELLA</td>
-                        <td>1</td>
-                        <td>S5005J</td>
-                        <td>19/05/2015</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>12-47011206</td>
-                        <td>MARCOS EDUARDO PAGLIANTI</td>
-                        <td>1</td>
-                        <td>S5005J</td>
-                        <td>19/05/2015</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>20-21268203</td>
-                        <td>CLAUDEMI ALVES DE LIMA</td>
-                        <td>1</td>
-                        <td>S5005J</td>
-                        <td>19/05/2015</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>12-24573142</td>
-                        <td>JULIO CESAR MORGANTE BELTRAMINI</td>
-                        <td>3</td>
-                        <td>S5005J</td>
-                        <td>20/05/2015</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>58-23464859</td>
-                        <td>EDUARDO KAJIMOTO DE A NUNES</td>
-                        <td>3</td>
-                        <td>S5005J</td>
-                        <td>21/05/2015</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>58-23465156</td>
-                        <td>GILMARA FLESSATI SERIO</td>
-                        <td>3</td>
-                        <td>S5005J</td>
-                        <td>21/06/2015</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>58-23464859</td>
-                        <td>EDUARDO KAJIMOTO DE A NUNES</td>
-                        <td>3</td>
-                        <td>S5005J</td>
-                        <td>21/05/2015</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>58-23465156</td>
-                        <td>GILMARA FLESSATI SERIO</td>
-                        <td>3</td>
-                        <td>S5005J</td>
-                        <td>21/06/2015</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>58-23464859</td>
-                        <td>EDUARDO KAJIMOTO DE A NUNES</td>
-                        <td>3</td>
-                        <td>S5005J</td>
-                        <td>21/05/2015</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>58-23465156</td>
-                        <td>GILMARA FLESSATI SERIO</td>
-                        <td>3</td>
-                        <td>S5005J</td>
-                        <td>21/06/2015</td>
-                        <td>1</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-
-<!--TABLE ABOVE-->
-
-
-<div class="ps-modal" id="ModalPadrao">
-    <a href="javascript:;" class="ps-modal-close ps-modal-close-default"><span
-            class="ps-ico ps-ico-sm ps-sm-ico-lg ps-ico-close"></span></a>
-    <div class="ps-modal-container">
-        <div class="ps-modal-title">
-            <p class="titulo">Cadastro de Segmento</p>
-        </div>
-        <div class="ps-modal-content">
-            <label>Nome Segmento RV</label>
-            <input [(ngModel)]="objDTO.nmSegmentoRV" type="text" class="ps-frm-entry" placeholder="Preencha aqui" />
-            <br>
-            <input [(ngModel)]="objDTO.assessoria" type="checkbox" name="tst" class="ps-frm-checkbox"
-                id="ps-frm-chk-tst1" />
-            <label class="ps-frm-checkbox" for="ps-frm-chk-tst1">
-                Assessoria
-            </label>
-            <input [(ngModel)]="objDTO.normal" type="checkbox" name="tst" class="ps-frm-checkbox" id="ps-frm-chk-tst2"
-                checked />
-            <label class="ps-frm-checkbox" for="ps-frm-chk-tst2">
-                Normal
-            </label><br>
-            <input [(ngModel)]="objDTO.isSeguro" type="radio" name="tst1" value=true class="ps-frm-radio"
-                id="ps-frm-rad-tst1" />
-            <label class="ps-frm-radio" for="ps-frm-rad-tst1">
-                Seguro
-            </label>
-            <br>
-            <input [(ngModel)]="objDTO.isSeguro" type="radio" name="tst1" value=false class="ps-frm-radio"
-                id="ps-frm-rad-tst2" checked />
-
-            <label class="ps-frm-radio" for="ps-frm-rad-tst2">
-                Não Seguro
-            </label>
-            <textarea [(ngModel)]="objDTO.observacao" name="test" class="ps-frm-entry"
-                placeholder="Observação (máximo 100 caracteres)" maxlength="100" style="width: 300px;"></textarea>
-        </div>
-        <div class="ps-modal-foot">
-            <div class="row">
-                <div class="ps-sm-mod6">
-                    <button (click)="gravar()" class="ps-btn">Gravar</button>
+            </div>
+            <div class="guide-grid ps-lg-mod6">
+               Pesquisar: <input class="form-control" type="text" name="search" [(ngModel)]="filter">  <!-- Input que deve ser adicionado -->
+            </div>
+            <div class="guide-grid ps-lg-mod2">
+                <br>
+                <span class="ps-ico ps-ico-magnifi-glass"></span>
+            </div>
+            <!-- <div class="guide-grid ps-lg-mod6">
+                <div *ngIf="objSearchDTO.opcaoSelectionada ==='Código'" class="guide-grid ps-lg-mod6"
+                    style="margin-top:20px;">
+                    <input (keypress)="teste()" type="text" [(ngModel)]="objSearchDTO.codigo" class="ps-frm-entry"
+                        placeholder="Preencha aqui" />
                 </div>
-                <div class="ps-sm-mod6">
-                    <button class="ps-btn" style="color: crimson; border-color: crimson">Cancelar</button>
+                <div class="guide-grid ps-lg-mod6"
+                    style="margin-top:20px;">
+                    <input *ngIf="objSearchDTO.opcaoSelectionada != 'Código'" (keypress)="teste()" type="text" [(ngModel)]="objSearchDTO.src" class="ps-frm-entry"
+                        placeholder="Preencha aqui" />
+                </div>
+                <div  class="guide-grid ps-lg-mod4" style="margin-top: 20px; margin-left: 2px">
+                    <a (keypres)="teste()">
+                        <span class="ps-ico ps-ico-magnifi-glass" title="Pesquisar"></span>
+                    </a>
+                </div>
+            </div> -->
+    </div>
+        <br>
+
+        <!--TABLE HERE-->
+        <div class="ps-container">
+            <div class="ps-row">
+                <div class="ps-mod8 ps-sm-mod12">
+                    <table class="ps-table ps-data " data-pagesize="5" data-filtering="true">
+                        <thead>
+                            <tr>
+                                <th class="ps-sm-mod2" data-name="codigo" data-type="text">
+                                    Código
+                                    <a (click)="ordenarCresc()"> <span class="ps-ico ps-ico-arrow-down"></span> </a>
+                                    <a (click)="ordernarDecres()"> <span class="ps-ico ps-ico-arrow-up"></span></a>
+                                </th>
+                                <th class="ps-sm-mod3" data-name="nmSegmentoRV" data-type="text">
+                                    Segmento
+                                    <a (click)="ordenarAlphaCresc()"><span class="primary-click">A-Z</span></a> | <a
+                                        (click)="ordenarAlphaDecres()"><span class="primary-click">Z-A</span></a>
+                                </th>
+                                <th class="ps-hide ps-sm-show ps-sm-mod3" data-name="isSeguro" data-type="text">
+                                   Tipo produto
+                                </th>
+                                <th class="ps-hide ps-sm-show ps-sm-mod2" data-name="normal" data-type="text">
+                                    Equipe Comercial
+                                </th>
+                                <th class="ps-hide ps-sm-show ps-sm-mod2" data-name="assessoria" data-type="text">
+                                    Assessoria
+                                </th>
+                                <th class="ps-sm-mod2" data-name="editar"> Editar </th>
+                                <th class="ps-sm-mod2" data-name="editar"> Excluir </th>
+                            </tr>
+                        </thead>
+                        <tbody data-source="items">
+                            <tr *ngFor="let item of items  | paginate: { itemsPerPage: 5, currentPage: p } |  filter:filter">
+                                <td>{{item.id}}</td>
+                                <td>{{item.nmSegmentoRV}}</td>
+
+                                <td *ngIf="item.isSeguro">Seguro</td>
+                                <td *ngIf="!item.isSeguro">Não Seguro</td>
+
+
+                                <td *ngIf="item.normal">Sim</td>
+                                <td *ngIf="!item.normal">Não</td>
+
+                                <td *ngIf="item.assessoria">Sim</td>
+                                <td *ngIf="!item.assessoria">Não</td>
+
+                                <td>
+                                    <a href="?">
+                                        <span style="color:#3DACFF" class="ps-ico ps-glyph ps-ico-brush"></span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="?">
+                                        <span style="color:red" class="ps-ico ps-glyph ps-ico-trashcan"></span>
+                                    </a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <div style="float:right">
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-</div>
+        <!--TABLE ABOVE-->
+
+    <div class="ps-modal" id="ModalPadrao">
+        <a href="javascript:;" class="ps-modal-close ps-modal-close-default"><span
+                class="ps-ico ps-ico-sm ps-sm-ico-lg ps-ico-close"></span></a>
+        <div class="ps-modal-container">
+            <div class="ps-modal-title">
+                <p class="titulo">Cadastro de Segmento</p>
+            </div>
+            <div class="ps-modal-content">
+                <label>Nome Segmento RV</label>
+                <input [(ngModel)]="objDTO.nmSegmentoRV" type="text" class="ps-frm-entry" placeholder="Preencha aqui" />
+                <br>
+                <input [(ngModel)]="objDTO.assessoria" type="checkbox" name="tst" class="ps-frm-checkbox"
+                    id="ps-frm-chk-tst1" />
+                <label class="ps-frm-checkbox" for="ps-frm-chk-tst1">
+                    Assessoria
+                </label>
+                <input [(ngModel)]="objDTO.normal" type="checkbox" name="tst" class="ps-frm-checkbox"
+                    id="ps-frm-chk-tst2" checked />
+                <label class="ps-frm-checkbox" for="ps-frm-chk-tst2">
+                    Normal
+                </label><br>
+                <input [(ngModel)]="objDTO.isSeguro" type="radio" name="tst1" value=true class="ps-frm-radio"
+                    id="ps-frm-rad-tst1" />
+                <label class="ps-frm-radio" for="ps-frm-rad-tst1">
+                    Seguro
+                </label>
+                <br>
+                <input [(ngModel)]="objDTO.isSeguro" type="radio" name="tst1" value=false class="ps-frm-radio"
+                    id="ps-frm-rad-tst2" checked />
+
+                <label class="ps-frm-radio" for="ps-frm-rad-tst2">
+                    Não Seguro
+                </label>
+                <textarea [(ngModel)]="objDTO.observacao" name="test" class="ps-frm-entry"
+                    placeholder="Observação (máximo 100 caracteres)" maxlength="100" style="width: 300px;"></textarea>
+            </div>
+            <div class="ps-modal-foot">
+                <div class="row">
+                    <div class="ps-sm-mod6">
+                        <button (click)="gravar()" class="ps-btn">Gravar</button>
+                    </div>
+                    <div class="ps-sm-mod6">
+                        <button class="ps-btn" style="color: crimson; border-color: crimson">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>

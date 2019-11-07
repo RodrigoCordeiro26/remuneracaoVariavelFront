@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { API_CONFIG } from 'src/config/api.config';
 import { CadastroSegmentoRVDTO } from 'src/models/CadastroSegmentoRV.dto';
 import { Observable } from 'rxjs/internal/Observable';
+import { FiltrosDTO } from 'src/models/Filtros.dto';
 
 
 
@@ -25,7 +26,13 @@ export class CadastroSegmentoService{
         return this.http.get<CadastroSegmentoRVDTO[]>(`${API_CONFIG.baseUrl}/segmentos-rv`);
     }
 
-    getListByFilter(selected: String, value: String ):Observable<CadastroSegmentoRVDTO[]>{
-        return this.http.get<CadastroSegmentoRVDTO[]>(`${API_CONFIG.baseUrl}/segmentos-rv/filtro?selected=${selected}&value=${value}"`)
+    getListByFilter(filtro: FiltrosDTO ):Observable<CadastroSegmentoRVDTO[]>{
+        console.log(filtro.codigo)
+        console.log(filtro.src)
+        console.log(filtro.opcaoSelectionada)
+        return this.http.get<CadastroSegmentoRVDTO[]>(
+           
+            `${API_CONFIG.baseUrl}/segmentos-rv/filtro?codigo=${filtro.codigo}&segmento=${filtro.src}&selected=${filtro.opcaoSelectionada}`
+        );
     }
 }
