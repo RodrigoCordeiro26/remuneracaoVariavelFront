@@ -28,11 +28,11 @@ export class CadastroComposicaoRegraService {
     getModalidade(codRamo:number){
         return this.http.get<[]>(`${API_CONFIG.baseUrl}/cadastroComposicaoRegra/modalidade/${codRamo}`)
     }
-    getGrupo(): Observable<[]>{
-        return this.http.get<[]>(`${API_CONFIG.baseUrl}/cadastroComposicaoRegra/grupo`)
+    getGrupo(numGrupoModalidade:number): Observable<[]>{
+        return this.http.get<[]>(`${API_CONFIG.baseUrl}/cadastroComposicaoRegra/grupo/${numGrupoModalidade}`)
     }
-    getSubgrupo(): Observable<[]>{
-        return this.http.get<[]>(`${API_CONFIG.baseUrl}/cadastroComposicaoRegra/subGrupo`)
+    getSubgrupo(numGrupo:number): Observable<[]>{
+        return this.http.get<[]>(`${API_CONFIG.baseUrl}/cadastroComposicaoRegra/subGrupo/${numGrupo}`)
     }
     getIndicadores(): Observable<Indicadores[]>{
         return this.http.get<Indicadores[]>('assets/data.json')

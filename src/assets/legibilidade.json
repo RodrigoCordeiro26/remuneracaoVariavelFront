@@ -1,0 +1,57 @@
+[
+{
+    "matricula":121,
+    "nome":"alex",
+    "cargo":"Desenvolvedor",
+    "afastamento":"nao",
+    "tipoAfastamento": "nao",
+    "nivelHie": "TI",
+    "codHieraquia":12,
+    "receberRV": false
+    
+},
+{
+    "matricula":122,
+    "nome":"rodrigo",
+    "cargo":"Desenvolvedor",
+    "afastamento":"nao",
+    "tipoAfastamento": "nao",
+    "nivelHie": "TI",
+    "codHieraquia":12,
+    "receberRV": true
+},
+{
+    "matricula":123,
+    "nome":"Flademir",
+    "cargo":"Scrum",
+    "afastamento":"nao",
+    "tipoAfastamento": "nao",
+    "nivelHie": "Scrum",
+    "codHieraquia":15,
+    "receberRV": false
+},
+{
+    "matricula":124,
+    "nome":"Jorge",
+    "cargo":"Analista de Sistema",
+    "afastamento":"nao",
+    "tipoAfastamento": "nao",
+    "nivelHie": "TI",
+    "codHieraquia":12,
+    "receberRV": true
+    
+},
+{
+    "matricula":125,
+    "nome":"Mauricio",
+    "cargo":"PO",
+    "afastamento":"nao",
+    "tipoAfastamento": "nao",
+    "nivelHie": "Negocio",
+    "codHieraquia":13,
+    "receberRV": false
+    
+    
+
+}
+]

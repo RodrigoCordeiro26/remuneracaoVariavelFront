@@ -1,0 +1,73 @@
+<div class="card">
+  <div class="card-head">
+    <a class="card-link" data-toggle="collapse">
+      Cadastro de Região
+    </a>
+  </div>
+  <div class="card-body">
+    <div class="ps-row" style="margin-bottom: 4px;">
+      <tr class="ps-mod8 ps-sm-mod12">
+        <th class="ps-mod8 ps-sm-mod2">
+          <a title="Adicionar novo Segmento" style="width:60px;" href="javascript:;" class="ps-btn ps-open-modal"
+            data-modal="#ModalPadrao" data-modalbackdropstatic="false" data-modalkeyboarddisable="true"
+            data-modalonshow="console.log('abrir modal')" data-modalonhide="console.log('fechar modal')">
+            <span class="ps-mod8 ps-ico ps-sm-mod1 ps-alignCenter ps-ico-plus">
+            </span>
+          </a><br />
+
+        </th>
+      </tr>
+    </div>
+    <br>
+    <div class="container-rv">
+      <label>Sucursal</label>
+      <div cdkDropList #minha="cdkDropList" [cdkDropListConnectedTo]="[confirmados]" class="list-rv"
+        [cdkDropListData]="myList" (cdkDropListDropped)="drop($event)">
+        <div class="box-rv" *ngFor="let p of myList" cdkDrag>{{p.nome}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ps-modal" id="ModalPadrao">
+  <a href="javascript:;" class="ps-modal-close ps-modal-close-default"><span
+      class="ps-ico ps-ico-sm ps-sm-ico-lg ps-ico-close"></span></a>
+  <div class="ps-modal-container" style="width: 37%;">
+    <div class="card-header" style=" padding: 20px;  margin: 10px;">
+      <a class="card-link" data-toggle="collapse" href="#collapseOne">
+        Cadastro de Região
+      </a>
+    </div>
+    <div class="ps-modal-content">
+      <label>Nome da Região</label>
+      <input [(ngModel)]="nomeRegiao" type="text" class="ps-frm-entry" placeholder="Preencha aqui" />
+      <br>
+
+      <div class="ps-mod8 ps-sm-mod6 ps-frm-row">
+        <label>Cargo</label>
+        <div class="ps-frm-select" style="width: 150px;">
+          <select name="test" class="ps-frm-valid">
+            <option value="">Selecione</option>
+            <option *ngFor="let cargo of cargos" value={{cargo.codCargo}}>{{cargo.nmeCargo}}</option>
+          </select>
+        </div>
+
+
+
+        <input [(ngModel)]="teto" type="text" class="ps-frm-entry" placeholder="Teto" name="valor" currencyMask
+          style="text-align: right;left: 181px;top: -41px;width: 150px;" />
+
+        <input [(ngModel)]="faixa" type="text" class="ps-frm-entry" placeholder="Faixa" name="valor" currencyMask
+          style="text-align: right;width: 150px;left: 342px;top: -80px;" />
+
+
+        <button (click)="gravar()" class="ps-btn">Gravar</button>
+
+      </div>
+
+
+
+    </div>
+  </div>
+
+</div>

@@ -1,228 +1,238 @@
 <div class="card">
-    <div class="card-header">
-      <a class="card-link" data-toggle="collapse" href="#collapseOne">
-        Cadastro de Composição e Regras
-      </a>
-    </div>
-    <div class="card-body">
+  <div class="card-header">
+    <a class="card-link" data-toggle="collapse" href="#collapseOne">
+      Cadastro de Composição e Regras
+    </a>
+  </div>
+  <div class="card-body">
 
-      <div class="container-rv-input">
-        <label>Nome do Segmento</label>
-        <div class="form-group">
-          <input type="text" class="form-control" name="segtmento">
-        </div>
-      </div>
-      <div class="form-group" id="form-parte-um">
-        <div class="container-rv-p">
-          <div class="form-group">
-            <label><b>Empresa</b></label>
-            <select class="form-control" [(ngModel)]="empresa" (change)="getBuscarProduto()">
-              <option >selecione</option>
-              <option *ngFor="let emp of empresaList" value={{emp.codEmpresa}}>{{emp.codEmpresa}}-{{emp.nomEmpresa}}</option>
-            </select>
-          </div>
-        </div>
-        <div class="container-rv-p">
-          <div class="form-group">
-            <label><b>Produto</b></label>
-            <select class="form-control" [(ngModel)]="produto" (change)="getBuscarRamo()">
-              <option >selecione</option>
-              <option *ngFor="let prod of produtoList" value={{prod.codProduto}}>{{prod.codProduto}}-{{prod.produto}}</option>
-
-
-
-            </select>
-          </div>
-        </div>
-        <div class="container-rv-p">
-          <div class="form-group">
-            <label><b>Ramo</b></label>
-            <select class="form-control" [(ngModel)]="ramo" (change)="getBuscarModalidade()">
-              <option >selecione</option>
-              <option *ngFor="let ramo of ramoList" value={{ramo.codRamo}}>{{ramo.codRamo}}-{{ramo.nomRamo}}</option>
-
-            </select>
-          </div>
-        </div>
-        <div class="container-rv-p">
-          <div class="form-group" id="radioButtom">
-              <div class="custom-control custom-radio ">
-                  <input type="radio" class="custom-control-input" id="customRadio" name="radio" [(ngModel)]="tipoOperacao"  value=true>
-                  <label class="custom-control-label" for="customRadio">Adicionar</label>
-                </div>
-                <div class="custom-control custom-radio ">
-                  <input type="radio" class="custom-control-input" id="customRadio2" name="radio" [(ngModel)]="tipoOperacao" value=false>
-                  <label class="custom-control-label" for="customRadio2">Remover</label>
-                </div>
-           
-          </div> 
-        </div>
-      </div>
-
-
+    <div class="container-rv-input">
+      <label>Nome do Segmento</label>
       <div class="form-group">
-        <div class="container-rv-p">
-          <div class="form-group">
-            <label><b>Modalidade</b></label>
-            <select class="form-control" [(ngModel)]="modalidade" >
-              <option >selecione</option>
-              <option *ngFor="let mod of modalidadeList" value={{mod.codModalidade}}>{{mod.codModalidade}}-{{mod.nomModalidade}}</option>
-
-            </select>
-          </div>
-        </div>
-        <div class="container-rv-p">
-          <div class="form-group">
-            <label><b>Grupo</b></label>
-            <select class="form-control" [(ngModel)]="grupo" >
-              <option >selecione</option>
-              <option *ngFor="let grupo of grupoList" value={{grupo.numGrupo}}>{{grupo.numGrupo}}-{{grupo.nomGrupo}}</option>
-
-
-            </select>
-          </div>
-        </div>
-        <div class="container-rv-p">
-          <div class="form-group">
-            <label><b>Subgrupo</b></label>
-            <select class="form-control" [(ngModel)]="subgrupo" >
-              <option value=''>selecione</option>
-              <option *ngFor="let sub of subgrupoList" value='{{sub.numSubGrupo}}'>{{sub.numSubGrupo}}-{{sub.nomSubGrupo}}</option>
-
-            </select>
-          </div>
-        </div>
-        <div class="container-rv-p">
-          <div class="form-group" id="adicionar">
-              <button type="button" class="btn btn-outline-primary" (click)="getCadastraComposicaoRegra()">Adicionar</button>
-            </div>
-          </div>
-        </div>
-      
-      
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Empresa</th>
-            <th>Produto</th>
-            <th>Ramo</th>
-            <th>Modalidade</th>
-            <th>Grupo</th>
-            <th>Subgrupo</th>
-            <th>Operação</th>
-            <th>Excluir</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let dados of composicaoList | paginate: { itemsPerPage: 5, currentPage: paginaAtual }; let i = index">
-            <td>{{dados.empresa.codEmpresa}}-{{dados.empresa.nomEmpresa}}</td>
-            <td>{{dados.produto.codProduto}}-{{dados.produto.produto}}</td>
-            <td>{{dados.ramo.codRamo}}-{{dados.ramo.nomRamo}}</td>
-            <td>{{dados.modalidade.codModalidade}}-{{dados.modalidade.nomModalidade}}</td>
-            <td>{{dados.grupo.numGrupo}}-{{dados.grupo.nomGrupo}}</td>
-            <td>{{dados.subgrupo.numSubGrupo}}-{{dados.subgrupo.nomSubGrupo}}</td>
-            <td *ngIf="dados.tipoOperacao == false"  >
-                <i  class="fas fa-minus" ></i> 
-                         
-            </td>
-            <td *ngIf="dados.tipoOperacao == true" >
-                <i class="fas fa-plus" ></i>
-                
-            </td>
-            <td>
-                <i class="fa fa-trash-o" style="font-size:24px;" (click)="deletarComposicaoRegra(dados.id)"></i>
-              
-            </td>
-
-          </tr>
-        </tbody>
-        
-      </table>
-      <pagination-controls maxSize="5" (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo"></pagination-controls>
-    </div>
-
-    <div class="card-header">
-      <a class="card-link" data-toggle="collapse" href="#collapseOne">
-        Regras
-      </a>
-    </div>
-
-    <div class="card-body">
-      <div class="container-rv">
-        <label><b>Indicador</b></label>
-        <div cdkDropList #minha="cdkDropList" [cdkDropListConnectedTo]="[confirmados,indicadorregra]" class="list-rv"
-          [cdkDropListData]="myList" (cdkDropListDropped)="drop($event)">
-          <div class="box-rv" *ngFor="let p of myList" cdkDrag>{{p.name}}</div>
-        </div>
+        <input type="text" class="form-control" name="segtmento">
       </div>
-
-      <div class="container-rv" style="width: 150px;">
-        <label><b>Indicador Escolhido</b></label>
-        <div cdkDropList #confirmados="cdkDropList" [cdkDropListConnectedTo]="[minha]" [cdkDropListData]="confirmeList"
-          class="list-rv" (cdkDropListDropped)="drop($event)">
-          <div class="box-rv" *ngFor="let p of confirmeList" cdkDrag>{{p.name}}</div>
-        </div>
-
-      </div>
-      <div class="container-rv">
-        <div class="form-group" *ngIf="flgRegras">
-          <label><b>Operador</b></label>
-          <select class="fas" (change)="getMostravalor()">
-            <option value="">selecione</option>
-            <option class='fas' value=">">&#xf531;</option>
-            <option class='fas' value="<">&#xf536;</option>
-            <option class='fas' value="=">&#xf52c;</option>
-            <option class='fas' value="<=">&#xf537;</option>
-            <option class='fas' value="=>">&#xf532;</option>
+    </div>
+    <div class="form-group" id="form-parte-um">
+      <div class="container-rv-p">
+        <div class="form-group">
+          <label><b>Empresa</b></label>
+          <select class="form-control" [(ngModel)]="empresa" (change)="getBuscarProduto()">
+            <option>selecione</option>
+            <option *ngFor="let emp of empresaList" value={{emp.codEmpresa}}>{{emp.codEmpresa}}-{{emp.nomEmpresa}}
+            </option>
           </select>
         </div>
       </div>
+      <div class="container-rv-p">
+        <div class="form-group">
+          <label><b>Produto</b></label>
+          <select class="form-control" [(ngModel)]="produto" (change)="getBuscarRamo()">
+            <option >selecione</option>
+            <option *ngFor="let prod of produtoList" value={{prod.codProduto}}>{{prod.codProduto}}-{{prod.produto}}
+            </option>
 
-      <div class="container-rv">
-        <div class="form-group" style="padding: 33px 0px 0px 0px;" *ngIf="flgValor">
-          <input type="text" class="form-control" placeholder="R$0.00" name="valor" currencyMask>
+
+
+          </select>
         </div>
       </div>
+      <div class="container-rv-p">
+        <div class="form-group">
+          <label><b>Ramo</b></label>
+          <select class="form-control" [(ngModel)]="ramo" (change)="getBuscarModalidade()">
+            <option>selecione</option>
+            <option *ngFor="let ramo of ramoList" value={{ramo.codRamo}}>{{ramo.codRamo}}-{{ramo.nomRamo}}</option>
 
-      <div class="container-rv" style="width: 150px;">
-
-        <label><b>Indicador regra</b></label>
-        <div cdkDropList #indicadorregra="cdkDropList" [cdkDropListConnectedTo]="[minha]" [cdkDropListData]="regra"
-          class="list-rv" (cdkDropListDropped)="drop($event)">
-          <div class="box-rv" *ngFor="let p of regra" cdkDrag>{{p.name}}</div>
+          </select>
         </div>
-
       </div>
-
-      <div class="container-rv">
-        <div class="form-group" *ngIf="flgValor">
-          <label><b>taxa</b></label>
-          <div class="radio">
-            <label><input type="radio" name="optradio"  [(ngModel)]="tipoDado"    value="1">porcentagem</label>
+      <div class="container-rv-p">
+        <div class="form-group" id="radioButtom">
+          <div class="custom-control custom-radio ">
+            <input type="radio" class="custom-control-input" id="customRadio" name="radio" [(ngModel)]="tipoOperacao"
+              value=true>
+            <label class="custom-control-label" for="customRadio">Adicionar</label>
           </div>
-          <div class="radio">
-            <label><input type="radio" name="optradio"  [(ngModel)]="tipoDado"  value="2">valor</label>
+          <div class="custom-control custom-radio ">
+            <input type="radio" class="custom-control-input" id="customRadio2" name="radio" [(ngModel)]="tipoOperacao"
+              value=false>
+            <label class="custom-control-label" for="customRadio2">Remover</label>
           </div>
-        </div>
-      </div>
 
-      <div class="container-rv">
-        <div class="form-group" style="padding: 33px 0px 0px 0px;" *ngIf="tipoDado == 1">
-          <input type="text" class="form-control" placeholder="%0.000" currencyMask
-            [options]="{ precision:3, decimal: '.',prefix: '%'}" maxlength="8">
-        </div>
-      </div>
-      <div class="container-rv">
-        <div class="form-group" style="padding: 33px 0px 0px 0px;" *ngIf="tipoDado == 2">
-          <input type="text" class="form-control" placeholder="R$0.00" name="valor" currencyMask>
         </div>
       </div>
     </div>
+
+
+    <div class="form-group">
+      <div class="container-rv-p">
+        <div class="form-group">
+          <label><b>Modalidade</b></label>
+          <select class="form-control" [(ngModel)]="modalidade" (change)="getGrupo($event.target.value)"  >
+            <option selected>selecione</option>
+            <option *ngFor="let mod of modalidadeList" value={{mod.codModalidade}} >
+              {{mod.codModalidade}}-{{mod.nomModalidade}}</option>
+
+          </select>
+        </div>
+      </div>
+      <div class="container-rv-p">
+        <div class="form-group">
+          <label><b>Grupo</b></label>
+          <select class="form-control" [(ngModel)]="grupo" (change)="getSubgrupo()">
+            <option *ngFor="let grupo of grupoList" value={{grupo.numGrupo}}>{{grupo.numGrupo}}-{{grupo.nomGrupo}}
+            </option>
+
+
+          </select>
+        </div>
+      </div>
+      <div class="container-rv-p">
+        <div class="form-group">
+          <label><b>Subgrupo</b></label>
+          <select class="form-control" [(ngModel)]="subgrupo">
+            <option *ngFor="let sub of subgrupoList" value='{{sub.numSubGrupo}}'>{{sub.numSubGrupo}}-{{sub.nomSubGrupo}}
+            </option>
+
+          </select>
+        </div>
+      </div>
+      <div class="container-rv-p">
+        <div class="form-group" id="adicionar">
+          <button type="button" class="btn btn-outline-primary"
+            (click)="getCadastraComposicaoRegra()">Adicionar</button>
+        </div>
+      </div>
+    </div>
+
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Empresa</th>
+          <th>Produto</th>
+          <th>Ramo</th>
+          <th>Modalidade</th>
+          <th>Grupo</th>
+          <th>Subgrupo</th>
+          <th>Operação</th>
+          <th>Excluir</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let dados of composicaoList | paginate: { itemsPerPage: 5, currentPage: paginaAtual }; let i = index">
+          <td>{{dados.empresa.codEmpresa}}-{{dados.empresa.nomEmpresa}}</td>
+          <td>{{dados.produto.codProduto}}-{{dados.produto.produto}}</td>
+          <td>{{dados.ramo.codRamo}}-{{dados.ramo.nomRamo}}</td>
+          <td>{{dados.modalidade.codModalidade}}-{{dados.modalidade.nomModalidade}}</td>
+          <td *ngIf="dados.grupo != null">{{dados.grupo.numGrupo}}-{{dados.grupo.nomGrupo}}</td>
+          <td *ngIf="dados.grupo == null">Sem grupo</td>
+          <td *ngIf="dados.subgrupo != null">{{dados.subgrupo.numSubGrupo}}-{{dados.subgrupo.nomSubGrupo}}</td>
+          <td *ngIf="dados.subgrupo == null" >Sem Subgrupo</td>
+          <td *ngIf="dados.tipoOperacao == false">
+            <i class="fas fa-minus"></i>
+
+          </td>
+          <td *ngIf="dados.tipoOperacao == true">
+            <i class="fas fa-plus"></i>
+
+          </td>
+          <td>
+            <i class="fa fa-trash-o" style="font-size:24px;" (click)="deletarComposicaoRegra(dados.id)"></i>
+
+          </td>
+
+        </tr>
+      </tbody>
+
+    </table>
+    <pagination-controls maxSize="5" (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo">
+    </pagination-controls>
+  </div>
+
+  <div class="card-header">
+    <a class="card-link" data-toggle="collapse" href="#collapseOne">
+      Regras
+    </a>
+  </div>
+
+  <div class="card-body">
+    <div class="container-rv">
+      <label><b>Indicador</b></label>
+      <div cdkDropList #minha="cdkDropList" [cdkDropListConnectedTo]="[confirmados,indicadorregra]" class="list-rv"
+        [cdkDropListData]="myList" (cdkDropListDropped)="drop($event)">
+        <div class="box-rv" *ngFor="let p of myList" cdkDrag>{{p.name}}</div>
+      </div>
+    </div>
+
+    <div class="container-rv" style="width: 150px;">
+      <label><b>Indicador Escolhido</b></label>
+      <div cdkDropList #confirmados="cdkDropList" [cdkDropListConnectedTo]="[minha]" [cdkDropListData]="confirmeList"
+        class="list-rv" (cdkDropListDropped)="drop($event)">
+        <div class="box-rv" *ngFor="let p of confirmeList" cdkDrag>{{p.name}}</div>
+      </div>
+
+    </div>
+    <div class="container-rv">
+      <div class="form-group" *ngIf="flgRegras">
+        <label><b>Operador</b></label>
+        <select class="fas" [(ngModel)]="operador">
+          <option value="">selecione</option>
+          <option class='fas' value=">">&#xf531;</option>
+          <option class='fas' value="<">&#xf536;</option>
+          <option class='fas' value="=">&#xf52c;</option>
+          <option class='fas' value="<=">&#xf537;</option>
+          <option class='fas' value="=>">&#xf532;</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="container-rv">
+      <div class="form-group" style="padding: 33px 0px 0px 0px;" *ngIf="operador !== ''">
+        <input type="text" class="form-control" placeholder="R$0.00" name="valor" currencyMask>
+      </div>
+    </div>
+
+    <div class="container-rv" style="width: 150px;">
+
+      <label><b>Indicador regra</b></label>
+      <div cdkDropList #indicadorregra="cdkDropList" [cdkDropListConnectedTo]="[minha]" [cdkDropListData]="regra"
+        class="list-rv" (cdkDropListDropped)="drop($event)">
+        <div class="box-rv" *ngFor="let p of regra" cdkDrag>{{p.name}}</div>
+      </div>
+
+    </div>
+
+    <div class="container-rv">
+      <div class="form-group" *ngIf="flgValor">
+        <label><b>taxa</b></label>
+        <div class="radio">
+          <label><input type="radio" name="optradio" [(ngModel)]="tipoDado" value="1">porcentagem</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="optradio" [(ngModel)]="tipoDado" value="2">valor</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-rv">
+      <div class="form-group" style="padding: 33px 0px 0px 0px;" *ngIf="tipoDado == 1">
+        <input type="text" class="form-control" placeholder="%0.000" currencyMask
+          [options]="{ precision:3, decimal: '.',prefix: '%'}" maxlength="8">
+      </div>
+    </div>
+    <div class="container-rv">
+      <div class="form-group" style="padding: 33px 0px 0px 0px;" *ngIf="tipoDado == 2">
+        <input type="text" class="form-control" placeholder="R$0.00" name="valor" currencyMask>
+      </div>
+    </div>
+  </div>
 </div>
 <ng-template #deleteModel>
   <div class="modal-body text-center">
     <p>Realmente deseja exluir a composicao?</p>
-    <button type="button" class="btn btn-default" (click)="confirmaDelete()" >Sim</button>
-    <button type="button" class="btn btn-primary"  (click)=" negarDelete()">Não</button>
+    <button type="button" class="btn btn-default" (click)="confirmaDelete()">Sim</button>
+    <button type="button" class="btn btn-primary" (click)=" negarDelete()">Não</button>
   </div>
 </ng-template>

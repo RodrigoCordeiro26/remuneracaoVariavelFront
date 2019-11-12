@@ -1,0 +1,87 @@
+<div class="card">
+    <div class="card-header">
+
+        Legibilidade
+
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table ">
+                <thead class="thead-light">
+                    <tr style="font-size: 12px;">
+                        <th>Matricula</th>
+                        <th>Nome</th>
+                        <th>Cargo</th>
+                        <th>Min Garantido</th>
+                        <th>Tipo de Teto</th>
+                        <th>Vigencia inicial</th>
+                        <th>Vigencia Final</th>
+                        <th>Receber RV</th>
+                        <th>Afastamento</th>
+                        <th>Tipo Afastamento</th>
+                        <th id="excecao">Exceção</th>
+                        <th>Nivel Hie.</th>
+                        <th id="codHieTH">Cód. Hieraquia</th>
+                        <th id="observacao">Observações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        *ngFor="let dados of legibilidadeList | paginate: { itemsPerPage: 5, currentPage: paginaAtual }; let i = index">
+
+                        <td>{{dados.matricula}}</td>
+                        <td>{{dados.nome}}</td>
+                        <td>{{dados.cargo}}</td>
+                        <td id="minGarantido">
+                            <div class="custom-control">
+                                <input type="text" class="form-control" style="width: 10px;" style="width: 60px;"
+                                    name="min">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="custom-control">
+                                <input type="text" class="form-control" name="min" style="width: 100px;">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-md-2">
+                                <input id="dtnasc" name="dtnasc" placeholder="DD/MM/AAAA" class="form-control input-md"
+                                    required="" type="text" maxlength="10" mask="XX/XX/XXXX" style="width: 120px;">
+                            </div>
+
+                        </td>
+                        <td>
+                            <div class="col-md-2">
+                                <input id="dtnasc" name="dtnasc" placeholder="DD/MM/AAAA" class="form-control input-md"
+                                    required="" type="text" maxlength="10" mask="XX/XX/XXXX" style="width: 120px;">
+                            </div>
+
+                        </td>
+                        <td id="receberRV">
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                              </label>
+                        </td>
+                        <td>{{dados.afastamento}}</td>
+                        <td id="tipoAfastamento">{{dados.tipoAfastamento}}</td>
+                        <td>
+                            <div class="custom-control">
+                                <input type="text" class="form-control" name="min" style="width: 100px;">
+                            </div>
+                        </td>
+                        <td>{{dados.nivelHie}}</td>
+                        <td id="codHie">{{dados.codHieraquia}}</td>
+                        <td>
+                            <div class="custom-control">
+                                <input type="text" class="form-control" name="min" style="width: 300px;">
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <pagination-controls maxSize="5" (pageChange)="paginaAtual = $event" previousLabel="Anterior"
+            nextLabel="Próximo">
+        </pagination-controls>
+    </div>

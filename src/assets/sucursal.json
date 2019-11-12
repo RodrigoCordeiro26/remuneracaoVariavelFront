@@ -1,0 +1,43 @@
+[
+    {
+        "nome": "SÃO PAULO",
+        "id": 1
+    },
+    {
+        "nome": "RIO DE JANEIRO",
+        "id": 2
+    },
+    {
+        "nome": "BAHIA",
+        "id": 3
+    },
+    {
+        "nome": "PERNAMBUCO",
+        "id": 4
+    },
+    {
+        "nome": "TOCANTINS",
+        "id": 5
+    },
+    {
+        "nome": "PARANA",
+        "id": 6
+    },
+    {
+        "nome": "MOGI DAS CRUZES",
+        "id": 7
+    },
+    {
+        "nome": "MARANHÃO",
+        "id": 8
+    },
+    {
+        "nome": "PARA",
+        "id": 9
+    },
+    {
+        "nome":"MINAS GERAIS",
+        "id": 10
+    }
+    
+]
