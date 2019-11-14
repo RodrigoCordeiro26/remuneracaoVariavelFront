@@ -2,158 +2,294 @@
     <div class="ps-row" style="text-align: center; margin-top:0px; ">
         <p class="titulo">Cadastro de Segmento</p>
     </div><br><br>
-    <div class="ps-row" >
-        <tr class="ps-mod8 ps-sm-mod12" >
+    <div class="ps-row">
+        <tr class="ps-mod8 ps-sm-mod12">
             <div class="ps-mod8 ps-sm-mod2" style="margin-top: 20px;">
-                <a title="Adicionar novo Segmento" style="width:60px" href="javascript:;" class="ps-btn ps-open-modal"
-                    data-modal="#ModalPadrao" data-modalbackdropstatic="false" data-modalkeyboarddisable="true"
-                    data-modalonshow="console.log('abrir modal')" data-modalonhide="console.log('fechar modal')">
+                <a id="add" (click)="openNewModal(template)" title="Adicionar novo Segmento" style="width:60px"
+                    href="javascript:;" class="ps-btn ps-open-modal" data-modal="#ModalPadrao"
+                    data-modalbackdropstatic="false" data-modalkeyboarddisable="true" data-modalonshow="console.log()"
+                    data-modalonhide="console.log('fechar modal')">
                     <span class="ps-mod8 ps-ico ps-sm-mod1 ps-alignCenter ps-ico-plus">
                     </span>
                 </a>
 
             </div>
-            <div class="guide-grid ps-lg-mod6">
-               Pesquisar: <input class="form-control" type="text" name="search" [(ngModel)]="filter">  <!-- Input que deve ser adicionado -->
+            <div class="ps-mod8 ps-sm-mod2 ps-frm-row">
+                <div class="ps-frm-select">
+                    <select name="opcoes" ngDefaultControl [(ngModel)]="opcoes" type="text">
+                        <option value="todos">Todos</option>
+                        <option value="codigo">Código</option>
+                        <option value="segmento">Segmento</option>
+                        <option value="tipoProduto">Tipo Produto</option>
+                        <option value="equipeComercial">Equipe Comercial</option>
+                        <option value="assessoria">Assessorias</option>
+                        <option value="gratificacao">Gratificação</option>
+                        <option value="campanha">Campanha</option>
+                        <option value="status">Status</option>
+                    </select>
+                </div>
+            </div>
+            <div *ngIf="opcoes === 'segmento'" style="margin-top:20px" class="ps-mod8 ps-sm-mod6 ps-frm-row">
+                <input type="text" [(ngModel)]="filter" name="filter" class="ps-frm-entry" placeholder="Preencha aqui"
+                    (keypress)="filtrar()" />
+            </div>
+            <div *ngIf="opcoes === 'codigo'" style="margin-top:20px" class="ps-mod8 ps-sm-mod6 ps-frm-row">
+                <input type="number" [(ngModel)]="codigo" name="filter" class="ps-frm-entry"
+                    placeholder="Preencha aqui" />
+            </div>
+            <div *ngIf="opcoes === 'tipoProduto'" class="ps-mod8 ps-sm-mod2 ps-frm-row">
+                <div class="ps-frm-select">
+                    <select name="opcoes" (change)="filtrar()" ngDefaultControl [(ngModel)]="filter" type="text">
+                        <option value="Seguro">Seguro</option>
+                        <option value="Não Seguro">Não Seguro</option>
+                    </select>
+                </div>
+            </div>
+            <div *ngIf="opcoes === 'status'" class="ps-mod8 ps-sm-mod2 ps-frm-row">
+                <div class="ps-frm-select">
+                    <select (change)="filtrar()" name="opcoes" ngDefaultControl [(ngModel)]="filter" type="text">
+                        <option value="Ativo">ATIVO</option>
+                        <option value="Inativo">INATIVO</option>
+                    </select>
+                </div>
+            </div>
+            <div *ngIf="opcoes !== 'status' && opcoes !== 'segmento' && opcoes !== 'tipoProduto' && opcoes !== 'todos' && opcoes !== 'codigo'"
+                class="ps-mod8 ps-sm-mod2 ps-frm-row">
+                <div class="ps-frm-select">
+                    <select (change)="filtrar()" name="opcoes" ngDefaultControl [(ngModel)]="filter" type="text">
+                        <option value="SIM">SIM</option>
+                        <option value="Não">NÃO</option>
+                    </select>
+                </div>
             </div>
             <div class="guide-grid ps-lg-mod2">
                 <br>
-                <span class="ps-ico ps-ico-magnifi-glass"></span>
+                <span (click)="filtrar()" class="ps-ico ps-ico-magnifi-glass"></span>
             </div>
-            <!-- <div class="guide-grid ps-lg-mod6">
-                <div *ngIf="objSearchDTO.opcaoSelectionada ==='Código'" class="guide-grid ps-lg-mod6"
-                    style="margin-top:20px;">
-                    <input (keypress)="teste()" type="text" [(ngModel)]="objSearchDTO.codigo" class="ps-frm-entry"
-                        placeholder="Preencha aqui" />
+    </div>
+    <br>
+
+    <!--TABLE HERE-->
+    <div class="ps-container">
+
+        <div class="ps-row">
+            <div class="ps-mod8 ps-sm-mod12">
+                <table id="exportable" class="ps-table ps-data " data-pagesize="5" data-filtering="true">
+                    <thead>
+                        <tr>
+                            <th class="ps-sm-mod2" data-name="codigo" data-type="text">
+                                Código <br><br>
+                                <a (click)="ordenarCresc()"> <span class="ps-ico ps-ico-arrow-down"></span> </a>
+                                <a (click)="ordernarDecres()"> <span class="ps-ico ps-ico-arrow-up"></span></a>
+                            </th>
+                            <th class="ps-sm-mod3" data-name="nmSegmentoRV" data-type="text">
+                                Segmento<br><br>
+                                <a (click)="ordenarAlphaCresc()"><span class="primary-click">A-Z</span></a> | <a
+                                    (click)="ordenarAlphaDecres()"><span class="primary-click">Z-A</span></a>
+                            </th>
+                            <th class="ps-hide ps-sm-show ps-sm-mod3" data-name="isSeguro" data-type="text">
+                                Tipo produto
+                            </th>
+                            <th class="ps-hide ps-sm-show ps-sm-mod2" data-name="normal" data-type="text">
+                                Equipe Comercial
+                            </th>
+                            <th class="ps-hide ps-sm-show ps-sm-mod2" data-name="assessoria" data-type="text">
+                                Assessorias
+                            </th>
+                            <th class="ps-hide ps-sm-show ps-sm-mod2" data-name="gratificacao" data-type="text">
+                                Gratificação
+                            </th>
+                            <th class="ps-hide ps-sm-show ps-sm-mod2" data-name="campanha" data-type="text">
+                                Campanha
+                            </th>
+                            <th class="ps-hide ps-sm-show ps-sm-mod2" data-name="campanha" data-type="text">
+                                Status
+                            </th>
+                            <th class="ps-sm-mod2" data-name="editar"> Editar </th>
+                            <th class="ps-sm-mod2" data-name="editar"> Composição <br> & <br> Regras </th>
+                        </tr>
+                    </thead>
+                    <tbody data-source="items">
+                        <tr *ngFor="let item of lista | paginate: { itemsPerPage: 5, currentPage: p } |  filter:filter">
+                            <td>{{item.id}}</td>
+                            <td>{{item.nmSegmentoRV}}</td>
+                            <td>{{item.tipoProduto}}</td>
+                            <td>{{item.equipeComercial}}</td>
+                            <td>{{item.assessoria}}</td>
+                            <td>{{item.gratificacao}}</td>
+                            <td>{{item.campanha}}</td>
+                            <td>{{item.status}}</td>
+                            <td>
+
+                                <span (click)="openModal(template, item)" style="color:#3DACFF"
+                                    class="ps-ico ps-glyph ps-ico-brush"></span>
+
+                            </td>
+                            <td>
+                                <a [routerLink]="['/cadastro-composicao-regra', item.id]">
+                                    <span style="color:red" class="ps-ico ps-glyph ps-ico-tools"></span>
+                                </a>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <div style="float:right">
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
                 </div>
-                <div class="guide-grid ps-lg-mod6"
-                    style="margin-top:20px;">
-                    <input *ngIf="objSearchDTO.opcaoSelectionada != 'Código'" (keypress)="teste()" type="text" [(ngModel)]="objSearchDTO.src" class="ps-frm-entry"
-                        placeholder="Preencha aqui" />
-                </div>
-                <div  class="guide-grid ps-lg-mod4" style="margin-top: 20px; margin-left: 2px">
-                    <a (keypres)="teste()">
-                        <span class="ps-ico ps-ico-magnifi-glass" title="Pesquisar"></span>
+                <div class="ps-mod8 ps-sm-mod4" style="padding: 14px">
+                    <a class="ps-btn ps-btn-ico ps-btn-alert" (click)="exportar()">
+                        <span class="ps-ico ps-glyph ps-ico-down"></span>
+                        Exportar .csv
                     </a>
                 </div>
-            </div> -->
-    </div>
-        <br>
-
-        <!--TABLE HERE-->
-        <div class="ps-container">
-            <div class="ps-row">
-                <div class="ps-mod8 ps-sm-mod12">
-                    <table class="ps-table ps-data " data-pagesize="5" data-filtering="true">
-                        <thead>
-                            <tr>
-                                <th class="ps-sm-mod2" data-name="codigo" data-type="text">
-                                    Código
-                                    <a (click)="ordenarCresc()"> <span class="ps-ico ps-ico-arrow-down"></span> </a>
-                                    <a (click)="ordernarDecres()"> <span class="ps-ico ps-ico-arrow-up"></span></a>
-                                </th>
-                                <th class="ps-sm-mod3" data-name="nmSegmentoRV" data-type="text">
-                                    Segmento
-                                    <a (click)="ordenarAlphaCresc()"><span class="primary-click">A-Z</span></a> | <a
-                                        (click)="ordenarAlphaDecres()"><span class="primary-click">Z-A</span></a>
-                                </th>
-                                <th class="ps-hide ps-sm-show ps-sm-mod3" data-name="isSeguro" data-type="text">
-                                   Tipo produto
-                                </th>
-                                <th class="ps-hide ps-sm-show ps-sm-mod2" data-name="normal" data-type="text">
-                                    Equipe Comercial
-                                </th>
-                                <th class="ps-hide ps-sm-show ps-sm-mod2" data-name="assessoria" data-type="text">
-                                    Assessoria
-                                </th>
-                                <th class="ps-sm-mod2" data-name="editar"> Editar </th>
-                                <th class="ps-sm-mod2" data-name="editar"> Excluir </th>
-                            </tr>
-                        </thead>
-                        <tbody data-source="items">
-                            <tr *ngFor="let item of items  | paginate: { itemsPerPage: 5, currentPage: p } |  filter:filter">
-                                <td>{{item.id}}</td>
-                                <td>{{item.nmSegmentoRV}}</td>
-
-                                <td *ngIf="item.isSeguro">Seguro</td>
-                                <td *ngIf="!item.isSeguro">Não Seguro</td>
-
-
-                                <td *ngIf="item.normal">Sim</td>
-                                <td *ngIf="!item.normal">Não</td>
-
-                                <td *ngIf="item.assessoria">Sim</td>
-                                <td *ngIf="!item.assessoria">Não</td>
-
-                                <td>
-                                    <a href="?">
-                                        <span style="color:#3DACFF" class="ps-ico ps-glyph ps-ico-brush"></span>
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="?">
-                                        <span style="color:red" class="ps-ico ps-glyph ps-ico-trashcan"></span>
-                                    </a>
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                    <div style="float:right">
-                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
-                    </div>
-                </div>
             </div>
+
         </div>
+    </div>
 
-        <!--TABLE ABOVE-->
+    <!--TABLE ABOVE-->
 
-    <div class="ps-modal" id="ModalPadrao">
-        <a href="javascript:;" class="ps-modal-close ps-modal-close-default"><span
-                class="ps-ico ps-ico-sm ps-sm-ico-lg ps-ico-close"></span></a>
-        <div class="ps-modal-container">
-            <div class="ps-modal-title">
-                <p class="titulo">Cadastro de Segmento</p>
-            </div>
+
+    <ng-template #template>
+        <div class="modal-header">
+            <h4 *ngIf="newModal" class="modal-title pull-left">Inclusão de Segmento de Produto </h4>
+            <h4 *ngIf="!newModal" class="modal-title pull-left">Edição de Segmento</h4>
+            <button type="button" class="close pull-right" aria-label="Close"
+                (click)="modalRef.hide(); observacaoObrigatoria =false">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" style="height: 500px">
             <div class="ps-modal-content">
-                <label>Nome Segmento RV</label>
-                <input [(ngModel)]="objDTO.nmSegmentoRV" type="text" class="ps-frm-entry" placeholder="Preencha aqui" />
-                <br>
-                <input [(ngModel)]="objDTO.assessoria" type="checkbox" name="tst" class="ps-frm-checkbox"
-                    id="ps-frm-chk-tst1" />
-                <label class="ps-frm-checkbox" for="ps-frm-chk-tst1">
-                    Assessoria
-                </label>
-                <input [(ngModel)]="objDTO.normal" type="checkbox" name="tst" class="ps-frm-checkbox"
-                    id="ps-frm-chk-tst2" checked />
-                <label class="ps-frm-checkbox" for="ps-frm-chk-tst2">
-                    Normal
-                </label><br>
-                <input [(ngModel)]="objDTO.isSeguro" type="radio" name="tst1" value=true class="ps-frm-radio"
-                    id="ps-frm-rad-tst1" />
-                <label class="ps-frm-radio" for="ps-frm-rad-tst1">
-                    Seguro
-                </label>
-                <br>
-                <input [(ngModel)]="objDTO.isSeguro" type="radio" name="tst1" value=false class="ps-frm-radio"
-                    id="ps-frm-rad-tst2" checked />
+                <!-- {{form.valid}}
+                {{form.value | json}} -->
 
-                <label class="ps-frm-radio" for="ps-frm-rad-tst2">
-                    Não Seguro
-                </label>
-                <textarea [(ngModel)]="objDTO.observacao" name="test" class="ps-frm-entry"
-                    placeholder="Observação (máximo 100 caracteres)" maxlength="100" style="width: 300px;"></textarea>
-            </div>
-            <div class="ps-modal-foot">
-                <div class="row">
-                    <div class="ps-sm-mod6">
-                        <button (click)="gravar()" class="ps-btn">Gravar</button>
+
+                <form #form="ngForm" novalidate>
+                    <h6>Nome Segmentação: </h6>
+                    <input [(ngModel)]="updateObjDTO.nmSegmentoRV" type="text" class="ps-frm-entry" name="nmSegmentoRV"
+                        placeholder="Preencha aqui" #iptNmSegmento="ngModel"
+                        [class.ps-frm-error]="!iptNmSegmento.valid && (iptNmSegmento.dirty || iptNmSegmento.touched)"
+                        ngModel required minlength="2" maxlength="20" />
+                    <span *ngIf="!iptNmSegmento.valid && (iptNmSegmento.dirty || iptNmSegmento.touched)"
+                        style="color:red; font-size: 10px">Campo Obrigatório </span>
+
+                    <br><br>
+                    <div class="ps-row">
+                        <div class="guide-grid ps-lg-mod6">
+                            <h6>Tipo Produto: </h6>
+                            <input [(ngModel)]="updateObjDTO.tipoProduto" type="radio" name="tipoProduto" value="Seguro"
+                                class="ps-frm-radio" id="ps-frm-rad-tst1" #iptProduto="ngModel" ngModel required
+                                [class.ps-frm-error]="!iptProduto.valid && (iptProduto.dirty || iptProduto.touched)" />
+                            <label class="ps-frm-radio" for="ps-frm-rad-tst1">
+                                Seguro
+                            </label>
+                            <br>
+                            <input [(ngModel)]="updateObjDTO.tipoProduto" type="radio" name="tipoProduto"
+                                value="Nao Seguro" class="ps-frm-radio" id="ps-frm-rad-tst2" #iptProduto="ngModel"
+                                ngModel required checked
+                                [class.ps-frm-error]="!iptProduto.valid && (iptProduto.dirty || iptProduto.touched)" />
+
+                            <label class="ps-frm-radio" for="ps-frm-rad-tst2">
+                                Não Seguro
+                            </label>
+                            <div (change)="handleChangeObservacao()">
+                                <h6>Status: </h6>
+                                <input [(ngModel)]="updateObjDTO.status" type="radio" name="status" value="Ativo"
+                                    class="ps-frm-radio" id="ps-frm-rad-tst3" #iptStatus="ngModel" ngModel required
+                                    [class.ps-frm-error]="!iptStatus.valid && (iptStatus.dirty || iptStatus.touched)" />
+                                <label class="ps-frm-radio" for="ps-frm-rad-tst3">
+                                    Ativo
+                                </label>
+                                <br>
+                                <input [(ngModel)]="updateObjDTO.status" type="radio" name="status" value="Inativo"
+                                    class="ps-frm-radio" id="ps-frm-rad-tst4" #iptStatus="ngModel" ngModel required
+                                    [class.ps-frm-error]="!iptStatus.valid && (iptStatus.dirty || iptStatus.touched)" />
+
+                                <label *ngIf="!newModal" class="ps-frm-radio" for="ps-frm-rad-tst4">
+                                    Inativo
+                                </label><br>
+                                <textarea *ngIf="observacaoObrigatoria" [(ngModel)]="updateObjDTO.obsAtualizacaoStatus"
+                                    name="observacaoObrigatoria" class="ps-frm-entry"
+                                    placeholder="Observação de mudança de status obrigatória* (máximo 100 caracteres) "
+                                    maxlength="100" style="width: 200px; height: 70px !important;" ngModel required
+                                    #iptObsObrigatoria="ngModel"
+                                    [class.ps-frm-error]="!iptObsObrigatoria.valid"></textarea>
+
+                                <textarea *ngIf="newModal" [(ngModel)]="updateObjDTO.observacao" name="observacao"
+                                    class="ps-frm-entry" placeholder="Observação (máximo 100 caracteres)"
+                                    maxlength="100" style="width: 200px; height: 70px !important " ngModel required
+                                    #iptObs="ngModel"
+                                    [class.ps-frm-error]="!iptObs.valid && (iptObs.dirty || iptObs.touched)"></textarea>
+                            </div><br>
+
+                        </div>
+                        <div class="guide-grid ps-lg-mod4">
+                            <div name="divForm">
+
+                                <h6>Tipo de Cálculo: </h6>
+                                <input [(ngModel)]="updateObjDTO.equipeComercial" type="checkbox" name="tipoCalculo"
+                                    class="ps-frm-checkbox" id="ps-frm-chk-tst10" checked ngModel required
+                                    #iptTipoCalculo="ngModel"
+                                    [class.ps-frm-error]="!iptTipoCalculo.valid && (iptTipoCalculo.dirty || iptTipoCalculo.touched)" />
+                                <label class="ps-frm-checkbox" for="ps-frm-chk-tst10">
+                                    Equipe Comercial
+                                </label><br>
+                                <input [(ngModel)]="updateObjDTO.assessoria" type="checkbox" name="tipoCalculo"
+                                    class="ps-frm-checkbox" id="ps-frm-chk-tst11" ngModel required
+                                    #iptTipoCalculo="ngModel"
+                                    [class.ps-frm-error]="!iptTipoCalculo.valid && (iptTipoCalculo.dirty || iptTipoCalculo.touched)" />
+                                <label class="ps-frm-checkbox" for="ps-frm-chk-tst11">
+                                    Assessorias
+                                </label>
+                                <input [(ngModel)]="updateObjDTO.gratificacao" type="checkbox" name="tipoCalculo"
+                                    class="ps-frm-checkbox" id="ps-frm-chk-tst12" ngModel required
+                                    #iptTipoCalculo="ngModel"
+                                    [class.ps-frm-error]="!iptTipoCalculo.valid && (iptTipoCalculo.dirty || iptTipoCalculo.touched)" />
+                                <label class="ps-frm-checkbox" for="ps-frm-chk-tst12">
+                                    Gratificação
+                                </label><br>
+
+                                <input [(ngModel)]="updateObjDTO.campanha" type="checkbox" name="tipoCalculo"
+                                    class="ps-frm-checkbox" id="ps-frm-chk-tst13" ngModel required
+                                    #iptTipoCalculo="ngModel"
+                                    [class.ps-frm-error]="!iptTipoCalculo.valid && (iptTipoCalculo.dirty || iptTipoCalculo.touched)" />
+                                <label class="ps-frm-checkbox" for="ps-frm-chk-tst13">
+                                    Campanha
+                                </label><br>
+                                <div class="row">
+
+                                    <span style="margin-top: 0%"
+                                        *ngIf="!iptTipoCalculo.valid && (iptTipoCalculo.dirty || iptTipoCalculo.touched)"
+                                        style="color:red; font-size: 10px; text-align: center">É necessário escolher um
+                                        tipo de cálculo </span>
+
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
                     </div>
-                    <div class="ps-sm-mod6">
-                        <button class="ps-btn" style="color: crimson; border-color: crimson">Cancelar</button>
+
+                    <div class="ps-modal-foot">
+
+                        <div class="row">
+                            <div class="ps-sm-mod6">
+                                <button *ngIf="!newModal" (click)="atualizar()" class="ps-btn"
+                                    [disabled]="!form.valid">Atualizar</button>
+                                <button *ngIf="newModal" (click)="gravar()" class="ps-btn"
+                                    [disabled]="!form.valid">Gravar</button>
+                            </div>
+                            <div class="ps-sm-mod6">
+                                <button class="ps-btn" style="color: crimson; border-color: crimson"
+                                    (click)="modalRef.hide();">Cancelar</button>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
-
-    </div>
+    </ng-template>

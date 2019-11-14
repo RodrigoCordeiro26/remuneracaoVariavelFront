@@ -1,8 +1,12 @@
 export interface CadastroSegmentoRVDTO {
     id: Number;
     nmSegmentoRV: String;
-    isSeguro: Boolean;
+    tipoProduto: any;
     observacao: String;
-    assessoria: Boolean;
-    normal: Boolean;
+    assessoria: any;
+    gratificacao:any,
+    campanha:any,
+    equipeComercial: any;
+    status: any;
+    obsAtualizacaoStatus: String
 }
