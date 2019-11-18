@@ -8,5 +8,5 @@ export interface CadastroSegmentoRVDTO {
     campanha:any,
     equipeComercial: any;
     status: any;
-    obsAtualizacaoStatus: String
+    observacaoMudancaStatus: String
 }

@@ -27,7 +27,7 @@ export class CadastroSegmentoRVComponent implements OnInit {
     gratificacao: false,
     campanha: false,
     observacao: "",
-    obsAtualizacaoStatus: ""
+    observacaoMudancaStatus: ""
   }
   filter2: String
 
@@ -41,7 +41,7 @@ export class CadastroSegmentoRVComponent implements OnInit {
     gratificacao: false,
     campanha: false,
     observacao: "",
-    obsAtualizacaoStatus: null
+    observacaoMudancaStatus: null
   }
 
   orderByCres: true
@@ -92,7 +92,7 @@ export class CadastroSegmentoRVComponent implements OnInit {
     this.updateObjDTO.gratificacao = ""
     this.updateObjDTO.id = null,
     this.updateObjDTO.nmSegmentoRV = "",
-    this.updateObjDTO.obsAtualizacaoStatus = ""
+    this.updateObjDTO.observacaoMudancaStatus = ""
     this.updateObjDTO.observacao = ""
     this.updateObjDTO.tipoProduto = ""
 
@@ -127,7 +127,7 @@ export class CadastroSegmentoRVComponent implements OnInit {
 
   atualizar() {
 
-    if(this.updateObjDTO.obsAtualizacaoStatus !== null || this.objDTO.status.toUpperCase() === this.updateObjDTO.status.toUpperCase()){
+    if(this.updateObjDTO.observacaoMudancaStatus !== null || this.objDTO.status.toUpperCase() === this.updateObjDTO.status.toUpperCase()){
       this.service.update(this.updateObjDTO, 'update');
 
     }
