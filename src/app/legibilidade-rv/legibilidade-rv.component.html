@@ -1,87 +1,119 @@
-<div class="card">
+<div class="card" style="height: 595px;">
     <div class="card-header">
 
         Legibilidade
 
     </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table ">
+    <button type="button" class="btn btn-primary" style="margin: 14px;width: 200px;" (click)=" getChamarModalDescricao()">atualizar</button>
+    <div class="card-body" style="width: 32%; margin: 0px 0px -415px 0px;">
+        
+        <div class="form-group">
+            <table class="table">
                 <thead class="thead-light">
                     <tr style="font-size: 12px;">
-                        <th>Matricula</th>
+                        <th style="display: block;">Matricula</th>
                         <th>Nome</th>
                         <th>Cargo</th>
-                        <th>Min Garantido</th>
-                        <th>Tipo de Teto</th>
-                        <th>Vigencia inicial</th>
-                        <th>Vigencia Final</th>
-                        <th>Receber RV</th>
-                        <th>Afastamento</th>
-                        <th>Tipo Afastamento</th>
-                        <th id="excecao">Exceção</th>
-                        <th>Nivel Hie.</th>
-                        <th id="codHieTH">Cód. Hieraquia</th>
-                        <th id="observacao">Observações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr
+                    <tr [ngStyle]="{'color':getColor(dados.status)}"
+                       
                         *ngFor="let dados of legibilidadeList | paginate: { itemsPerPage: 5, currentPage: paginaAtual }; let i = index">
 
-                        <td>{{dados.matricula}}</td>
+                        <td style="display: block; padding: 10px 0px 28px 0px;">{{dados.numMatricula}}</td>
                         <td>{{dados.nome}}</td>
                         <td>{{dados.cargo}}</td>
-                        <td id="minGarantido">
-                            <div class="custom-control">
-                                <input type="text" class="form-control" style="width: 10px;" style="width: 60px;"
-                                    name="min">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="custom-control">
-                                <input type="text" class="form-control" name="min" style="width: 100px;">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="col-md-2">
-                                <input id="dtnasc" name="dtnasc" placeholder="DD/MM/AAAA" class="form-control input-md"
-                                    required="" type="text" maxlength="10" mask="XX/XX/XXXX" style="width: 120px;">
-                            </div>
-
-                        </td>
-                        <td>
-                            <div class="col-md-2">
-                                <input id="dtnasc" name="dtnasc" placeholder="DD/MM/AAAA" class="form-control input-md"
-                                    required="" type="text" maxlength="10" mask="XX/XX/XXXX" style="width: 120px;">
-                            </div>
-
-                        </td>
-                        <td id="receberRV">
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                              </label>
-                        </td>
-                        <td>{{dados.afastamento}}</td>
-                        <td id="tipoAfastamento">{{dados.tipoAfastamento}}</td>
-                        <td>
-                            <div class="custom-control">
-                                <input type="text" class="form-control" name="min" style="width: 100px;">
-                            </div>
-                        </td>
-                        <td>{{dados.nivelHie}}</td>
-                        <td id="codHie">{{dados.codHieraquia}}</td>
-                        <td>
-                            <div class="custom-control">
-                                <input type="text" class="form-control" name="min" style="width: 300px;">
-                            </div>
-                        </td>
                     </tr>
                 </tbody>
+
             </table>
+        </div>
+    </div>
+    <div class="card-body" style="margin: 0px 0px 0px 343px;">
+        <div class="table-responsive">
+            <div class="form-group">
+                <table class="table ">
+                    <thead class="thead-light">
+                        <tr style="font-size: 12px;">
+                            <th>Min Garantido</th>
+                            <th>Tipo de Teto</th>
+                            <th>Vigencia inicial</th>
+                            <th>Vigencia Final</th>
+                            <th>Receber RV</th>
+                            <th>Afastamento</th>
+                            <th>Tipo Afastamento</th>
+                            <th id="excecao">Exceção</th>
+                            <th>Nivel Hie.</th>
+                            <th id="codHieTH">Cód. Hieraquia</th>
+                            <th id="observacao">Observações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr 
+                            *ngFor="let dados of legibilidadeList | paginate: { itemsPerPage: 5, currentPage: paginaAtual }; let i = index"
+                            >
+                            <td id="minGarantidos">
+                                <div class="custom-control">
+                                    <input type="text" class="form-control" style="width: 150px;" [(ngModel)]="dados.minGarantido"
+                                        name="min" placeholder="R$0.00" currencyMask >
+                                </div>
+                            </td>
+                            <td>
+                                <div class="custom-control">
+                                    <select class="form-control" style="width: 150px;" [(ngModel)]="dados.codTipoTeto" > 
+                                        <option>selecione</option>
+                                        <option value="1">Individual</option>
+                                        <option value="2">Surcusal</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col-md-2">
+                                    <input id="dtnasc" [(ngModel)]="dados.dtaVigenciaInicial" 
+                                          type="date">
+                                </div>
+
+                            </td>
+                            <td>
+                                <div class="col-md-2">
+                                    <input id="dtnasc" [(ngModel)]="dados.dtaVigenciaFinal"
+                                        required="" type="date" >
+                                </div>
+
+                            </td>
+                            <td id="receberRV">
+                                <label class="switch">
+                                    <input type="checkbox" [(ngModel)]="dados.receberRV">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                            <td>
+                                    <label class="switch">
+                                            <input type="checkbox" [(ngModel)]="dados.afastamento" disabled>
+                                            <span class="slider round"></span>
+                                        </label>
+                                 </td>
+                            <td id="tipoAfastamento">{{dados.tipoAfastamento}}</td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" [(ngModel)]="dados.excecao">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                            <td>nivelHie</td>
+                            <td id="codHie">codHieraquia</td>
+                            <td  style="padding: 0px;">
+                                    <textarea style="width: 478px; height: 55px;margin: 4px -3px -6px 0px;" [(ngModel)]="dados.observacao"></textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <pagination-controls maxSize="5" (pageChange)="paginaAtual = $event" previousLabel="Anterior"
             nextLabel="Próximo">
         </pagination-controls>
     </div>
+
+    

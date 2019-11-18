@@ -28,6 +28,7 @@ import { LegibilidadeRvComponent } from './legibilidade-rv/legibilidade-rv.compo
 import { NgxMaskModule } from 'ngx-mask';
 import { CadastroRegiaoRvComponent } from './cadastro-regiao-rv/cadastro-regiao-rv.component';
 import { CadastroRegioesService } from 'src/services/domain/CadastroRegioe.service';
+import { LegivelService } from "src/services/domain/Legiveis.service";
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     align: "right",
@@ -67,6 +68,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ModalModule.forRoot(),
     AlertModule.forRoot(),
     NgxMaskModule.forRoot()
+    
   
     
   ],
@@ -74,11 +76,12 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }, 
     CadastroSegmentoService,
     CadastroComposicaoRegraService,
-    CadastroRegioesService
+    CadastroRegioesService,
+    LegivelService
   
   ],
   exports:[AlertModelComponent],
-  entryComponents:[AlertModelComponent, CadastroComposicaoRegraComponent],
+  entryComponents:[AlertModelComponent, CadastroComposicaoRegraComponent,LegibilidadeRvComponent],
 
   bootstrap: [AppComponent]
 })

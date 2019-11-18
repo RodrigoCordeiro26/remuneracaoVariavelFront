@@ -53,5 +53,31 @@
     
     
 
+},
+{
+    "matricula":125,
+    "nome":"Mauricio",
+    "cargo":"PO",
+    "afastamento":"nao",
+    "tipoAfastamento": "nao",
+    "nivelHie": "Negocio",
+    "codHieraquia":13,
+    "receberRV": false
+    
+    
+
+},
+{
+    "matricula":125,
+    "nome":"jose",
+    "cargo":"PO",
+    "afastamento":"nao",
+    "tipoAfastamento": "nao",
+    "nivelHie": "Negocio",
+    "codHieraquia":14,
+    "receberRV": false
+    
+    
+
 }
 ]
