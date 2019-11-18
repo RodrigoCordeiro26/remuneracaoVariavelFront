@@ -5,13 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
-import { AlgumaCoisaComponent } from './alguma-coisa/alguma-coisa.component';
+
 import { ModalComponent } from './modal/modal.component';
 import { CadastroSegmentoRVComponent } from './cadastro-segmento-rv/cadastro-segmento-rv.component';
 
 import { CadastroSegmentoService } from 'src/services/domain/cadastroSegmento.service';
 import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
-
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { CadastroComposicaoRegraComponent } from './cadastro-composicao-regra/cadastro-composicao-regra.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -19,6 +19,7 @@ import {CommonModule} from '@angular/common';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from "ng2-currency-mask/src/currency-mask.config";
 import {NgxPaginationModule} from "ngx-pagination"; 
+<<<<<<< HEAD
 import { FormsModule } from '@angular/forms';
 import { CadastroComposicaoRegraService } from 'src/services/domain/CadastroComposicaoRegra.service';
 import { ModalModule } from 'ngx-bootstrap';
@@ -29,6 +30,12 @@ import { NgxMaskModule } from 'ngx-mask';
 import { CadastroRegiaoRvComponent } from './cadastro-regiao-rv/cadastro-regiao-rv.component';
 import { CadastroRegioesService } from 'src/services/domain/CadastroRegioe.service';
 import { LegivelService } from "src/services/domain/Legiveis.service";
+=======
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+import { ToastrModule } from 'ngx-toastr';
+
+>>>>>>> master
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     align: "right",
@@ -46,14 +53,16 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    AlgumaCoisaComponent,
     ModalComponent,
     CadastroSegmentoRVComponent,
     CadastroComposicaoRegraComponent,
+<<<<<<< HEAD
     AlertModelComponent,
     LegibilidadeRvComponent,
     CadastroRegiaoRvComponent
     
+=======
+>>>>>>> master
   ],
   imports: [
     BrowserModule,
@@ -65,12 +74,19 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     CurrencyMaskModule,
     NgxPaginationModule,
     FormsModule,
+<<<<<<< HEAD
     ModalModule.forRoot(),
     AlertModule.forRoot(),
     NgxMaskModule.forRoot()
     
   
     
+=======
+    AutocompleteLibModule,
+    Ng2SearchPipeModule,
+    ToastrModule.forRoot(),
+    ModalModule.forRoot()
+>>>>>>> master
   ],
   providers: [
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }, 
