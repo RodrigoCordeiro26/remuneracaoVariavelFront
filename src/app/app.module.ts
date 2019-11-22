@@ -19,23 +19,19 @@ import {CommonModule} from '@angular/common';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from "ng2-currency-mask/src/currency-mask.config";
 import {NgxPaginationModule} from "ngx-pagination"; 
-<<<<<<< HEAD
 import { FormsModule } from '@angular/forms';
 import { CadastroComposicaoRegraService } from 'src/services/domain/CadastroComposicaoRegra.service';
-import { ModalModule } from 'ngx-bootstrap';
-import { AlertModule } from 'ngx-bootstrap';
+import { AlertModule } from 'ngx-bootstrap/alert';
 import {AlertModelComponent} from 'src/app/alert-model/alert-model.component';
 import { LegibilidadeRvComponent } from './legibilidade-rv/legibilidade-rv.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { CadastroRegiaoRvComponent } from './cadastro-regiao-rv/cadastro-regiao-rv.component';
 import { CadastroRegioesService } from 'src/services/domain/CadastroRegioe.service';
 import { LegivelService } from "src/services/domain/Legiveis.service";
-=======
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
-import { ToastrModule } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr'
 
->>>>>>> master
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     align: "right",
@@ -56,13 +52,12 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ModalComponent,
     CadastroSegmentoRVComponent,
     CadastroComposicaoRegraComponent,
-<<<<<<< HEAD
     AlertModelComponent,
     LegibilidadeRvComponent,
     CadastroRegiaoRvComponent
     
-=======
->>>>>>> master
+
+
   ],
   imports: [
     BrowserModule,
@@ -74,19 +69,14 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     CurrencyMaskModule,
     NgxPaginationModule,
     FormsModule,
-<<<<<<< HEAD
     ModalModule.forRoot(),
     AlertModule.forRoot(),
-    NgxMaskModule.forRoot()
-    
-  
-    
-=======
+    NgxMaskModule.forRoot(),
     AutocompleteLibModule,
     Ng2SearchPipeModule,
     ToastrModule.forRoot(),
     ModalModule.forRoot()
->>>>>>> master
+
   ],
   providers: [
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }, 

@@ -11,7 +11,7 @@
 }
 
 #excecao{
-    padding: 0px 0px 11px 57px;
+    padding: 0px 0px 11px 15px;
 }
 
 #codHie{
@@ -19,11 +19,73 @@
 }
 
 #codHieTH{
-    padding: 1px 0px 11px 28px;
+  padding: 1px 0px 11px 52px;
+
 }
 
 #observacao{
     padding: 0px 38px 12px 56px;
+}
+
+#card{
+  height: 612px;
+}
+
+#atualizar{
+  margin: 14px;width: 200px;
+}
+
+#vigenciainicial{
+  margin-top:17px
+}
+
+#valorPesquisa{
+  margin-top:20px
+}
+
+#body{
+  width: 32%; 
+  margin: 0px 0px -417px 0px;
+}
+
+#cabeçalho{
+  font-size: 12px;
+}
+
+#matricula{
+  display: block; 
+  padding: 10px 0px 28px 0px;
+}
+#cabeçalho2{
+  margin: 0px 0px 0px 343px;
+}
+
+#mingarantido{
+  width: 150px;
+}
+
+#tipoteto{
+  width: 150px;
+}
+
+#observacao{
+  padding: 0px;
+}
+
+#textarea{
+  width: 478px; 
+  height: 55px;
+  margin: 4px -3px -6px 0px;
+}
+
+#removido{
+  font-style: oblique;
+  color: red
+}
+
+#incluido{
+  font-style: oblique;
+  color:green
 }
 
 .switch {

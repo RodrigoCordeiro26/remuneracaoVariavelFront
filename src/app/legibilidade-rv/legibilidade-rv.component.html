@@ -1,16 +1,84 @@
-<div class="card" style="height: 595px;">
+<div class="card" id="card">
     <div class="card-header">
 
         Legibilidade
 
     </div>
-    <button type="button" class="btn btn-primary" style="margin: 14px;width: 200px;" (click)=" getChamarModalDescricao()">atualizar</button>
-    <div class="card-body" style="width: 32%; margin: 0px 0px -415px 0px;">
-        
+    <form class="form-inline">
+        <button type="button" class="btn btn-primary" id="atualizar"
+            (click)=" getChamarModalDescricao()">atualizar</button>
+
+        <div class="ps-mod8 ps-sm-mod2 ps-frm-row">
+            <div class="ps-frm-select">
+                <select name="opcoes" ngDefaultControl [(ngModel)]="opcoes" type="text">
+                    <option value="todos" selected>Todos</option>
+                    <option value="codigo">Matricula</option>
+                    <option value="nome">Nome</option>
+                    <option value="cargo">cargo</option>
+                    <option value="mingarantido">Minimo Garantido</option>
+                    <option value="tipoteto">Tipo Teto</option>
+                    <option value="vigenciainicial">Vigencia Inicial</option>
+                    <option value="vigenciafinal">Vigencia Final</option>
+                    <option value="receberrv">Receber RV</option>
+                    <option value="afastamento">Afastamento</option>
+                    <option value="tipoafastamento">Tipo Afastamento</option>
+                    <option value="excecao">Exceção</option>
+                    <option value="nivelhie">Nível Hieraquia</option>
+                    <option value="codhie">Código Hieraquia</option>
+                </select>
+            </div>
+        </div>
+
+        <div *ngIf="opcoes === 'vigenciainicial'" id="vigenciainicial" class="ps-mod6 ps-sm-mod4 ps-frm-row">
+            <input type="date" [(ngModel)]="valorPesquisaData" name="filter" class="ps-frm-entry"
+                placeholder="Preencha aqui" />
+
+        </div>
+        <div *ngIf="opcoes === 'vigenciafinal'" class="ps-mod6 ps-sm-mod4 ps-frm-row">
+            <input type="date" [(ngModel)]="valorPesquisaData" name="filter" class="ps-frm-entry"
+                placeholder="Preencha aqui" />
+
+        </div>
+        <div id="valorPesquisa"
+            *ngIf="(opcoes !== 'vigenciainicial'&& opcoes !== 'vigenciafinal' && opcoes !== 'todos' && opcoes !== 'tipoteto' 
+        && opcoes !== 'receberrv' && opcoes !== 'afastamento' && opcoes !== 'excecao') 
+        && (opcoes === 'codigo' || opcoes === 'nome' || opcoes === 'cargo' || opcoes === 'mingarantido' || opcoes === 'nivelhie' || opcoes === 'codhie' || opcoes === 'tipoafastamento' )"
+            class="ps-mod6 ps-sm-mod4 ps-frm-row">
+            <input type="text" [(ngModel)]="valorPesquisa" name="filter" class="ps-frm-entry"
+                placeholder="Preencha aqui" (input)="filtrar()" />
+        </div>
+        <div *ngIf="opcoes === 'tipoteto' " class="ps-mod8 ps-sm-mod2 ps-frm-row">
+            <div class="ps-frm-select">
+                <select name="valorPesquisaTeto" ngDefaultControl (change)="filtrar()" [(ngModel)]="valorPesquisaTeto"
+                    type="text">
+                    <option value="1">Individual</option>
+                    <option value="2">Surcusal</option>
+                </select>
+            </div>
+        </div>
+        <div *ngIf="(opcoes !== 'tipoteto'&& opcoes !== 'nome' && opcoes !== 'codigo' && opcoes !== 'cargo' && 
+        opcoes !== 'mingarantido' && opcoes !== 'vigenciainicial' && opcoes !== 'vigenciafinal' && opcoes !== 'tipoAfastamento'
+        && opcoes !== 'nivelhie' && opcoes !== 'codhie' && opcoes !== 'todos') && (opcoes === 'receberrv' || opcoes === 'afastamento'
+        || opcoes === 'excecao')" class="ps-mod8 ps-sm-mod2 ps-frm-row">
+            <div class="ps-frm-select">
+                <select name="valorPesquisaSimNao" ngDefaultControl (change)="filtrar()"
+                    [(ngModel)]="valorPesquisaSimNao" type="text">
+                    <option value="true">Sim</option>
+                    <option value="false">Não</option>
+                </select>
+            </div>
+        </div>
+
+        <span (click)="filtrar()" class="ps-ico ps-ico-magnifi-glass"
+            *ngIf="opcoes === 'vigenciainicial' || opcoes === 'vigenciafinal' || opcoes === 'todos'"></span>
+    </form>
+    <div class="card-body" id="body">
+
+
         <div class="form-group">
             <table class="table">
                 <thead class="thead-light">
-                    <tr style="font-size: 12px;">
+                    <tr id="cabeçalho">
                         <th style="display: block;">Matricula</th>
                         <th>Nome</th>
                         <th>Cargo</th>
@@ -18,10 +86,9 @@
                 </thead>
                 <tbody>
                     <tr [ngStyle]="{'color':getColor(dados.status)}"
-                       
-                        *ngFor="let dados of legibilidadeList | paginate: { itemsPerPage: 5, currentPage: paginaAtual }; let i = index">
+                        *ngFor="let dados of legibilidadeList | paginate: { itemsPerPage: 5, currentPage: paginaAtual }  |  filter:filter ">
 
-                        <td style="display: block; padding: 10px 0px 28px 0px;">{{dados.numMatricula}}</td>
+                        <td id="matricula">{{dados.numMatricula}}</td>
                         <td>{{dados.nome}}</td>
                         <td>{{dados.cargo}}</td>
                     </tr>
@@ -30,7 +97,7 @@
             </table>
         </div>
     </div>
-    <div class="card-body" style="margin: 0px 0px 0px 343px;">
+    <div class="card-body" id="cabeçalho2">
         <div class="table-responsive">
             <div class="form-group">
                 <table class="table ">
@@ -50,19 +117,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr 
-                            *ngFor="let dados of legibilidadeList | paginate: { itemsPerPage: 5, currentPage: paginaAtual }; let i = index"
-                            >
+                        <tr
+                            *ngFor="let dados of legibilidadeList | paginate: { itemsPerPage: 5, currentPage: paginaAtual }  |  filter:filter ">
                             <td id="minGarantidos">
                                 <div class="custom-control">
-                                    <input type="text" class="form-control" style="width: 150px;" [(ngModel)]="dados.minGarantido"
-                                        name="min" placeholder="R$0.00" currencyMask >
+                                    <input type="text" class="form-control" id="mingarantido"
+                                        [(ngModel)]="dados.minGarantido" name="min" placeholder="R$0.00" currencyMask>
                                 </div>
                             </td>
                             <td>
                                 <div class="custom-control">
-                                    <select class="form-control" style="width: 150px;" [(ngModel)]="dados.codTipoTeto" > 
-                                        <option>selecione</option>
+                                    <select class="form-control" id="tipoteto" [(ngModel)]="dados.codTipoTeto">
                                         <option value="1">Individual</option>
                                         <option value="2">Surcusal</option>
                                     </select>
@@ -70,15 +135,13 @@
                             </td>
                             <td>
                                 <div class="col-md-2">
-                                    <input id="dtnasc" [(ngModel)]="dados.dtaVigenciaInicial" 
-                                          type="date">
+                                    <input id="dtnasc" [(ngModel)]="dados.dtaVigenciaInicial" type="date">
                                 </div>
 
                             </td>
                             <td>
                                 <div class="col-md-2">
-                                    <input id="dtnasc" [(ngModel)]="dados.dtaVigenciaFinal"
-                                        required="" type="date" >
+                                    <input id="dtnasc" [(ngModel)]="dados.dtaVigenciaFinal" required="" type="date">
                                 </div>
 
                             </td>
@@ -89,11 +152,11 @@
                                 </label>
                             </td>
                             <td>
-                                    <label class="switch">
-                                            <input type="checkbox" [(ngModel)]="dados.afastamento" disabled>
-                                            <span class="slider round"></span>
-                                        </label>
-                                 </td>
+                                <label class="switch">
+                                    <input type="checkbox" [(ngModel)]="dados.afastamento" disabled>
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
                             <td id="tipoAfastamento">{{dados.tipoAfastamento}}</td>
                             <td>
                                 <label class="switch">
@@ -103,8 +166,8 @@
                             </td>
                             <td>nivelHie</td>
                             <td id="codHie">codHieraquia</td>
-                            <td  style="padding: 0px;">
-                                    <textarea style="width: 478px; height: 55px;margin: 4px -3px -6px 0px;" [(ngModel)]="dados.observacao"></textarea>
+                            <td id="observacao">
+                                <textarea id="textarea" [(ngModel)]="dados.observacao"></textarea>
                             </td>
                         </tr>
                     </tbody>
@@ -115,5 +178,11 @@
             nextLabel="Próximo">
         </pagination-controls>
     </div>
+    <ng-template #InformaModel>
+        <div class="modal-body" >
+            <p id="removido">Quantidade de itens removido pelo RH: {{itensRemovido}}</p>
+            <p id="incluido">Quantidade de itens incluido pelo RH: {{itensAtualizado}}</p>
+            <button type="button" class="btn btn-primary" (click)="openModal2()">Ok</button>
+        </div>
 
-    
+    </ng-template>

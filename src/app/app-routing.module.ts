@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: 'modal', component:ModalComponent},
   {path: 'cadastro-segmento', component:CadastroSegmentoRVComponent},
   {path: 'legibilidade-rv',component : LegibilidadeRvComponent},
-  {path: 'cadastro-regiao-rv', component: CadastroRegiaoRvComponent}
+  {path: 'cadastro-regiao-rv', component: CadastroRegiaoRvComponent},
   {path: 'cadastro-composicao-regra/:id',component:CadastroComposicaoRegraComponent}
 
 

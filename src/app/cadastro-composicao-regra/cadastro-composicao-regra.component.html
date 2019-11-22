@@ -17,7 +17,6 @@
         <div class="form-group">
           <label><b>Empresa</b></label>
           <select class="form-control" [(ngModel)]="empresa" (change)="getBuscarProduto()">
-            <option>selecione</option>
             <option *ngFor="let emp of empresaList" value={{emp.codEmpresa}}>{{emp.codEmpresa}}-{{emp.nomEmpresa}}
             </option>
           </select>
@@ -27,7 +26,7 @@
         <div class="form-group">
           <label><b>Produto</b></label>
           <select class="form-control" [(ngModel)]="produto" (change)="getBuscarRamo()">
-            <option >selecione</option>
+            <option value>Nenhum</option>
             <option *ngFor="let prod of produtoList" value={{prod.codProduto}}>{{prod.codProduto}}-{{prod.produto}}
             </option>
 
@@ -40,7 +39,7 @@
         <div class="form-group">
           <label><b>Ramo</b></label>
           <select class="form-control" [(ngModel)]="ramo" (change)="getBuscarModalidade()">
-            <option>selecione</option>
+              <option value=null>Nenhum</option>
             <option *ngFor="let ramo of ramoList" value={{ramo.codRamo}}>{{ramo.codRamo}}-{{ramo.nomRamo}}</option>
 
           </select>
@@ -69,7 +68,7 @@
         <div class="form-group">
           <label><b>Modalidade</b></label>
           <select class="form-control" [(ngModel)]="modalidade" (change)="getGrupo($event.target.value)"  >
-            <option selected>selecione</option>
+              <option value=null>Nenhum</option>
             <option *ngFor="let mod of modalidadeList" value={{mod.codModalidade}} >
               {{mod.codModalidade}}-{{mod.nomModalidade}}</option>
 
@@ -80,6 +79,7 @@
         <div class="form-group">
           <label><b>Grupo</b></label>
           <select class="form-control" [(ngModel)]="grupo" (change)="getSubgrupo()">
+              <option value=null>Nenhum</option>
             <option *ngFor="let grupo of grupoList" value={{grupo.numGrupo}}>{{grupo.numGrupo}}-{{grupo.nomGrupo}}
             </option>
 
@@ -91,6 +91,7 @@
         <div class="form-group">
           <label><b>Subgrupo</b></label>
           <select class="form-control" [(ngModel)]="subgrupo">
+              <option value="null">Nenhum</option>
             <option *ngFor="let sub of subgrupoList" value='{{sub.numSubGrupo}}'>{{sub.numSubGrupo}}-{{sub.nomSubGrupo}}
             </option>
 
@@ -123,13 +124,16 @@
         <tr
           *ngFor="let dados of composicaoList | paginate: { itemsPerPage: 5, currentPage: paginaAtual }; let i = index">
           <td>{{dados.empresa.codEmpresa}}-{{dados.empresa.nomEmpresa}}</td>
-          <td>{{dados.produto.codProduto}}-{{dados.produto.produto}}</td>
-          <td>{{dados.ramo.codRamo}}-{{dados.ramo.nomRamo}}</td>
-          <td>{{dados.modalidade.codModalidade}}-{{dados.modalidade.nomModalidade}}</td>
-          <td *ngIf="dados.grupo != null">{{dados.grupo.numGrupo}}-{{dados.grupo.nomGrupo}}</td>
-          <td *ngIf="dados.grupo == null">Sem grupo</td>
-          <td *ngIf="dados.subgrupo != null">{{dados.subgrupo.numSubGrupo}}-{{dados.subgrupo.nomSubGrupo}}</td>
-          <td *ngIf="dados.subgrupo == null" >Sem Subgrupo</td>
+          <td *ngIf="dados.produto !== null">{{dados.produto.codProduto}}-{{dados.produto.produto}}</td>
+          <td *ngIf="dados.produto === null"></td>
+          <td *ngIf="dados.ramo !== null">{{dados.ramo.codRamo}}-{{dados.ramo.nomRamo}}</td>
+          <td *ngIf="dados.ramo === null"></td>
+          <td *ngIf="dados.modalidade !== null">{{dados.modalidade.codModalidade}}-{{dados.modalidade.nomModalidade}}</td>
+          <td *ngIf="dados.modalidade === null"></td>
+          <td *ngIf="dados.grupo !== null">{{dados.grupo.numGrupo}}-{{dados.grupo.nomGrupo}}</td>
+          <td *ngIf="dados.grupo === null"></td>
+          <td *ngIf="dados.subgrupo !== null">{{dados.subgrupo.numSubGrupo}}-{{dados.subgrupo.nomSubGrupo}}</td>
+          <td *ngIf="dados.subgrupo === null"></td>
           <td *ngIf="dados.tipoOperacao == false">
             <i class="fas fa-minus"></i>
 

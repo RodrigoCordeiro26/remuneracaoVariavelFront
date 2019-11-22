@@ -7,11 +7,12 @@ export interface legiveisDTO{
     codTipoTeto:number,
     dtaVigenciaInicial:string,
     dtaVigenciaFinal:string,
-    receberRV:boolean,
-    afastamento:boolean,
+    receberRV:string,
+    afastamento:string,
     tipoAfastamento:string,
     excecao:string,
     nivelHierarquia:string,
     codHierarquia:number,
+    status:string,
     observacao:string
 }

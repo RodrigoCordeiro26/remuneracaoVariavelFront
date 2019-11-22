@@ -32,7 +32,7 @@
 <div class="ps-modal" id="ModalPadrao">
   <a href="javascript:;" class="ps-modal-close ps-modal-close-default"><span
       class="ps-ico ps-ico-sm ps-sm-ico-lg ps-ico-close"></span></a>
-  <div class="ps-modal-container" style="width: 37%;">
+  <div class="ps-modal-container" style="width: 56%;">
     <div class="card-header" style=" padding: 20px;  margin: 10px;">
       <a class="card-link" data-toggle="collapse" href="#collapseOne">
         Cadastro de Região
@@ -41,26 +41,53 @@
     <div class="ps-modal-content">
       <label>Nome da Região</label>
       <input [(ngModel)]="nomeRegiao" type="text" class="ps-frm-entry" placeholder="Preencha aqui" />
+      <button type="button" (click)="getRegioes()" class="btn btn-outline-primary" style="float: right; margin: 88px 12px 13px 15px;">
+        <span class="ps-mod8 ps-ico ps-sm-mod1 ps-alignCenter ps-ico-plus"></span>
+      </button>
       <br>
 
       <div class="ps-mod8 ps-sm-mod6 ps-frm-row">
         <label>Cargo</label>
         <div class="ps-frm-select" style="width: 150px;">
-          <select name="test" class="ps-frm-valid">
-            <option value="">Selecione</option>
+          <select name="codCargo" class="ps-frm-valid" [(ngModel)]="codCargo" ngDefaultControl>
             <option *ngFor="let cargo of cargos" value={{cargo.codCargo}}>{{cargo.nmeCargo}}</option>
           </select>
         </div>
 
 
 
-        <input [(ngModel)]="teto" type="text" class="ps-frm-entry" placeholder="Teto" name="valor" currencyMask
+        <input [(ngModel)]="teto" type="text" class="ps-frm-entry" placeholder="Teto" name="teto" currencyMask
           style="text-align: right;left: 181px;top: -41px;width: 150px;" />
 
-        <input [(ngModel)]="faixa" type="text" class="ps-frm-entry" placeholder="Faixa" name="valor" currencyMask
+        <input [(ngModel)]="faixaDe" type="text" class="ps-frm-entry" placeholder="Faixa:De" name="faixaDe" currencyMask
           style="text-align: right;width: 150px;left: 342px;top: -80px;" />
 
+        <input [(ngModel)]="faixaAte" type="text" class="ps-frm-entry" placeholder="Faixa:Ate" name="faixaAte" currencyMask
+          style="text-align: right;width: 150px;left: 504px;top: -120px;" />
 
+
+
+
+        <table class="table table-striped" style="width: 784px;">
+          <thead>
+            <tr>
+              <th>Cargo</th>
+              <th>Teto</th>
+              <th>Faixa De</th>
+              <th>Faixa Ate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let regioes of regioesList" >
+              <td>{{regioes.nomeCargo}}</td>
+              <td>{{regioes.teto}}</td>
+              <td>{{regioes.faixaDe}}</td>
+              <td>{{regioes.faixaAte}}</td>
+            </tr>
+          </tbody>
+
+        </table>
+        <br>
         <button (click)="gravar()" class="ps-btn">Gravar</button>
 
       </div>
@@ -69,5 +96,6 @@
 
     </div>
   </div>
+
 
 </div>
