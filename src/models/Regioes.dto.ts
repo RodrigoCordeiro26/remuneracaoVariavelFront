@@ -6,3 +6,5 @@ export interface Regioes {
     faixaDe:number;
     faixaAte:number;
   }
+
+  

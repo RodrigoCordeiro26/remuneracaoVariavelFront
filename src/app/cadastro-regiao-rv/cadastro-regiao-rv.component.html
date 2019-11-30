@@ -1,30 +1,91 @@
 <div class="card">
-  <div class="card-head">
-    <a class="card-link" data-toggle="collapse">
-      Cadastro de Região
+  <div class="card-header" style=" padding: 20px;  margin: 10px; font-size: 20px;">
+    <a class="card-link" data-toggle="collapse" href="#collapseOne">
+      Cadastro de Regiões
     </a>
   </div>
+  <br>
   <div class="card-body">
-    <div class="ps-row" style="margin-bottom: 4px;">
-      <tr class="ps-mod8 ps-sm-mod12">
-        <th class="ps-mod8 ps-sm-mod2">
-          <a title="Adicionar novo Segmento" style="width:60px;" href="javascript:;" class="ps-btn ps-open-modal"
-            data-modal="#ModalPadrao" data-modalbackdropstatic="false" data-modalkeyboarddisable="true"
-            data-modalonshow="console.log('abrir modal')" data-modalonhide="console.log('fechar modal')">
-            <span class="ps-mod8 ps-ico ps-sm-mod1 ps-alignCenter ps-ico-plus">
-            </span>
-          </a><br />
-
-        </th>
-      </tr>
-    </div>
-    <br>
-    <div class="container-rv">
-      <label>Sucursal</label>
-      <div cdkDropList #minha="cdkDropList" [cdkDropListConnectedTo]="[confirmados]" class="list-rv"
-        [cdkDropListData]="myList" (cdkDropListDropped)="drop($event)">
-        <div class="box-rv" *ngFor="let p of myList" cdkDrag>{{p.nome}}</div>
+    <form class="form-inline">
+      <div class="ps-frm-select" style="width: 250px; top: -26px;">
+        <label>Selecione a Região</label>
+        <select name="codCargo" class="ps-frm-valid" [(ngModel)]="regiaoSelecionada" ngDefaultControl
+          (change)="getMostraDetalhes(regiao)" style="text-transform: uppercase;">
+          <option *ngFor="let regiao of listaRegioesCadastrada" [value]="regiao.cdRegiao">{{regiao.nmRegiao}}</option>
+        </select>
       </div>
+      <div class="ps-row" style="margin-bottom: 4px;">
+
+        <tr class="ps-mod8 ps-sm-mod12">
+          <th class="ps-mod8 ps-sm-mod2">
+            <a title="Adicionar nova região" style="width:60px;" href="javascript:;" class="ps-btn ps-open-modal"
+              data-modal="#ModalPadrao" data-modalbackdropstatic="false" data-modalkeyboarddisable="true"
+              data-modalonshow="console.log('abrir modal')" data-modalonhide="console.log('fechar modal')">
+              <span class="ps-mod8 ps-ico ps-sm-mod1 ps-alignCenter ps-ico-plus">
+              </span>
+            </a><br />
+
+          </th>
+        </tr>
+
+      </div>
+    </form>
+    <br>
+    <div class="container" *ngIf="mostraDetalhe">
+      <div class="card-header">
+        <p style="font-size: 25px; text-align: center;text-transform: uppercase;">{{detalheNmRegiao}}
+        <button type="button" class="btn btn-primary" style="float: right;">Atualizar</button> </p>
+      </div>
+      <table class="table table-bordered" style="margin: 0%;">
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th *ngFor=" let a of detalheTetoFaixa">{{a.cargoDomain.nmCargo}}</th>
+
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>faixa</td>
+            <td *ngFor="let regiao of detalheTetoFaixa">{{regiao.faixaDe}} Ate {{regiao.faixaAte}}</td>
+          </tr>
+          <tr>
+            <td>Teto</td>
+            <td *ngFor="let regiao of detalheTetoFaixa">{{regiao.teto}}</td>
+          </tr>
+        </tbody>
+
+      </table>
+      <div class="card-header">
+        <p style="font-size: 20px;text-align: center;">Hieraquia</p>
+      </div>
+      <table class="table table-bordered" style="margin: 0%;">
+        <thead>
+          <tr *ngIf="diretorias.length > 0">
+            <th>Diretorias</th>
+          </tr>
+          <tr *ngIf="sucursais.length > 0">
+            <th>Sucusais</th>
+          </tr>
+          <tr *ngIf="reginais.length > 0">
+            <th>Regionais</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor=" let d of diretorias">
+            <td>{{d.nmDiretoria}}</td>
+          </tr>
+          <tr *ngFor="let s of sucursais">
+            <td>{{s.nmSucursal}}</td>
+          </tr>
+          <tr *ngFor="let r of reginais">
+            <td>{{r.nmRegional}}</td>
+          </tr>
+        </tbody>
+
+      </table>
+
     </div>
   </div>
 </div>
@@ -39,63 +100,103 @@
       </a>
     </div>
     <div class="ps-modal-content">
-      <label>Nome da Região</label>
-      <input [(ngModel)]="nomeRegiao" type="text" class="ps-frm-entry" placeholder="Preencha aqui" />
-      <button type="button" (click)="getRegioes()" class="btn btn-outline-primary" style="float: right; margin: 88px 12px 13px 15px;">
-        <span class="ps-mod8 ps-ico ps-sm-mod1 ps-alignCenter ps-ico-plus"></span>
-      </button>
+      <div class="form-inline">
+        <div class="form-group">
+          <label>Nome da Região</label>
+          <input [(ngModel)]="nomeRegiao" type="text" class="ps-frm-entry" placeholder="Preencha aqui"
+            style="text-transform: uppercase;" />
+        </div>
+        <div class="form-group">
+          <button type="button" (click)="getRegioes()" class="btn btn-outline-primary"
+            style="float: right; margin: 18px 0px -11px 39px;">
+            <span class="ps-mod8 ps-ico ps-sm-mod1 ps-alignCenter ps-ico-plus"></span>
+          </button>
+        </div>
+      </div>
       <br>
 
-      <div class="ps-mod8 ps-sm-mod6 ps-frm-row">
-        <label>Cargo</label>
-        <div class="ps-frm-select" style="width: 150px;">
-          <select name="codCargo" class="ps-frm-valid" [(ngModel)]="codCargo" ngDefaultControl>
-            <option *ngFor="let cargo of cargos" value={{cargo.codCargo}}>{{cargo.nmeCargo}}</option>
-          </select>
+
+      <div class="form-inline" style="padding: 0px 0px 18px 3px;">
+
+        <div class="form-group" style="padding: 19px 5px 0px 42px;">
+          <ng-multiselect-dropdown [placeholder]="'Selecionar Diretoria'" [data]="dropdownListDiretoria"
+            [(ngModel)]="selectedItemsDiretor" [settings]="dropdownSettingsDiretoria"
+            (onSelect)="getBuscarSucursal($event)" (onSelectAll)="getBuscarSucursal($event)">
+          </ng-multiselect-dropdown>
+
+        </div>
+        <div class="form-group" style="padding: 19px 5px 0px 42px;">
+          <ng-multiselect-dropdown [placeholder]="'Selecionar Surcusal'" [data]="dropdownListSucursal"
+            [(ngModel)]="selectedItemsSurcursal" [settings]="dropdownSettingsSucursal"
+            (onSelect)="getBuscarRegional($event)" (onSelectAll)="getBuscarRegional($event)">
+          </ng-multiselect-dropdown>
+
+        </div>
+        <div class="form-group" style="padding: 19px 5px 0px 42px;">
+            
+          <ng-multiselect-dropdown [placeholder]="'Selecionar Regional'" [data]="dropdownListRegional"
+            [(ngModel)]="selectedItemsRegional" [settings]="dropdownSettingsRegional"
+            (onSelect)="getValidarRegional($event)" (onSelectAll)="getValidarRegional($event)" 
+            >
+            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Tooltip em elemento desativado"></span>
+          </ng-multiselect-dropdown>
+       
+
         </div>
 
+      </div>
+      <label style="margin: 9px 0px 0px 0px;">Cargo</label>
+      <div class="form-inline" style="padding: 0px 0px 28px 0px;">
+        <div class="form-group">
+
+          <div class="ps-frm-select" style="width: 150px;top: -9px;">
+            <select name="codCargo" class="ps-frm-valid" [(ngModel)]="codCargo" ngDefaultControl>
+              <option *ngFor="let cargo of cargos" value={{cargo.cdCargo}}>{{cargo.nmCargo}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group" style="padding: 10px;">
+          <input [(ngModel)]="teto" type="text" class="ps-frm-entry" style="width: 150px;" placeholder="Teto"
+            name="teto" currencyMask />
+        </div>
+        <div class="form-group" style="padding: 10px;">
+          <input [(ngModel)]="faixaDe" type="text" class="ps-frm-entry" style="width: 150px;" placeholder="Faixa:De"
+            name="faixaDe" currencyMask />
+        </div>
+        <div class="form-group" style="padding: 10px;">
+          <input [(ngModel)]="faixaAte" type="text" class="ps-frm-entry" style="width: 150px;" placeholder="Faixa:Ate"
+            name="faixaAte" currencyMask />
+        </div>
+      </div>
 
 
-        <input [(ngModel)]="teto" type="text" class="ps-frm-entry" placeholder="Teto" name="teto" currencyMask
-          style="text-align: right;left: 181px;top: -41px;width: 150px;" />
 
-        <input [(ngModel)]="faixaDe" type="text" class="ps-frm-entry" placeholder="Faixa:De" name="faixaDe" currencyMask
-          style="text-align: right;width: 150px;left: 342px;top: -80px;" />
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Cargo</th>
+            <th>Teto</th>
+            <th>Faixa De</th>
+            <th>Faixa Ate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let regioes of regioesList">
+            <td>{{regioes.nomeCargo}}</td>
+            <td>{{regioes.teto}}</td>
+            <td>{{regioes.faixaDe}}</td>
+            <td>{{regioes.faixaAte}}</td>
+          </tr>
+        </tbody>
 
-        <input [(ngModel)]="faixaAte" type="text" class="ps-frm-entry" placeholder="Faixa:Ate" name="faixaAte" currencyMask
-          style="text-align: right;width: 150px;left: 504px;top: -120px;" />
-
-
-
-
-        <table class="table table-striped" style="width: 784px;">
-          <thead>
-            <tr>
-              <th>Cargo</th>
-              <th>Teto</th>
-              <th>Faixa De</th>
-              <th>Faixa Ate</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let regioes of regioesList" >
-              <td>{{regioes.nomeCargo}}</td>
-              <td>{{regioes.teto}}</td>
-              <td>{{regioes.faixaDe}}</td>
-              <td>{{regioes.faixaAte}}</td>
-            </tr>
-          </tbody>
-
-        </table>
-        <br>
-        <button (click)="gravar()" class="ps-btn">Gravar</button>
-
+      </table>
+      <br>
+      <div class="form-group" style="padding: 10px;">
+        <button (click)="gravar()" style="width:300px" class="ps-btn">Gravar</button>
       </div>
 
 
 
     </div>
   </div>
-
-
 </div>

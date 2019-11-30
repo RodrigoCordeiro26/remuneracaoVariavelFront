@@ -30,7 +30,8 @@ import { CadastroRegioesService } from 'src/services/domain/CadastroRegioe.servi
 import { LegivelService } from "src/services/domain/Legiveis.service";
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
-import { ToastrModule } from 'ngx-toastr'
+import { ToastrModule } from 'ngx-toastr';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
@@ -75,7 +76,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     AutocompleteLibModule,
     Ng2SearchPipeModule,
     ToastrModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    NgMultiSelectDropDownModule.forRoot()
 
   ],
   providers: [
