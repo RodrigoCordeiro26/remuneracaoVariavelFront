@@ -1,0 +1,45 @@
+<div id="accordion">
+    <div class="card">
+        <div class="card-header">
+            <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                Consulta de Regras
+            </a>
+        </div>
+        <div class="card-body">
+        <div class="ps-row" *ngFor="let bloco of blocoRegra">
+
+            BLOCO:<b>{{bloco.id}}</b>
+            {{bloco.valorTaxa}}
+            {{bloco.indicadorTaxa}}
+            {{bloco.agravoTaxa}}
+            {{bloco.blocoObrigatorio}}
+            <p *ngFor="let segmento of bloco.lsSegmento">
+                <b>Segmento:  {{segmento.id}}</b>
+               
+                {{segmento.nome}}
+            </p><br>
+            <p *ngFor="let tipoRemuneracao of bloco.lsTipoRemuneracao">
+                <b>Cód Tipo Remuneracao:  {{tipoRemuneracao.id}}</b>
+               
+                {{tipoRemuneracao.nmTipoRemuneracao}}
+            </p>    <br>
+            <p *ngFor="let regra of bloco.lsRegra">
+               <b>REGRA: {{regra.id}}</b><br>
+                {{regra.indicadorRegra}}
+                {{regra.agravo}}
+                {{regra.valorMinimo}}
+                {{regra.valorMaximo}}
+                {{regra.periodo}}
+                {{regra.referencia}}
+                {{regra.pesoRegra}}
+            </p><br>
+
+            
+        </div>
+
+
+
+        </div>
+        
+        </div>
+</div>

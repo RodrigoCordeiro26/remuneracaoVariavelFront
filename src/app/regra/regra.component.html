@@ -1,0 +1,135 @@
+<div class="ps-container">
+    <form #form="ngForm" novalidate (click)="setValidForm(form.valid)">
+        <div class="ps-row">
+            <div class="ps-mod8 ps-sm-mod4 ps-lg-mod8 formato-texto" style="padding-left: 0px ; margin-top: 0px;">
+                <div class="ps-mod8 ps-sm-mod2 ps-lg-mod4 formato-texto"
+                    style="width: 120px !important; font-size: 12px; color:red">
+                    Peso da Regra
+                </div>
+                <div class="ps-mod8 ps-sm-mod4 ps-lg-mod2" style="width: 100px">
+                    <input style="margin-top: 12px" currencyMask [options]="{ precision:3, decimal: '.',prefix: '%'}"
+                        maxlength="8" [(ngModel)]="Ilinha.pesoRegra"  type="text"   name="ateValor"
+                         class="ps-frm-entry" ngModel required #iptAteValor="ngModel"
+                        [class.ps-frm-error]="!iptAteValor.valid && (iptAteValor.dirty || iptAteValor.touched)"   />
+                </div>
+
+
+            </div>
+
+            <div class="ps-mod8 ps-sm-mod4 ps-lg-mod4 formato-texto" style="padding-left: 220px ">
+                <div style="width: 100px;">
+                    <button title="Excluir regra"  [disabled]="isValidForm === false" (click)="deleteItemInList(Ilinha)" class="ps-btn"
+                        style="color: darkred; border-color: darkred">
+                        <span class="ps-ico ps-ico-trashcan" style="color: darkred;" title="Excluir Regra"></span>
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="ps-row">
+            <div class="ps-mod8 ps-sm-mod4 ps-lg-mod1 formato-texto" style="padding-left: 40px ">Se o </div>
+            <div class="ps-mod8 ps-sm-mod4 ps-lg-mod2" style="margin-left: 0px; margin-top: 0px;">
+                <div class="ps-frm-select">
+                            <select  name="indicadoresRegra" [(ngModel)]="Ilinha.indicadorRegra" required>
+                                    <option value="Indicador 1">Indicador 1</option>
+                                    <option value="Indicador 2">Indicador 2</option>
+                                    <option value="Indicador 3">Indicador 3</option>
+                              </select>
+                </div>
+            </div>
+            <div class="ps-mod8 ps-sm-mod4 ps-lg-mod2 formato-texto" style="width: 150px !important;">estiver entre:
+            </div>
+            <div class="ps-mod8 ps-sm-mod4 ps-lg-mod1">
+                    <div class="ps-frm-select" style="padding-right: 30px; margin-top: 0px;">
+                            <select  ngModel required
+                        [class.ps-frm-error]="!slctAgravo.valid && (slctAgravo.dirty || slctAgravo.touched)"
+                        (change)="imprimirOpcao()"  name="agravo"  id="x"  [(ngModel)]="Ilinha.agravo"
+                        #slctAgravo="ngModel">
+                                    <option selected>%</option>
+                                    <option>R$</option>
+                                    <option>Qtd</option>
+                                </select>
+                        </div>
+            </div>
+            <div class="ps-mod8 ps-sm-mod4 ps-lg-mod2" style="margin-top:5px;">
+                <div style="padding: 20px;">
+                    <input currencyMask [(ngModel)]="Ilinha.valorMinimo" *ngIf="Ilinha.agravo === 'R$' || Ilinha.agravo === '' "  type="text"
+                        autocomplete="off"   name="deValor"  class="ps-frm-entry"             placeholder="De:" ngModel
+                        required #iptdeValor="ngModel"
+                        [class.ps-frm-error]="!iptdeValor.valid && (iptdeValor.dirty || iptdeValor.touched)" />
+                    <input currencyMask [options]="{ decimal: '.',prefix: '%'}" maxlength="6"
+                         [(ngModel)]="Ilinha.valorMinimo" *ngIf="Ilinha.agravo === '%'"  type="text"   name="deValor"
+                        autocomplete="off"  class="ps-frm-entry"             placeholder="De:" ngModel required
+                        #iptdeValor="ngModel"
+                        [class.ps-frm-error]="!iptdeValor.valid && (iptdeValor.dirty || iptdeValor.touched)" />
+                    <input [(ngModel)]="Ilinha.valorMinimo" *ngIf="Ilinha.agravo === 'Qtd'"  type="text"
+                          name="deValor" autocomplete="off"  class="ps-frm-entry"             placeholder="De:" ngModel
+                        required #iptdeValor="ngModel"
+                        [class.ps-frm-error]="!iptdeValor.valid && (iptdeValor.dirty || iptdeValor.touched)" />
+                </div>
+
+            </div>
+            <div class="ps-mod8 ps-sm-mod4 ps-lg-mod2 formato-texto" style="width: 50px !important;">e
+            </div>
+            <div class="ps-mod8 ps-sm-mod4 ps-lg-mod2" style="margin-top:5px;">
+                <div style="margin-top: 20px;">
+                    <input currencyMask [(ngModel)]="Ilinha.valorMaximo"  *ngIf="Ilinha.agravo === 'R$' || Ilinha.agravo === ''"  type="text"
+                        autocomplete="off"   name="ateValor"  class="ps-frm-entry"             placeholder="Até:"
+                        ngModel required #iptAteValor="ngModel"
+                        [class.ps-frm-error]="!iptAteValor.valid && (iptAteValor.dirty || iptAteValor.touched)"   />
+                    <input currencyMask
+                        [options]="{ precision:2, decimal: '.',prefix: '%', align: 'center', suffix: ''}" maxlength="6"
+                        [(ngModel)]="Ilinha.valorMaximo" *ngIf="Ilinha.agravo === '%'"  type="text"   name="ateValor"
+                        type="text" autocomplete="off"  class="ps-frm-entry"             placeholder="Até:" ngModel
+                        required #iptAteValor="ngModel"
+                        [class.ps-frm-error]="!iptAteValor.valid && (iptAteValor.dirty || iptAteValor.touched)"   />
+                    <input [(ngModel)]="Ilinha.valorMaximo" *ngIf="Ilinha.agravo === 'Qtd'"  type="text" type="text"
+                        autocomplete="off"   name="ateValor"  class="ps-frm-entry"             placeholder="Até:"  
+                        ngModel required #iptAteValor="ngModel"
+                        [class.ps-frm-error]="!iptAteValor.valid && (iptAteValor.dirty || iptAteValor.touched)" />
+                </div>
+            </div>
+            <br>
+
+            <br>
+
+
+        </div>
+        <div class="ps-row" style="margin-left: 30px; ">
+            <div class="ps-mod8 ps-sm-mod4 ps-lg-mod2 formato-texto" style="width: 120px !important; padding-left: 0px "
+                *ngIf="flgPeso === true">
+                No período:
+            </div>
+            <div class="ps-mod8 ps-sm-mod4 ps-lg-mod2">
+                <div  class="ps-frm-select">
+                                    <select ngModel required #sltPeriodo="ngModel"
+                        [class.ps-frm-error]="!sltPeriodo.valid && (sltPeriodo.dirty || sltPeriodo.touched)"
+                         (click)="setValidForm(form.valid)" name="periodo"  id="x"  [(ngModel)]="Ilinha.periodo">
+                                            <option value="Mês Atual" selected>Mês</option>
+                                            <option value="Mês anterior">Acumulado Ano</option>
+                                            <option value="Ano anterior">12 meses</option>
+                                        </select>
+                </div>  
+            </div>
+            <div class="ps-mod8 ps-sm-mod4 ps-lg-mod2 formato-texto" style="margin-left: 20px; width: 160px !important"
+                *ngIf="flgPeso === true">
+                com referência:
+            </div>
+            <div class="ps-mod8 ps-sm-mod4 ps-lg-mod2" style="padding-left: 0px;">
+
+                <div  class="ps-frm-select">
+                                    <select ngModel required #sltPeriodo="ngModel"
+                        [class.ps-frm-error]="!sltPeriodo.valid && (sltPeriodo.dirty || sltPeriodo.touched)"
+                         (click)="setValidForm(form.valid)" name="periodo"  id="x"  [(ngModel)]="Ilinha.periodo">
+                                            <option value="Mês Atual" selected>Ano anterior</option>
+                                            <option value="Mês anterior">Mês anterior</option>
+                                        </select>
+                </div>  
+
+            </div>
+        </div>
+    </form>
+    <hr style="background: lightseagreen; width: 1180px; margin-left: 0px;">
+</div>

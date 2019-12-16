@@ -105,8 +105,9 @@
                             <th class="ps-hide ps-sm-show ps-sm-mod2" data-name="campanha" data-type="text">
                                 Status
                             </th>
-                            <th class="ps-sm-mod2" data-name="editar"> Editar </th>
-                            <th class="ps-sm-mod2" data-name="editar"> Composição <br> & <br> Regras </th>
+                            <th  class="ps-sm-mod2" data-name="editar"> Editar </th>
+                            <th  class="ps-sm-mod2" data-name="editar"> Composição <br> & <br>
+                                Regras </th>
                         </tr>
                     </thead>
                     <tbody data-source="items">
@@ -135,10 +136,14 @@
                     </tbody>
                 </table>
                 <div style="float:right">
-                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    <pagination-controls [previousLabel]="labels.previousLabel" [nextLabel]="labels.nextLabel"
+                        [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+                        [screenReaderPageLabel]="labels.screenReaderPageLabel"
+                        [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel" (pageChange)="p = $event">
+                    </pagination-controls>
                 </div>
                 <div class="ps-mod8 ps-sm-mod4" style="padding: 14px">
-                    <a class="ps-btn ps-btn-ico ps-btn-alert" (click)="exportar()">
+                    <a class="ps-btn ps-btn-ico ps-btn-alert" (click)="ExportTOExcel()">
                         <span class="ps-ico ps-glyph ps-ico-down"></span>
                         Exportar .csv
                     </a>
@@ -162,8 +167,8 @@
         </div>
         <div class="modal-body" style="height: 500px">
             <div class="ps-modal-content">
-                <!-- {{form.valid}}
-                {{form.value | json}} -->
+                 <!-- {{form.valid}}
+                {{form.value | json}}  -->
 
 
                 <form #form="ngForm" novalidate>
@@ -210,8 +215,9 @@
                                 <label *ngIf="!newModal" class="ps-frm-radio" for="ps-frm-rad-tst4">
                                     Inativo
                                 </label><br>
-                                <textarea *ngIf="observacaoObrigatoria" [(ngModel)]="updateObjDTO.observacaoMudancaStatus"
-                                    name="observacaoObrigatoria" class="ps-frm-entry"
+                                <textarea *ngIf="observacaoObrigatoria"
+                                    [(ngModel)]="updateObjDTO.observacaoMudancaStatus" name="observacaoObrigatoria"
+                                    class="ps-frm-entry"
                                     placeholder="Observação de mudança de status obrigatória* (máximo 100 caracteres) "
                                     maxlength="100" style="width: 200px; height: 70px !important;" ngModel required
                                     #iptObsObrigatoria="ngModel"
@@ -229,43 +235,45 @@
                             <div name="divForm">
 
                                 <h6>Tipo de Cálculo: </h6>
-                                <input [(ngModel)]="updateObjDTO.equipeComercial" type="checkbox" name="tipoCalculo"
-                                    class="ps-frm-checkbox" id="ps-frm-chk-tst10" checked ngModel required
-                                    #iptTipoCalculo="ngModel"
-                                    [class.ps-frm-error]="!iptTipoCalculo.valid && (iptTipoCalculo.dirty || iptTipoCalculo.touched)" />
+                                <input  [disabled]="updateObjDTO.status === 'Inativo'" [(ngModel)]="updateObjDTO.equipeComercial" type="checkbox" name="tipoCalculo1"
+                                    class="ps-frm-checkbox" id="ps-frm-chk-tst10" 
+ />
                                 <label class="ps-frm-checkbox" for="ps-frm-chk-tst10">
                                     Equipe Comercial
                                 </label><br>
-                                <input [(ngModel)]="updateObjDTO.assessoria" type="checkbox" name="tipoCalculo"
-                                    class="ps-frm-checkbox" id="ps-frm-chk-tst11" ngModel required
-                                    #iptTipoCalculo="ngModel"
-                                    [class.ps-frm-error]="!iptTipoCalculo.valid && (iptTipoCalculo.dirty || iptTipoCalculo.touched)" />
+                                <input [disabled]="updateObjDTO.status === 'Inativo'" [(ngModel)]="updateObjDTO.assessoria" type="checkbox" name="tipoCalculo2"
+                                    class="ps-frm-checkbox" id="ps-frm-chk-tst11" 
+                                   
+ />
                                 <label class="ps-frm-checkbox" for="ps-frm-chk-tst11">
                                     Assessorias
                                 </label>
-                                <input [(ngModel)]="updateObjDTO.gratificacao" type="checkbox" name="tipoCalculo"
-                                    class="ps-frm-checkbox" id="ps-frm-chk-tst12" ngModel required
-                                    #iptTipoCalculo="ngModel"
-                                    [class.ps-frm-error]="!iptTipoCalculo.valid && (iptTipoCalculo.dirty || iptTipoCalculo.touched)" />
+                                <input [disabled]="updateObjDTO.status === 'Inativo'"
+                                [(ngModel)]="updateObjDTO.gratificacao" type="checkbox" name="tipoCalculo3"
+                                    class="ps-frm-checkbox" id="ps-frm-chk-tst12" 
+                                   
+ />
                                 <label class="ps-frm-checkbox" for="ps-frm-chk-tst12">
                                     Gratificação
                                 </label><br>
 
-                                <input [(ngModel)]="updateObjDTO.campanha" type="checkbox" name="tipoCalculo"
-                                    class="ps-frm-checkbox" id="ps-frm-chk-tst13" ngModel required
-                                    #iptTipoCalculo="ngModel"
-                                    [class.ps-frm-error]="!iptTipoCalculo.valid && (iptTipoCalculo.dirty || iptTipoCalculo.touched)" />
+                                <input [disabled]="updateObjDTO.status === 'Inativo'" [(ngModel)]="updateObjDTO.campanha" type="checkbox" name="tipoCalculo4"
+                                    class="ps-frm-checkbox" id="ps-frm-chk-tst13" 
+                                   
+ />
                                 <label class="ps-frm-checkbox" for="ps-frm-chk-tst13">
                                     Campanha
                                 </label><br>
                                 <div class="row">
 
-                                    <span style="margin-top: 0%"
-                                        *ngIf="!iptTipoCalculo.valid && (iptTipoCalculo.dirty || iptTipoCalculo.touched)"
-                                        style="color:red; font-size: 10px; text-align: center">É necessário escolher um
-                                        tipo de cálculo </span>
+                                     <span style="margin-top: 0%"
+                                        *ngIf="updateObjDTO.status === 'Inativo'"
+                                        style="color:red; font-size: 10px; text-align: center">
+                                    
+                                    Para mudança de status não será possível alterar o tipo de cálculo
+                                    </span>
 
-
+                                        
 
                                 </div>
                             </div>
@@ -293,3 +301,43 @@
             </div>
         </div>
     </ng-template>
+
+<!-- Download Table-->
+
+<div  #TABLE #table style="display: none">
+
+    <table>
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Segmento</th>
+                <th>Tipo Produto</th>
+                <th>Equipe Comercial</th>
+                <th>Assessorias</th>
+                <th>Gratificação</th>
+                <th>Campanha</th>
+                <th>Status</th>
+                <th>Observação</th>
+                <th>Observação mudança de Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of items ">
+                <td>{{item.id}}</td>
+                <td>{{item.nmSegmentoRV}}</td>
+                <td>{{item.tipoProduto}}</td>
+                <td>{{item.equipeComercial}}</td>
+                <td>{{item.assessoria}}</td>
+                <td>{{item.gratificacao}}</td>
+                <td>{{item.campanha}}</td>
+                <td>{{item.status}}</td>
+                <td>{{item.observacao}}</td>
+                <td>{{item.observacaoMudancaStatus}}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+</div>
+
+
+  

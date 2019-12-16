@@ -9,4 +9,5 @@ export interface CadastroSegmentoRVDTO {
     equipeComercial: any;
     status: any;
     observacaoMudancaStatus: String
+    dataAtualizacao: String
 }

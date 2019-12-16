@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -23,7 +22,16 @@ import {NgxPaginationModule} from "ngx-pagination";
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { ToastrModule } from 'ngx-toastr';
-
+import { RegraCompostaComponent } from './regra-composta/regra-composta.component';
+import { RegraComponent } from './regra/regra.component';
+import { ExcelService } from 'src/services/domain/excel.service';
+import { RegraService } from 'src/services/domain/regra.service';
+import { IndicadorService } from 'src/services/domain/indicador.service';
+import { TipoRemuneracaoService } from 'src/services/domain/tipoRemuneracao.service';
+import { CadastroRegraComponent } from './cadastro-regra/cadastro-regra.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { PeriodoService } from 'src/services/domain/periodo.service';
+import { ConsultaRegraComponent } from './consulta-regra/consulta-regra.component';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     align: "right",
@@ -44,6 +52,10 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     ModalComponent,
     CadastroSegmentoRVComponent,
     CadastroComposicaoRegraComponent,
+    RegraCompostaComponent,
+    RegraComponent,
+    CadastroRegraComponent,
+    ConsultaRegraComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,11 +70,17 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     AutocompleteLibModule,
     Ng2SearchPipeModule,
     ToastrModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }, 
-    CadastroSegmentoService
+    CadastroSegmentoService,
+    ExcelService,
+    RegraService,
+    IndicadorService,
+    TipoRemuneracaoService,
+    PeriodoService
   
   ],
 

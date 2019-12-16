@@ -1,0 +1,341 @@
+<div class="ps-container">
+  <div class="ps-row">
+    <div class="ps-mod8 ps-sm-mod4 ps-lg-mod12" style="text-align: center">
+      <h1>Composição & Regras</h1>
+    </div>
+  </div>
+  <div class="ps-row" style="margin-left: 30px;">
+    <h6 style="margin-left: 30px">Tipo de Regra</h6>
+    <div class="ps-mod8 ps-sm-mod4 ps-lg-mod2 ps-alignLeft">
+      <input type="radio" name="tst1" value="1" class="ps-frm-radio" id="ps-frm-rad-tst1" />
+      <label class="ps-frm-radio" for="ps-frm-rad-tst1">
+        Simples
+      </label>
+    </div>
+    <div class="ps-mod8 ps-sm-mod4 ps-lg-mod2 ps-alignLeft">
+      <input type="radio" name="tst1" value="1" class="ps-frm-radio" id="ps-frm-rad-tst2" checked />
+      <label class="ps-frm-radio" for="ps-frm-rad-tst2">
+        Composta
+      </label>
+    </div>
+  </div>
+  <br>
+  <hr>
+  <div class="ps-accordion">
+    <!-- -->
+    <div class="ps-panel " [ngClass]="{'ps-accordion-opened': isOpenAcordeon, 'ps-accordion-closed': isClosedAcordeon}">
+      <a href="javascript:;" class="ps-panel-head ps-headline">
+
+        Consultar Regra
+      </a>
+      <div class="ps-panel-ctt">
+        <div class="ps-row">
+          <div class="ps-mod8 ps-sm-mod4 ps-lg-mod12" style="text-align: left; margin-left: 20px;"
+            *ngFor="let bloco of blocos; let i = index" style=" font-size: 16px; ">
+            <b style="float: left">Regra{{i + 1}}</b> <br>
+
+            <div
+              style="float:right; font-size: 16px; padding:10px; width: 250px; border-style: outset; margin-top: 10px; border-radius:1px;">
+
+
+
+                                <p style="margin-top:0px">Aplicar Taxa:<br>
+                <input *ngIf="bloco.agravoTaxa === 'R$'" class="ps-frm-entry" currencyMask [(ngModel)]="bloco.valorTaxa"
+                  disabled style="color: green; text-align: center !important" />
+
+
+                <input *ngIf="bloco.agravoTaxa === '%'" class="ps-frm-entry" currencyMask
+                  [options]="{ decimal: '.', prefix: '%'}" maxlength="8" [(ngModel)]="bloco.valorTaxa" disabled
+                  style="color: green; text-align: center !important" />
+                <br>
+                <span *ngIf="bloco.indicadorTaxa">Sobre o indicador: <b> {{bloco.indicadorTaxa}}</b> </span>
+              </p>
+                 <a (click)="carregarCampos(bloco, i)" style="color:white; width: 200px;"
+                class="ps-btn  ps-btn-primary">
+                Editar Regra </a>
+                <a *ngIf="flagExcluir === false || bloco.id != excluirId" (click)="setExcluir(bloco.id)"
+                style="color:white; width: 200px;margin-bottom:20px; " class="ps-btn  ps-btn-alert">
+                Excluir Regra </a>
+              <span *ngIf="flagExcluir === true && bloco.id == excluirId"> Você deseja realmente excluir essa Regra?
+              </span>
+              <a *ngIf="flagExcluir === true && bloco.id == excluirId" class="ps-btn"
+                (click)="excluirBloco(bloco)">Sim</a>
+              <a *ngIf="flagExcluir === true && bloco.id == excluirId" class="ps-btn" (click)="flagExcluir = false"
+                style="margin-bottom: 10px">Não</a>
+
+            </div>
+
+            <div class="ps-mod8 ps-sm-mod4 ps-lg-mod9" *ngFor="let regra of bloco.lsRegra let j = index">
+
+              <div *ngIf="regra.agravo === 'R$'">
+                Se o <b>{{regra.indicadorRegra}}</b> estiver entre: <br>
+                <div class="ps-mod8 ps-sm-mod4 ps-lg-mod1"> <input class="ps-frm-entry" currencyMask
+                    [(ngModel)]="regra.valorMinimo" disabled
+                    style="width: 150px; text-align: center !important; color:green" /> </div>
+
+                <div class="ps-mod8 ps-sm-mod4 ps-lg-mod1"
+                  style="margin-top: 20px; text-align: center; margin-left: 90px; width: 10px !important;"> e </div>
+
+                <div class="ps-mod8 ps-sm-mod4 ps-lg-mod1"> <input class="ps-frm-entry" currencyMask
+                    [(ngModel)]="regra.valorMaximo" disabled style="width: 150px; text-align: center; color:green" />
+                </div>
+
+                <div class="ps-mod8 ps-sm-mod4 ps-lg-mod2"
+                  style="margin-top: 20px; margin-left: 80px; text-align:right"> comparado ao </div>
+                <div class="ps-mod8 ps-sm-mod4 ps-lg-mod2" style="margin-top:20px"><span
+                    style="color: red">{{regra.periodo}}</span> <span *ngIf="j < (bloco.lsRegra.length - 1)"> e </span>
+                </div>
+                <!-- <div class="ps-mod8 ps-sm-mod4 ps-lg-mod2"
+                style="margin-top: 0px; margin-left: 20px; width:250px !important">Se o <b>{{regra.indicadorRegra}}
+                  estiver entre</b></div>
+                <div class="ps-mod8 ps-sm-mod4 ps-lg-mod1"> <input class="ps-frm-entry" currencyMask
+                    [(ngModel)]="regra.valorMinimo" disabled style="width: 150px; text-align: center !important; color:green" /> </div>
+                <div class="ps-mod8 ps-sm-mod4 ps-lg-mod1"
+                  style="margin-top: 20px; text-align: center; margin-left: 80px; width: 10px !important;"> e </div>
+                <div class="ps-mod8 ps-sm-mod4 ps-lg-mod1"> <input class="ps-frm-entry" currencyMask
+                    [(ngModel)]="regra.valorMaximo" disabled style="width: 150px; text-align: center; color:green" />
+                </div>
+                <div class="ps-mod8 ps-sm-mod4 ps-lg-mod2"
+                  style="margin-top: 20px; margin-left: 42px; text-align:right"> comparado ao </div>
+                <div class="ps-mod8 ps-sm-mod4 ps-lg-mod2" style="margin-top:20px"><span
+                    style="color: red">{{regra.periodo}}</span> <span *ngIf="j < (bloco.lsRegra.length - 1)"> e </span>
+                </div> -->
+              </div>
+
+              <div *ngIf="regra.agravo === '%'">
+
+
+                Se o <b>{{regra.indicadorRegra}}</b> estiver entre: <br>
+                <div class="ps-mod8 ps-sm-mod4 ps-lg-mod1"> <input class="ps-frm-entry" currencyMask
+                    [options]="{ decimal: '.',prefix: '%'}" maxlength="5" [(ngModel)]="regra.valorMinimo" disabled
+                    style="width: 150px; text-align: center; color:green" /> </div>
+                <div class="ps-mod8 ps-sm-mod4 ps-lg-mod1"
+                  style="margin-top: 20px; text-align: center; margin-left: 90px; width: 10px !important;"> e </div>
+                <div class="ps-mod8 ps-sm-mod4 ps-lg-mod1"> <input class="ps-frm-entry" currencyMask
+                    [options]="{ decimal: '.',prefix: '%'}" maxlength="5" [(ngModel)]="regra.valorMaximo" disabled
+                    style="width: 150px;text-align: center; color:green" />
+                </div>
+                <div class="ps-mod8 ps-sm-mod4 ps-lg-mod2"
+                  style="margin-top: 20px; margin-left: 80px; text-align:right"> comparado ao </div>
+                <div class="ps-mod8 ps-sm-mod4 ps-lg-mod2" style="margin-top:20px"><span
+                    style="color: red">{{regra.periodo}}</span> <span *ngIf="j < (bloco.lsRegra.length - 1)"> e </span>
+                </div>
+
+              </div>
+
+              <div *ngIf="regra.agravo === 'Qtd'">
+
+                Se o <b>{{regra.indicadorRegra}}</b> estiver entre: <br>
+                <div class="ps-mod8 ps-sm-mod4 ps-lg-mod1"> <input currencyMask
+                    [options]="{decimal: '.', prefix: 'Qtd '}" class="ps-frm-entry" maxlength="8"
+                    [(ngModel)]="regra.valorMinimo" disabled style="width: 150px; text-align: center; color:green" />
+                </div>
+                <div class="ps-mod8 ps-sm-mod4 ps-lg-mod1"
+                  style="margin-top: 20px; text-align: center; margin-left: 90px; width: 10px !important;"> e </div>
+                <div class="ps-mod8 ps-sm-mod4 ps-lg-mod1"> <input currencyMask
+                    [options]="{ decimal: '.', prefix: 'Qtd '}" class="ps-frm-entry" maxlength="8"
+                    [(ngModel)]="regra.valorMaximo" disabled style="width: 150px; text-align: center; color:green" />
+                </div>
+                <div class="ps-mod8 ps-sm-mod4 ps-lg-mod2" style="margin-top: 20px; margin-left:80px; text-align:right">
+                  comparado ao </div>
+                <div class="ps-mod8 ps-sm-mod4 ps-lg-mod2" style="margin-top:20px"><span
+                    style="color: red">{{regra.periodo}}</span> <span *ngIf="j < (bloco.lsRegra.length - 1)"> e </span>
+                </div>
+
+              </div>
+              <!-- estiver entre <span style="color: green"><input>{{regra.agravo}}</input> {{regra.valorMinimo}}</span> e -->
+
+            </div>
+
+
+
+            <div class="ps-mod8 ps-sm-mod4 ps-lg-mod12">
+              <hr>
+            </div>
+
+
+
+
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+    <!---->
+    <div class="ps-panel"
+      [ngClass]="{'ps-accordion-opened': !isOpenAcordeon, 'ps-accordion-closed': !isClosedAcordeon}">
+      <a href="javascript:;" class="ps-panel-head ps-headline">
+        <span *ngIf="isOpenAcordeon">Cadastrar Regra</span>
+        <span *ngIf="!isOpenAcordeon">Editar Regra</span>
+        <a (click)="limparCampos()" *ngIf="!isOpenAcordeon" href="javascript:;"
+          class="ps-btn ps-btn-secundary ps-open-modal" data-modal="#ModalPadrao"
+          style="border-color: green;color:rgb(184, 9, 9);border-color:rgb(184, 9, 9); width: 200px; float: right; border-radius: 50px; margin-bottom: 20px; height: 37px;">
+          <span class="ps-ico ps-glyph ps-ico-close" style="color:rgb(184, 9, 9); "></span>
+          Cancelar Edição</a>
+      </a>
+      <div class="ps-panel-ctt">
+        <div class="ps-row">
+          <div class="ps-mod8 ps-sm-mod4 ps-lg-mod8">
+            <input type="checkbox" name="tipoCalculo1" class="ps-frm-checkbox" id="indObrigatoriedade" />
+            <label class="ps-frm-checkbox" for="indObrigatoriedade">
+              Bloco Obrigatório
+            </label>
+            <input type="checkbox" name="tipoCalculo1" class="ps-frm-checkbox" id="indProporcionalidade" />
+            <label class="ps-frm-checkbox" for="indProporcionalidade">
+              Indice de proporcionalidade
+            </label>
+          </div>
+          <div class="ps-mod8 ps-sm-mod4 ps-lg-mod2">
+            <label>Segmento de Produto:</label>
+            <div  class="ps-frm-select">
+                <select (change)="imprimeEscolha()" ngModel required  name="segmento"  id="x" [(ngModel)]="segmentoSelected">
+                      <option *ngFor="let segmento of segmentos" value={{segmento.id}}>{{segmento.nome}}</option>      
+                 </select>
+            </div>  
+          </div>
+          <div class="ps-mod8 ps-sm-mod4 ps-lg-mod2">
+            <label>Tipo de Remuneração:</label>
+            <div  class="ps-frm-select">
+                              <select ngModel required [(ngModel)] = "tipoRemuneracaoSelected">
+                                    <option  *ngFor="let tipoRemuneracao of lsTipoRemuneracao" value={{tipoRemuneracao.id}} selected>{{tipoRemuneracao.nmTipoRemuneracao}}</option>   
+                               </select>
+            </div>  
+          </div>
+        </div>
+
+        <div class="ps-row">
+          <div class="ps-mod8 ps-sm-mod4 ps-lg-mod12"  *ngFor="let linha of linhas">
+            <rv-regra (formValid)="imprimeEvento($event)" (deleteItem)="deletarItem($event)" [Ilinha]=linha
+              [flgPeso]=true></rv-regra>
+          </div>
+          <div class="ps-mod8 ps-sm-mod2 ps-lg-mod8">
+
+            <div class="ps-row" style="margin-top: 20px; margin-left: 20px;">
+              <div class="ps-mod8 ps-sm-mod2 ps-lg-mod6">
+                <button [disabled]="result === false && linhas.length > 0" (click)="adicionarLinha()"
+                  style="color:white" class="ps-btn ps-btn-primary">
+                  <span class="ps-ico ps-glyph ps-ico-add"></span>
+                  Linha
+                </button>
+
+              </div>
+              <div class="ps-mod8 ps-sm-mod2 ps-lg-mod6">
+                <button *ngIf="result === false" [disabled]="result === false" href="javascript:;"
+                  class="ps-btn ps-open-modal" data-modal="#ModalPadrao"
+                  style="border-color: green;color:white;background-color:green">
+                  <span class="ps-ico ps-glyph ps-ico-add" style="color:#fdfffd;"></span>
+                  Incluir Taxa
+                </button>
+              </div>
+              <div [hidden]="result === false" class="ps-mod8 ps-sm-mod2 ps-lg-mod6">
+                <a href="javascript:;" class="ps-btn ps-open-modal" data-modal="#ModalPadrao"
+                  style="border-color: green;color:white;background-color:green">
+                  <span class="ps-ico ps-glyph ps-ico-add" style="color:#fdfffd;"></span>
+                  Incluir Taxa</a>
+              </div>
+            </div>
+
+
+            <!-- <div class="ps-row" style="margin-top: 20px; margin-left: 20px;" [hidden]="result === false">
+            <div class="ps-btn-group">
+              <a (click)="adicionarLinha()" style="color:white" class="ps-btn ps-btn-primary">
+                <span class="ps-ico ps-glyph ps-ico-add"></span>
+                Linha
+              </a>
+             
+            </div>
+
+          </div> -->
+
+
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<!-- MODAL PARA INCLUSÃO DE TAXA -->
+<div class="ps-modal" id="ModalPadrao">
+
+  <a href="javascript:;" class="ps-modal-close ps-modal-close-default"><span
+      class="ps-ico ps-ico-sm ps-sm-ico-lg ps-ico-close"></span></a>
+  <div class="ps-modal-container">
+    <div class="ps-modal-title" style="font-family: inherit">
+      <h3>Adicionar Taxa </h3>
+      <!-- {{form.valid}}
+                {{form.value | json}}  -->
+    </div>
+    <div class="ps-modal-content">
+      <div class="ps-row">
+        <form #form="ngForm" novalidate>
+          <div class="ps-mod8 ps-sm-mod3 ps-lg-mod3">
+            Agravo
+                <div  class="ps-frm-select">
+                      <select name="agravo" id="x" [(ngModel)]="agravoTaxa" (change)="anularIndicador()" required>
+                            <option selected>%</option>
+                            <option>R$</option>
+                        </select>
+                  </div>
+          </div>
+          <div class="ps-mod8 ps-sm-mod4 ps-lg-mod4">
+            Taxa
+            <div style="margin-top: 20px;">
+              <input currencyMask [(ngModel)]="valorTaxa" *ngIf="agravoTaxa  === 'R$'"  type="text"   name="deValor"
+                 class="ps-frm-entry"    autocomplete="off"          placeholder="valor" ngModel required
+                #iptdeValor="ngModel"
+                [class.ps-frm-error]="!iptdeValor.valid && (iptdeValor.dirty || iptdeValor.touched)" />
+              <input autocomplete="off"   currencyMask [options]="{ precision:3, decimal: '.',prefix: '%'}"
+                maxlength="8"  [(ngModel)]="valorTaxa" *ngIf="agravoTaxa  === '%'"  type="text"   name="deValor"
+                 class="ps-frm-entry"             placeholder="valor" ngModel required #iptdeValor="ngModel"
+                [class.ps-frm-error]="!iptdeValor.valid && (iptdeValor.dirty || iptdeValor.touched)" />
+            </div>
+
+          </div>
+
+          <div class="ps-mod8 ps-sm-mod4 ps-lg-mod4">
+            Indicador
+            <div *ngIf="agravoTaxa === '%'" class="ps-frm-select">
+                      <select name="indicadores" [(ngModel)]="indicadorTaxa" required>  
+                <option selected>Indicador 1</option>
+                            <option>Indicador 2</option>
+                            <option>Indicador 3</option>       
+              </select>
+            </div>
+            <div *ngIf="agravoTaxa === 'R$'" class="ps-frm-select">
+                      <select name="indicadores" [(ngModel)]="indicadorTaxa">
+                          <option selected>Sem indicador</option>
+                <option>Indicador 1</option>
+                            <option>Indicador 2</option>
+                            <option>Indicador 3</option>       
+              </select>
+            </div>
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+    <div class="ps-modal-foot">
+      <div class="ps-btn-group">
+        <button [disabled]="result === false || form.valid === false" (click)="incluirTaxa()"
+          style="color:white; width: 460px;" class="ps-btn ps-btn-primary">
+          <span class="ps-ico ps-glyph ps-ico-memory-card"></span>
+          <span *ngIf="isOpenAcordeon">Salvar Regra </span>
+          <span *ngIf="!isOpenAcordeon">Atualizar Regra</span>
+        </button>
+      </div>
+      <span style="color: red; font-size: 12px;" *ngIf="!result">
+        Para salvar o registro, é necessário preencher todos os campos da regra
+      </span>
+    </div>
+  </div>
+</div>

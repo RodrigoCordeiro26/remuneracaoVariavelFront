@@ -1,0 +1,193 @@
+<div id="accordion">
+    <div class="card">
+        <div class="card-header">
+            <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                Cadastro de Regras
+            </a>
+        </div>
+        <div class="card-body">
+
+            <div class="ps-row" style="margin-left: 30px;">
+                <h6 style="margin-left: 30px">Tipo de Regra</h6>
+                <div class="ps-mod8 ps-sm-mod4 ps-lg-mod2 ps-alignLeft">
+                    <input type="radio" name="tst1" value="1" class="ps-frm-radio" id="ps-frm-rad-tst1" />
+                    <label class="ps-frm-radio" for="ps-frm-rad-tst1">
+                        Simples
+                    </label>
+                </div>
+                <div class="ps-mod8 ps-sm-mod4 ps-lg-mod6 ps-alignLeft">
+                    <input type="radio" name="tst1" value="1" class="ps-frm-radio" id="ps-frm-rad-tst2" checked />
+                    <label class="ps-frm-radio" for="ps-frm-rad-tst2">
+                        Composta
+                    </label>
+                </div>
+                <div class="ps-mod8 ps-sm-mod4 ps-lg-mod2">
+                        <ng-multiselect-dropdown
+                        [placeholder]="'Selecione o Segmento'"
+                        [data]="dropdownListSegmentos"
+                        [(ngModel)]="selectedItemsSegmentos"
+                        [settings]="dropdownSettingsSegmentos"
+                        (onSelect)="onItemSelect($event)"
+                        (onSelectAll)="onSelectAll($event)"
+                      >
+                      </ng-multiselect-dropdown>
+
+                </div>
+                <div class="ps-mod8 ps-sm-mod4 ps-lg-mod2">
+                        <ng-multiselect-dropdown
+                        [placeholder]="'Tipos de Remuneração'"
+                        [data]="dropdownListTipoRemuneracao"
+                        [(ngModel)]="selectedItemsTipoRemuneracao"
+                        [settings]="dropdownSettingsTipoRemuneracao"
+                        (onSelect)="onItemSelect($event)"
+                        (onSelectAll)="onSelectAll($event)"
+                      >
+                      </ng-multiselect-dropdown>
+
+                </div>
+              
+            </div>
+            
+            <div class="ps-row" style="margin-left: 30px;">
+                <div class="ps-mod8 ps-sm-mod4 ps-lg-mod8">
+                    <input [(ngModel)]="obrigatorio" type="checkbox" name="tipoCalculo1" class="ps-frm-checkbox" id="indObrigatoriedade" />
+                    <label class="ps-frm-checkbox" for="indObrigatoriedade">
+                        Bloco Obrigatório
+                    </label>
+                    <input [(ngModel)]="proporcional" type="checkbox" name="tipoCalculo1" class="ps-frm-checkbox" id="indProporcionalidade" />
+                    <label class="ps-frm-checkbox" for="indProporcionalidade">
+                        Indice de proporcionalidade
+                    </label>
+                </div>
+                
+            </div>
+            <hr>
+            <div class="ps-row">
+                <div class="ps-mod8 ps-sm-mod4 ps-lg-mod12"  *ngFor="let linha of linhas">
+                    <rv-regra (formValid)="imprimeEvento($event)" (deleteItem)="deletarItem($event)" [Ilinha]=linha
+                        [flgPeso]=true></rv-regra>
+                </div>
+                <div class="ps-mod8 ps-sm-mod2 ps-lg-mod8">
+
+                    <div class="ps-row" style="margin-top: 20px; margin-left: 20px;">
+                        <div class="ps-mod8 ps-sm-mod2 ps-lg-mod6">
+                            <button [disabled]="result === false && linhas.length > 0" (click)="adicionarLinha()"
+                                style="color:white" class="ps-btn ps-btn-primary">
+                                <span class="ps-ico ps-glyph ps-ico-add"></span>
+                                Linha
+                            </button>
+
+                        </div>
+                        <div class="ps-mod8 ps-sm-mod2 ps-lg-mod6">
+                            <button *ngIf="result === false" [disabled]="result === false"
+                                class="ps-btn" (click)="incluirTaxa()"
+                                style="border-color: green;color:white;background-color:green">
+                                <span class="ps-ico ps-glyph ps-ico-add" style="color:#fdfffd;"></span>
+                                Incluir Taxa
+                            </button>
+                        </div>
+                        <div [hidden]="result === false" class="ps-mod8 ps-sm-mod2 ps-lg-mod6">
+                            <a href="javascript:;" class="ps-btn ps-open-modal" data-modal="#ModalPadrao"
+                                style="border-color: green;color:white;background-color:green">
+                                <span class="ps-ico ps-glyph ps-ico-add" style="color:#fdfffd;"></span>
+                                Incluir Taxa</a>
+                        </div>
+                    </div>
+
+
+                    <!-- <div class="ps-row" style="margin-top: 20px; margin-left: 20px;" [hidden]="result === false">
+          <div class="ps-btn-group">
+            <a (click)="adicionarLinha()" style="color:white" class="ps-btn ps-btn-primary">
+              <span class="ps-ico ps-glyph ps-ico-add"></span>
+              Linha
+            </a>
+           
+          </div>
+
+        </div> -->
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <rv-consulta-regra></rv-consulta-regra>
+
+        <!-- MODAL PARA INCLUSÃO DE TAXA -->
+<div class="ps-modal" id="ModalPadrao">
+
+    <a href="javascript:;" class="ps-modal-close ps-modal-close-default"><span
+        class="ps-ico ps-ico-sm ps-sm-ico-lg ps-ico-close"></span></a>
+    <div class="ps-modal-container">
+      <div class="ps-modal-title" style="font-family: inherit">
+        <h3>Adicionar Taxa </h3>
+        <!-- {{form.valid}}
+                  {{form.value | json}}  -->
+      </div>
+      <div class="ps-modal-content">
+        <div class="ps-row">
+          <form #form="ngForm" novalidate>
+            <div class="ps-mod8 ps-sm-mod3 ps-lg-mod3">
+              Agravo
+                  <div  class="ps-frm-select">
+                        <select name="agravo" id="x" [(ngModel)]="agravoTaxa" (change)="anularIndicador()" required>
+                              <option selected>%</option>
+                              <option>R$</option>
+                          </select>
+                    </div>
+            </div>
+            <div class="ps-mod8 ps-sm-mod4 ps-lg-mod4">
+              Taxa
+              <div style="margin-top: 20px;">
+                <input currencyMask [(ngModel)]="valorTaxa" *ngIf="agravoTaxa  === 'R$'"  type="text"   name="deValor"
+                   class="ps-frm-entry"    autocomplete="off"          placeholder="valor" ngModel required
+                  #iptdeValor="ngModel"
+                  [class.ps-frm-error]="!iptdeValor.valid && (iptdeValor.dirty || iptdeValor.touched)" />
+                <input autocomplete="off"   currencyMask [options]="{ precision:3, decimal: '.',prefix: '%'}"
+                  maxlength="8"  [(ngModel)]="valorTaxa" *ngIf="agravoTaxa  === '%'"  type="text"   name="deValor"
+                   class="ps-frm-entry"             placeholder="valor" ngModel required #iptdeValor="ngModel"
+                  [class.ps-frm-error]="!iptdeValor.valid && (iptdeValor.dirty || iptdeValor.touched)" />
+              </div>
+  
+            </div>
+  
+            <div class="ps-mod8 ps-sm-mod4 ps-lg-mod4">
+              Indicador
+              <div *ngIf="agravoTaxa === '%'" class="ps-frm-select">
+                        <select name="indicadores" [(ngModel)]="indicadorTaxa" required>  
+                  <option selected>Indicador 1</option>
+                              <option>Indicador 2</option>
+                              <option>Indicador 3</option>       
+                </select>
+              </div>
+              <div *ngIf="agravoTaxa === 'R$'" class="ps-frm-select">
+                        <select name="indicadores" [(ngModel)]="indicadorTaxa">
+                            <option selected>Sem indicador</option>
+                  <option>Indicador 1</option>
+                              <option>Indicador 2</option>
+                              <option>Indicador 3</option>       
+                </select>
+              </div>
+            </div>
+          </form>
+  
+        </div>
+  
+      </div>
+      <div class="ps-modal-foot">
+        <div class="ps-btn-group">
+          <button [disabled]="result === false || form.valid === false" (click)="incluirTaxa()"
+            style="color:white; width: 460px;" class="ps-btn ps-btn-primary">
+            <span class="ps-ico ps-glyph ps-ico-memory-card"></span>
+            <span *ngIf="isOpenAcordeon">Salvar Regra </span>
+            <span *ngIf="!isOpenAcordeon">Atualizar Regra</span>
+          </button>
+        </div>
+        <span style="color: red; font-size: 12px;" *ngIf="!result">
+          Para salvar o registro, é necessário preencher todos os campos da regra
+        </span>
+      </div>
+    </div>
+  </div>
