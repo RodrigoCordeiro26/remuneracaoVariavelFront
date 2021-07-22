@@ -39,7 +39,7 @@
     "save": "^2.4.0",
     "tslib": "^1.10.0",
     "v-money": "^0.8.1",
-    "xlsx": "^0.15.2",
+    "xlsx": "^0.17.0",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
